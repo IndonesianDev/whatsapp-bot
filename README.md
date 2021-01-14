@@ -33,7 +33,7 @@
   <a href="https://github.com/IndonesianDev/whatsapp-bot#Requirements">Persyaratan</a> •
   <a href="https://github.com/IndonesianDev/whatsapp-bot#installation">Cara Penginstalan</a> •
   <a href="https://github.com/IndonesianDev/whatsapp-bot#features">Fiturnya</a> •
-  <a href="https://github.com/IndonesianDev/whatsapp-bot#thanks to">Terimakasih Kepada</a> •
+  <a href="https://github.com/IndonesianDev/whatsapp-bot#thanks-to">Terimakasih Kepada</a> •
   <a href="https://github.com/IndonesianDev/whatsapp-bott#license">lisensi</a>
 </p>
 
