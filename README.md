@@ -1,5 +1,5 @@
 <div align="center">
-<img src="https://avatars2.githubusercontent.com/u/68207798?s=400&u=29439908cd661d11443391cb74f5b07267b71117&v=4" alt="Piyobot" width="500" />
+<img src="https://avatars2.githubusercontent.com/u/68207798?s=400&u=29439908cd661d11443391cb74f5b07267b71117&v=4" alt="Piyobot" width="400" />
 
 # Piyobot
 
@@ -225,6 +225,6 @@ Setelah itu pindai kode QR menggunakan WhatsApp Anda di ponsel Anda!
 
 # Thanks to
 * [`open-wa/wa-automate-nodejs`](https://github.com/open-wa/wa-automate-nodejs)
-* [`VideFrelan`](https://github.com/AlvioAdjiJanuar)
+* [`AlvioAdjiJanuar`](https://github.com/AlvioAdjiJanuar)
 * [`SlavyanDesu`](https://github.com/SlavyanDesu/BocchiBot)
 * [`VideFrelan`](https://github.com/VideFrelan)
