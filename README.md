@@ -33,7 +33,7 @@
   <a href="https://github.com/IndonesianDev/whatsapp-bot#Requirements">Persyaratan</a> •
   <a href="https://github.com/IndonesianDev/whatsapp-bot#installation">Cara Penginstalan</a> •
   <a href="https://github.com/IndonesianDev/whatsapp-bot#features">Fiturnya</a> •
-  <a href="https://github.com/IndonesianDevwhatsapp-bot#thanks-to">Terimakasih Kepada</a> •
+  <a href="https://github.com/IndonesianDev/whatsapp-bot#thanks-to">Terimakasih Kepada</a> •
   <a href="https://github.com/IndonesianDev/whatsapp-bott#license">lisensi</a>
 </p>
 
@@ -224,7 +224,7 @@ Setelah itu pindai kode QR menggunakan WhatsApp Anda di ponsel Anda!
 | nHentai downloader |      ✔️      |
 
 
-# Thanks-to
+# Thanks to
 * [`open-wa/wa-automate-nodejs`](https://github.com/open-wa/wa-automate-nodejs)
 * [`AlvioAdjiJanuar`](https://github.com/AlvioAdjiJanuar)
 * [`SlavyanDesu`](https://github.com/SlavyanDesu/BocchiBot)
