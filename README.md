@@ -224,7 +224,7 @@ Setelah itu pindai kode QR menggunakan WhatsApp Anda di ponsel Anda!
 | nHentai downloader |      ✔️      |
 
 
-# Thanks to
+# Thanks-to
 * [`open-wa/wa-automate-nodejs`](https://github.com/open-wa/wa-automate-nodejs)
 * [`AlvioAdjiJanuar`](https://github.com/AlvioAdjiJanuar)
 * [`SlavyanDesu`](https://github.com/SlavyanDesu/BocchiBot)
