@@ -2565,8 +2565,8 @@ case 'tiktokstalk':
                       break
 //////////////////////////////////////////FUN MENU/////////////////////////////////////////////////////////////////
 case 'pacarpiyo':
-    const cantik = cecan[Math.floor(Math.random() * cecan.length)]
-    await piyo.sendImage(from, cantik.imagex, 'Cecan.jpg', cantik.lahwoi, id)
+    const cantikk = cecan[Math.floor(Math.random() * cecan.length)]
+    await piyo.sendImage(from, cantikk.imagex, 'Cecan.jpg', cantikk.lahwoi, id)
     break
 case 'infomobil':
             if (args.length == 0) return piyo.reply(from, `Kirim perintah *${prefix}infomobil [ Merek Motor ]*\n\nContoh : *${prefix}infomobil avanza*`, id)
