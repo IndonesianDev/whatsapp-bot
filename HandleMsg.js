@@ -847,8 +847,20 @@ case 'ttg':
                                             })
                                     break
 /////////////////////////////////////////////MENU LOGO////////////////////////////////////////////////////////////
-case 'blackpink':
-            
+case 'pubg':
+            if (!q) return piyo.reply(from, `Ketik /pubg teksnya` , id)
+                piyo.reply(from, 'Tunggu Ya Anjing', id)
+                const pubg1 = q.substring(0, q.indexOf('|') - 1)
+                const pubg2 = q.substring(q.lastIndexOf('|') + 2)
+                const pabji = await axios.get(`https://api.zeks.xyz/api/pubglogo?text1=${pubg1}&text2=${pubg2}&apikey=administrator`)
+                piyo.sendFileFromUrl(from, pabji.data.result, 'pubg.jpg' ,'neh kak', id)
+            break
+case 'csgo':
+            if (!q) return piyo.reply(from, `Salahkak , ketik /csgo teksnya` , id)
+            const csgo = await axios.get(`https://api.zeks.xyz/api/cslogo?text=${q}&apikey=administrator`)
+            piyo.sendFileFromUrl(from, csgo.data.result, 'pubg.jpg', 'jan epep burik tuh', id)
+            break			
+case 'blackpink':            
     piyo.reply(from, ind.wait(), id)
     const blpk = body.slice(11)
     if (blpk.length > 10) return piyo.reply(from, '*Teks Terlalu Panjang!*\n_Maksimal 10 huruf!_', id)
