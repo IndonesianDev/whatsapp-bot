@@ -3025,6 +3025,49 @@ case 'playstore':
                     piyo.reply(from, err, id)
                 }
             break
+	case 'tomp3':
+        if ((isMedia || isQuotedVideo || isQuotedFile)) {
+            piyo.reply(from, ind.wait(), id)
+            const encryptMedia = isQuotedVideo || isQuotedFile ? quotedMsg : message
+            const _mimetype = isQuotedVideo || isQuotedFile ? quotedMsg.mimetype : mimetype
+            console.log(color('[WAPI]', 'green'), 'Downloading and decrypt media...')
+            const mediaData = await decryptMedia(encryptMedia)
+            let temp = './temp'
+            let name = new Date() * 1
+            let fileInputPath = path.join(temp, 'video', `${name}.${_mimetype.replace(/.+\//, '')}`)
+            let fileOutputPath = path.join(temp, 'audio', `${name}.mp3`)
+            console.log(color('[fs]', 'green'), `Downloading media into '${fileInputPath}'`)
+            fs.writeFile(fileInputPath, mediaData, err => {
+                if (err) return piyo.sendText(from, 'Ada yang error saat menulis file\n\n' + err) && _err(err)
+                // ffmpeg -y -t 5 -i <input_file> -vf "scale=512:512:flags=lanczos:force_original_aspect_ratio=decrease" -qscale 100 <output_file>.webp
+                ffmpeg(fileInputPath)
+                    .format('mp3')
+                    .on('start', function (commandLine) {
+                        console.log(color('[FFmpeg]', 'green'), commandLine)
+                    })
+                    .on('progress', function (progress) {
+                        console.log(color('[FFmpeg]', 'green'), progress)
+                    })
+                    .on('end', function () {
+                        console.log(color('[FFmpeg]', 'green'), 'Processing finished!')
+                        // fs.readFile(fileOutputPath, { encoding: 'base64' }, (err, base64) => {
+                        // if (err) return piyo.sendText(from, 'Ada yang error saat membaca file .mp3') && console.log(color('[ERROR]', 'red'), err)
+                        piyo.sendFile(from, fileOutputPath, 'audio.mp3', '', id)
+                        // })
+                        setTimeout(() => {
+                            try {
+                                fs.unlinkSync(fileInputPath)
+                                fs.unlinkSync(fileOutputPath)
+                            } catch (e) {
+                                console.log(color('[ERROR]', 'red'), e)
+                            }
+                        }, 30000)
+                    })
+                    .save(fileOutputPath)
+            })
+        }
+        limitAdd(serial)
+    break
         case 'translate':
                 
             if (args.length != 1) return piyo.reply(from, `Maaf, format pesan salah.\nSilahkan reply sebuah pesan dengan caption ${prefix}translate <kode_bahasa>\ncontoh ${prefix}translate id`, id)
