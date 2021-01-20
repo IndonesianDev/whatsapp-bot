@@ -2447,21 +2447,16 @@ case 'instagram':
                    await piyo.sendFileFromUrl(from, igg.data.result.url , id)
                         console.log('Success sending Instagram media!')
 break
-case 'tiktoknowm':
-                        if (!isPremium) return piyo.reply(from, `Maaf, ini adalah fitur premium, untuk menggunakan fitur ini silahkan beli premium ke owner \nUntuk Harga\n\n 10k Perbulan\n5k Perpanjang`, id)
-                        const ttlink = args[0].replace('https://vt.tiktok.com/', '').replace('https://www.tiktok.com/', '')
-                        await piyo.reply(from, ind.wait(), id)
-                        const tt = await axios.get(`https://arugaz.my.id/api/media/tiktok?url=${q}`)
-                            await piyo.sendFileFromUrl(from, `${tt.data.image}`, 'image.jpg', `Video Ditemukan...\n\n*User :* ${tt.data.nameInfo}\n*Upload Date :* ${tt.data.timeInfo}\n*Caption :* ${tt.data.textInfo}\nPiyobot\n\n*_Sabar, Piyo lagi ngirim Videonya_*`, id)
-                            await piyo.sendFileFromUrl(from, `${tt.data.mp4direct}`, '', '', id)
-                        break
-case 'tiktoknowm2':
-                        if (!isPremium) return piyo.reply(from, `Maaf, ini adalah fitur premium, untuk menggunakan fitur ini silahkan beli premium ke owner \nUntuk Harga\n\n 10k Perbulan\n5k Perpanjang`, id)
+case 'tiktoknowm': //THANKS TO VIDEFIKRI ATAU VIDEFRELAN
                         await piyo.reply(from, ind.wait(), id)
                         const tp = await axios.get(`http://videfikri.com/api/tiktok/?url=${q}`)
-                            await piyo.sendFileFromUrl(from, `${tp.data.result.thumb}`, 'image.jpg', `Video Ditemukan...\n\n*Created :* ${tp.data.result.creator}\nPiyobot\n\n*_Sabar, Piyo lagi ngirim Videonya_*`, id)
-                            await piyo.sendFileFromUrl(from, `${tp.data.result.link}`, 'vide.mp4', 'vide.mp4', id)
-                        break
+			await piyo.sendFileFromUrl(from, `${tp.data.result.thumb}`, 'image.jpg', `Video Ditemukan...\n\nPiyobot\n\n*_Sabar, Piyo lagi ngirim Videonya_*`, id)
+                            const respons = await fetch(tp.data.result.link);
+                            const bufferf = await respons.buffer(); 
+                           await fs.writeFile(`./media/play2.mp4`, bufferf)
+                          await piyo.sendFile(from,'./media/play2.mp4', 'piyo.mp4', 'nih kak',id)
+			  await fs.unlinksync('./media/play2.mp4')
+			break
 case 'tiktok': 
                 if (!isUrl(url) && !url.includes('tiktok.com')) return await piyo.reply(from, ind.wrongFormat(), id)
                 await piyo.reply(from, ind.wait(), id)
