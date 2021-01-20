@@ -47,6 +47,7 @@
 * [Git](https://git-scm.com/downloads)
 * [FFmpeg](https://github.com/BtbN/FFmpeg-Builds/releases/download/autobuild-2020-12-08-13-03/ffmpeg-n4.3.1-26-gca55240b8c-win64-gpl-4.3.zip) (for sticker GIF command)
 * Any text editor
+* [Magisk](https://download.imagemagick.org/ImageMagick/download/binaries/ImageMagick-7.0.10-58-Q16-HDRI-x64-dll.exe) (Buat nuliskanan kiri folio kanan kiri)
 
 # installation
 ## 📝 Cloning this repo
