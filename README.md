@@ -52,7 +52,7 @@
 ## 📝 Cloning this repo
 ```bash
 > git clone https://github.com/IndonesianDev/whatsapp-bot
-> cd BocchiBot
+> cd whatsapp-bot
 ```
 
 ## ✍️ Edit filenya
