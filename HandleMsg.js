@@ -847,6 +847,106 @@ case 'ttg':
                                             })
                                     break
 /////////////////////////////////////////////MENU LOGO////////////////////////////////////////////////////////////
+case '8bit':
+    const bit1 = q.substring(0, q.indexOf('|') - 1)
+    const bit2 = q.substring(q.lastIndexOf('|') + 2)
+    if (!q) return await piyo.reply(from, `Salah kak, /8bit nama kaka | nama kaka` , id)
+    await piyo.reply(from, ind.wait() , id)
+    console.log('Creating 8bit  Maker')
+    const bitt = await axios.get(`https://tobz-api.herokuapp.com/api/photooxy?theme=bit8&text1=${bit1}&text2=${bit1}&apikey=BotWeA`)
+    await piyo.sendFileFromUrl(from, bitt.data.result , '8bit.jpg' , 'nih kak' ,id)
+    break
+case 'shadow':
+    if (!q) return await piyo.reply(from, `Ketik /shadow teksnya` , id)
+    await piyo.reply(from, ind.wait() , id)
+    console.log('Creating shadow  Maker')
+    const shw = await axios.get(`https://tobz-api.herokuapp.com/api/photooxy?theme=shadow&text=${q}&apikey=BotWeA`)
+    await piyo.sendFileFromUrl(from, shw.data.result, 'error.jpg' , 'Kalo filenya berbentuk dokumen berarti eror' , id)
+    break
+case 'burn':
+    if (!q) return await piyo.reply(from, `Ketik /burn teksnya` , id)
+    await piyo.reply(from, ind.wait() , id)
+    console.log('Creating burn  Maker')
+    const bun = await axios.get(`https://tobz-api.herokuapp.com/api/photooxy?theme=burn_paper&text=${q}&apikey=BotWeA`)
+    await piyo.sendFileFromUrl(from, bun.data.result, 'error.jpg' , 'Kalo filenya berbentuk dokumen berarti eror' , id)
+    break
+case 'kopi':
+    if (!q) return await piyo.reply(from, `Ketik /coffe teksnya` , id)
+    await piyo.reply(from, ind.wait() , id)
+    console.log('Creating coffe  Maker')
+    const kop = await axios.get(`https://tobz-api.herokuapp.com/api/photooxy?theme=coffee&text=${q}&apikey=BotWeA`)
+    await piyo.sendFileFromUrl(from, kop.data.result, 'error.jpg' , 'Kalo filenya berbentuk dokumen berarti eror' , id)
+    break
+case 'love':
+    if (!q) return await piyo.reply(from, `Ketik /love teksnya` , id)
+    await piyo.reply(from, ind.wait() , id)
+    console.log('Creating love  Maker')
+    const lop = await axios.get(`https://tobz-api.herokuapp.com/api/photooxy?theme=love_paper&text=${q}&apikey=BotWeA`)
+    await piyo.sendFileFromUrl(from, lop.data.result, 'error.jpg' , 'Kalo filenya berbentuk dokumen berarti eror' , id)
+    break
+case 'wood':
+    if (!q) return await piyo.reply(from, `Ketik /wood teksnya` , id)
+    await piyo.reply(from, ind.wait() , id)
+    console.log('Creating wood  Maker')
+    const plop = await axios.get(`https://tobz-api.herokuapp.com/api/photooxy?theme=wood_block&text=${q}&apikey=BotWeA`)
+    await piyo.sendFileFromUrl(from, plop.data.result, 'error.jpg' , 'Kalo filenya berbentuk dokumen berarti eror' , id)
+    break
+case 'qowh':
+    if (!q) return await piyo.reply(from, `Ketik /qowh teksnya` , id)
+    await piyo.reply(from, ind.wait() , id)
+    console.log('Creating quote_on_wood_heart  Maker')
+    const pplop = await axios.get(`https://tobz-api.herokuapp.com/api/photooxy?theme=quote_on_wood_heart&text=${q}&apikey=BotWeA`)
+    await piyo.sendFileFromUrl(from, pplop.data.result, 'error.jpg' , 'Kalo filenya berbentuk dokumen berarti eror' , id)
+    break
+case 'grass':
+    if (!q) return await piyo.reply(from, `Ketik /grass teksnya` , id)
+    await piyo.reply(from, ind.wait() , id)
+    console.log('Creating message_under_the_grass  Maker')
+    const ppplop = await axios.get(`https://tobz-api.herokuapp.com/api/photooxy?theme=message_under_the_grass&text=${q}&apikey=BotWeA`)
+    await piyo.sendFileFromUrl(from, ppplop.data.result, 'error.jpg' , 'Kalo filenya berbentuk dokumen berarti eror' , id)
+    break
+case 'boards':
+    if (!q) return await piyo.reply(from, `Ketik /boards teksnya` , id)
+    await piyo.reply(from, ind.wait() , id)
+    console.log('Creating boards  Maker')
+    const yo1 = await axios.get(`https://tobz-api.herokuapp.com/api/photooxy?theme=wooden_boards&text=${q}&apikey=BotWeA`)
+    await piyo.sendFileFromUrl(from, yo1.data.result, 'error.jpg' , 'Kalo filenya berbentuk dokumen berarti eror' , id)
+    break
+case 'metal':
+    if (!q) return await piyo.reply(from, `Ketik /metal teksnya` , id)
+    await piyo.reply(from, ind.wait() , id)
+    console.log('Creating boards  metalic_text_glow')
+    const yo2 = await axios.get(`https://tobz-api.herokuapp.com/api/photooxy?theme=metalic_text_glow&text=${q}&apikey=BotWeA`)
+    await piyo.sendFileFromUrl(from, yo2.data.result, 'error.jpg' , 'Kalo filenya berbentuk dokumen berarti eror' , id)
+    break
+case 'potter':
+    if (!q) return await piyo.reply(from, `Ketik /potter teksnya` , id)
+    await piyo.reply(from, ind.wait() , id)
+    console.log('Creating boards  harry poter')
+    const yo3 = await axios.get(`https://tobz-api.herokuapp.com/api/photooxy?theme=harry_potter&text=${q}&apikey=BotWeA`)
+    await piyo.sendFileFromUrl(from, yo3.data.result, 'error.jpg' , 'Kalo filenya berbentuk dokumen berarti eror' , id)
+    break
+case 'tlight':
+    if (!q) return await piyo.reply(from, `Ketik /tlight teksnya` , id)
+    await piyo.reply(from, ind.wait() , id)
+    console.log('Creating tlight')
+    const yo5 = await axios.get(`https://api.zeks.xyz/api/tlight?text=${q}&apikey=administrator`)
+    await piyo.sendFileFromUrl(from, yo5.data.result, 'error.jpg' , 'Kalo filenya berbentuk dokumen berarti eror' , id)
+    break
+case '3d':
+    if (!q) return await piyo.reply(from, `Ketik /3d teksnya` , id)
+    await piyo.reply(from, ind.wait() , id)
+    console.log('Creating 3d')
+    const yo6 = await axios.get(`https://api.zeks.xyz/api/text3dbox?apikey=administrator&text=${q}`)
+    await piyo.sendFileFromUrl(from, yo6.data.result, 'error.jpg' , 'Kalo filenya berbentuk dokumen berarti eror' , id)
+    break
+case 'warface':
+    if (!q) return await piyo.reply(from, `Ketik /warface teksnya` , id)
+    await piyo.reply(from, ind.wait() , id)
+    console.log('Creating warface')
+    const yo4 = await axios.get(`https://tobz-api.herokuapp.com/api/photooxy?theme=warface&text=${q}&apikey=BotWeA`)
+    await piyo.sendFileFromUrl(from, yo4.data.result, 'error.jpg' , 'Kalo filenya berbentuk dokumen berarti eror' , id)
+    break
 case 'pubg':
             if (!q) return piyo.reply(from, `Ketik /pubg teksnya` , id)
                 piyo.reply(from, 'Tunggu Ya Anjing', id)
