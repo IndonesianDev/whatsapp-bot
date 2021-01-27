@@ -1032,23 +1032,6 @@ case 'gmlogo':
                 await piyo.reply(from, `Ada yang Error!\n${err}`, id)
             })
 break
-case 'joker':
-            if (arghh.length === 1) return piyo.reply(from, `Kirim perintah /joker (teks), contoh /joker piyobot`, id)
-            piyo.reply(from, ind.wait(), id)
-            const jokerr = body.slice(7)
-            try {
-            const swrt2 = await axios.get(`http://api-melodicxt.herokuapp.com/api/txtcustom?theme=joker&text=${q}&apiKey=administrator`)       
-            const { result } = swrt2.data
-            const swrt3 = `Nih Ngab`
-            const pictk = await bent("buffer")(result)
-            const base64 = `data:image/jpg;base64,${pictk.toString("base64")}`
-            piyo.sendImage(from, base64, swrt3)
-            } catch (err) {
-             console.error(err.message)
-             await piyo.sendFileFromUrl(from, errorurl2, 'error.png', '💔 Maaf, User tidak ditemukan')
-             piyo.sendText(ownerNumber, 'JOKER Error : ' + err)
-           }
-        break
 case 'wolf2':
         if (args.length === 0) return piyo.reply(from, `Kirim perintah *${prefix}wolf2 [ |Teks1|Teks2 ]*, contoh *${prefix}wolf2 |aqulzz|xinz*`, id)
         argz = body.trim().split('|')
