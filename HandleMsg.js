@@ -16,6 +16,7 @@ const ffmpeg = require('fluent-ffmpeg')
 const db_group = new FileSync(appRoot+'/lib/data/group.json')
 const db = low(db_group)
 const notice = ['piyobot', 'piyobot']
+const { getUser, getPost, searchUser } = require('./lib/Insta')
 const path = require('path')
 const bent = require('bent')
 const Math_js = require('mathjs')
@@ -2422,14 +2423,31 @@ case 'fb':
                         await piyo.reply(from, `Ada yang Error!`, id)
                     })
             break
-case 'instagram':
-                if (!isPremium) return piyo.reply(from, `Maaf, ini adalah fitur premium, untuk menggunakan fitur ini silahkan beli premium ke owner \nUntuk Harga\n\n 10k Perbulan\n5k Perpanjang`, id)   
-                if (!isUrl(url) && !url.includes('instagram.com')) return await piyo.reply(from, ind.wrongFormat(), id)
-   await piyo.reply(from, ind.wait() , id)
-               const igg = await axios.get(`https://arugaz.my.id/api/media/ig?url=${q}`)   
-                   await piyo.sendFileFromUrl(from, igg.data.result.url , id)
-                        console.log('Success sending Instagram media!')
-break
+case 'instagram': //RECODE BY ALVIO ADJI JANUAR
+case 'ig':
+    if (!isPremium) return piyo.reply(from, `Fitur Ini Premium` ,id)
+            try {
+                if (arghh.length === 1) return piyo.reply(from, 'Kirim perintah *!ig [linkIg]* untuk contoh silahkan kirim perintah *!readme*', id)
+                if (!arghh[1].includes('instagram.com')) return piyo.reply(from, `Salah linknya kak`, id)
+                piyo.reply(from, ind.wait(), id)
+                let arrBln = ["Januari","Februaru","Maret","April","Mei","Juni","Juli","Agustus","September","Oktober","November","Desember"]
+                const idRegex = /([-_0-9A-Za-z]{11})/
+                const idIGG = arghh[1].match(idRegex)
+                await getPost(idIGG[0]).then((post) => {
+                    let a = new Date(post.date * 1000)
+                    const jam = a.getHours()
+                    const menit = a.getMinutes()
+                    const bulan = a.getMonth()
+                    const tanggal = a.getDate()
+                    const tahun = a.getFullYear()
+                    const captig = `*Media berhasil terkirim!*\n\n*Username* : ${post.owner_user}\n*Waktu Publish* : ${jam}:${menit} ${tanggal}-${arrBln[bulan - 1]}-${tahun}\n*Capt* : ${post.capt}`
+                    piyo.sendFileFromUrl(from, post.url, `Insta`, captig, id)
+                })
+            } catch (err) {
+                ERRLOG(err)
+            }
+            await piyo.sendSeen(from)
+            break
 case 'tiktoknowm': //THANKS TO VIDEFIKRI ATAU VIDEFRELAN
                         await piyo.reply(from, ind.wait(), id)
                         const tp = await axios.get(`http://videfikri.com/api/tiktok/?url=${q}`)
