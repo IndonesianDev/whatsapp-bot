@@ -1747,6 +1747,15 @@ case 'send':
                      }
  
                      break
+                case 'addupdate':
+                    {
+                    if (!isOwnerBot) return piyo.reply(from, 'Maaf, perintah ini hanya dapat dipakai oleh owner!', id)
+                    const update = body.slice(10)
+                                updatepiyobot.push(update)
+                                fs.writeFileSync('./settings/update.json', JSON.stringify(updatepiyobot))
+                                piyo.reply(from, `Sukses menambahkan update :)`, id)
+                            }
+                            break
 case 'update': {
                                 const updaterr = updatepiyobot
                                 let updatee = `╔══✪〘 *update* 〙✪══\n`
