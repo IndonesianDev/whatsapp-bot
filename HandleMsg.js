@@ -649,7 +649,7 @@ case 'rule':
             await piyo.sendText(from, menuId.textRules())
             break
 case 'ownermenu':
-            if (!isGroupAdmins) return piyo.reply(from, 'Gagal, perintah ini hanya dapat digunakan oleh owner bot!', id)
+	    if (!isOwnerBot) return piyo.reply(from, 'Fitur ini hanya untuk owner' , id)
             await piyo.sendText(from, menuId.textownermenu())
             break
 case 'menuadmin':            
