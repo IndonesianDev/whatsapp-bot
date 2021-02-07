@@ -75,7 +75,7 @@ const start = (piyo = new Client()) => {
     })
 
 // Listen to group's event
-    piyo.onGlobalParicipantsChanged(async (event) => {
+    piyo.onGlobalParticipantsChanged(async (event) => {
         const welcome = JSON.parse(fs.readFileSync('./settings/welcome.json'))
         const isWelcome = welcome.includes(event.chat)
         const botNumbers = await piyo.getHostNumber() + '@c.us'
