@@ -1,4 +1,4 @@
-﻿require('dotenv').config()
+require('dotenv').config()
 const { decryptMedia } = require('@open-wa/wa-automate')
 const moment = require('moment-timezone')
 moment.tz.setDefault('Asia/Jakarta').locale('id')
@@ -106,6 +106,8 @@ let dbcot = JSON.parse(fs.readFileSync('./settings/bacot.json'))
 let updatepiyobot = JSON.parse(fs.readFileSync('./settings/update.json'))
 let adminNumber = JSON.parse(fs.readFileSync('./settings/admin.json'))
 let limit = JSON.parse(fs.readFileSync('./settings/limit.json'))
+let stickerspam = JSON.parse(fs.readFileSync('./settings/stickerspam.json'))
+let antisticker = JSON.parse(fs.readFileSync('./settings/antisticker.json'))
 ///////////////////////////////////////////////////////////////////////////////
 
 /////////////////////////////////SETTING///////////////////////////////////////
@@ -329,6 +331,7 @@ module.exports = HandleMsg = async (piyo, message) => {
         const isDetectorOn = _antilink.includes(chat.id)
         const isInviteLink = await piyo.inviteInfo(body)
 		const isNgegas = ngegas.includes(chatId)
+        const AntiStickerSpam = antisticker.includes(chatId)
         // Log
         if (isCmd && !isGroupMsg) { console.log(color('[EXEC]'), color(moment(t * 1000).format('DD/MM/YY HH:mm:ss'), 'yellow'), color(`${command} [${args.length}]`), 'from', color(pushname)) }
         if (isCmd && isGroupMsg) { console.log(color('[EXEC]'), color(moment(t * 1000).format('DD/MM/YY HH:mm:ss'), 'yellow'), color(`${command} [${args.length}]`), 'from', color(pushname), 'in', color(name || formattedTitle)) }
@@ -468,6 +471,68 @@ const isAfkOn = getAfk(sender.id)
                 await piyo.sendText(from, ind.afkDone(pushname))
             }
         }
+//////////////////////////////////////ANTI STICKER SPAM////////////////////////////////
+function isStickerMsg(id){
+    if (isOwnerBot, isAdmin) {return false;}
+    let found = false;
+    for (let i of stickerspam){
+        if(i.id === id){
+            if (i.msg >= 5) {
+                found === true 
+                piyo.reply(from, '*「 𝗔𝗡𝗧𝗜 𝗦𝗣𝗔𝗠 𝗦𝗧𝗜𝗖𝗞𝗘𝗥 」*\nKamu telah SPAM STICKER di grup, kamu akan di kick otomatis oleh Piyobot', message.id).then(() => {
+                    piyo.removeParticipant(groupId, id)
+                }).then(() => {
+                    const cus = id
+                    var found = false
+                    Object.keys(stickerspam).forEach((i) => {
+                        if(stickerspam[i].id == cus){
+                            found = i
+                        }
+                    })
+                    if (found !== false) {
+                        stickerspam[found].msg = 1;
+                        const resultx = 'Database telah direset!'
+                        console.log(stickerspam[found])
+                        fs.writeFileSync('./settings/stickerspam.json',JSON.stringify(stickerspam));
+                        piyo.reply(from, resultx)
+                    } else {
+                            piyo.reply(from, `Nomor itu tidak terdaftar didalam database!`, id)
+                    }
+                })
+                return true;
+            }else{
+                found === true
+                return false;
+            }   
+        }
+    }
+    if (found === false){
+        let obj = {id: `${id}`, msg:1};
+        stickerspam.push(obj);
+        fs.writeFileSync('./settings/stickerspam.json',JSON.stringify(stickerspam));
+        return false;
+    }  
+}
+function addStickerCount(id){
+    if (isOwnerBot, isAdmin) {return;}
+    var found = false
+    Object.keys(stickerspam).forEach((i) => {
+        if(stickerspam[i].id == id){
+            found = i
+        }
+    })
+    if (found !== false) {
+        stickerspam[found].msg += 1;
+        fs.writeFileSync('./settings/stickerspam.json',JSON.stringify(stickerspam));
+    }
+}
+
+if (isGroupMsg && AntiStickerSpam && !isGroupAdmins && !isAdmin && !isOwner){
+    if(stickermsg === true){
+        if(isStickerMsg(serial)) return
+        addStickerCount(serial)
+    }
+}
 //////////////
 if (!isGroupMsg && isMedia && isImage && !isCmd)
     {
@@ -527,6 +592,9 @@ if (!isGroupMsg && isMedia && isImage && !isCmd)
                     }
                 }
 	// Filter Banned People
+    if (isBanned) {
+        return console.log(color('[BAN]', 'red'), color(moment(t * 1000).format('DD/MM/YY HH:mm:ss'), 'yellow'), color(`${command} [${args.length}]`), 'from', color(pushname))
+    }
         switch (command) {
         // Menu and TnC
 
@@ -825,15 +893,15 @@ case 'ttp2':
                                 break
 case 'blackbird':
                                     if (!q) return piyo.reply(from, `Ketik /blackbird teksnya` , id)
-                                    await piyo.sendStickerfromUrl(from, `https://arugaz.my.id/api/flamingtext/blackbird?text=${q}`)
+                                    await piyo.sendStickerfromUrl(from, `https://piyoz.my.id/api/flamingtext/blackbird?text=${q}`)
                                     break
 case 'memo':
                                     if (!q) return piyo.reply(from, `Ketik /memo teksnya` , id)
-                                    await piyo.sendStickerfromUrl(from, `https://arugaz.my.id/api/flamingtext/memories?text=${q}`)
+                                    await piyo.sendStickerfromUrl(from, `https://piyoz.my.id/api/flamingtext/memories?text=${q}`)
                                     break
 case 'water':
                                     if (!q) return piyo.reply(from, `Ketik /water teksnya` , id)
-                                    await piyo.sendStickerfromUrl(from, `https://arugaz.my.id/api/flamingtext/water?text=${q}`)
+                                    await piyo.sendStickerfromUrl(from, `https://piyoz.my.id/api/flamingtext/water?text=${q}`)
                                     break
 
 case 'ttg':
@@ -1097,7 +1165,7 @@ if (args.length == 0) return piyo.reply(from, `Membuat Text jadi Gambar ala ala 
 break
 case 'logo':
 if (!q) return piyo.reply(from, `nulis yang bener` , id)
-piyo.sendFileFromUrl(from, `https://arugaz.my.id/api/textpro/captamerica?text=${q}`)
+piyo.sendFileFromUrl(from, `https://piyoz.my.id/api/textpro/captamerica?text=${q}`)
 break
 case 'pornhub':
             if (args.length == 2) return piyo.reply(from, `Kirim perintah */pornhub [ |Teks1|Teks2 ]*, contoh */pornhub |Alvio|Piyobot*`, id)
@@ -1268,7 +1336,35 @@ case 'reminder': // by Slavyan
             }
         }, 1000)
     break
-
+    case 'antisticker':
+        if (!isGroupMsg) return piyo.reply(from, `Perintah ini hanya bisa di gunakan dalam group!`, id)
+        if (!isGroupAdmins) return piyo.reply(from, `Perintah ini hanya bisa di gunakan oleh Admin group!`, id)
+        if (!isBotGroupAdmins) return piyo.reply(from, `Perintah ini hanya bisa di gunakan jika Bot menjadi Admin!`, id)
+        if (ar[0] === 'enable') {
+            var cek = antisticker.includes(chatId);
+            if(cek){
+                return piyo.reply(from, `*「 ANTI SPAM STICKER 」*\nStatus : Sudah Aktif`, id)
+             } else {
+                antisticker.push(chatId)
+                fs.writeFileSync('./settings/antisticker.json', JSON.stringify(antisticker))
+                piyo.reply(from, `*「 ANTI SPAM STICKER 」*\nStatus : Aktif`, id)
+            }
+        } else if (ar[0] === 'disable') {
+            var cek = antisticker.includes(chatId);
+            if(cek){
+                return piyo.reply(from, `*「 ANTI SPAM STICKER 」*\nStatus : Sudak DiNonaktif`, id) //if number already exists on database
+            } else {
+                let nixx = antisticker.indexOf(chatId)
+                antisticker.splice(nixx, 1)
+                fs.writeFileSync('./settings/antisticker.json', JSON.stringify(antisticker))
+                piyo.reply(from, `*「 ANTI SPAM STICKER 」*\nStatus : Nonaktif`, id)
+                limitAdd(serial)
+            }
+        }
+        break
+case 'antiporn':
+    piyo.reply(from, `Ini fitur premium, jika ingin membelinya silahkan chat\nwa.me/6281414046576` , id)
+    break
 case 'antilink':                
     if (!isGroupMsg) return await piyo.reply(from, ind.groupOnly(), id)
     if (!isGroupAdmins) return await piyo.reply(from, ind.adminOnly(), id)
@@ -2535,7 +2631,7 @@ case 'play':
 case 'play2':
             if (!q) return piyo.reply(from , `Silahkan  ketik /play2 judulnya` , id)
             if (!isPremium) return piyo.reply(from, `Maaf, ini adalah fitur premium, untuk menggunakan fitur ini silahkan beli premium ke owner \nUntuk Harga\n\n10k Perbulan\n5k Perpanjang`, id)
-            axios.get(`https://arugaytdl.herokuapp.com/search?q=${q}`) 
+            axios.get(`https://piyoytdl.herokuapp.com/search?q=${q}`) 
                         .then(async (res) => {      
                             await piyo.reply(from, ind.wait(), id)
                             const serplay22 = body.slice(7)
@@ -3546,7 +3642,7 @@ await piyo.reply(from, `Maaf ${pushname}, Command *${arghh[0]}* Tidak Terdaftar 
             }
 			// Simi-simi function
             if ((!isCmd && isGroupMsg && chatId && isSimi) && message.type === 'chat') {
-                axios.get(`https://arugaz.herokuapp.com/api/simisimi?kata=${encodeURIComponent(message.body)}&apikey=${apiSimi}`)
+                axios.get(`https://piyoz.herokuapp.com/api/simisimi?kata=${encodeURIComponent(message.body)}&apikey=${apiSimi}`)
                 .then((res) => {
                     if (res.data.status == 403) return piyo.sendText(ownerNumber, `${res.data.result}\n\n${res.data.pesan}`)
                     piyo.reply(from, `Simi berkata: ${res.data.result}`, id)
