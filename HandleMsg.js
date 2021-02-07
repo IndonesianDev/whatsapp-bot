@@ -611,34 +611,33 @@ case 'toimg':
         } else if (!quotedMsg) return piyo.reply(from, `Format salah, silahkan tag sticker yang ingin dijadikan gambar!`, id)
         break
 case 'sticker':
-case 'stiker':            
-            if ((isMedia || isQuotedImage) && args.length === 0) {
-                const encryptMedia = isQuotedImage ? quotedMsg : message
-                const _mimetype = isQuotedImage ? quotedMsg.mimetype : mimetype
-                const mediaData = await decryptMedia(encryptMedia, uaOverride)
-                const imageBase64 = `data:${_mimetype};base64,${mediaData.toString('base64')}`
-                piyo.sendImageAsSticker(from, imageBase64 , 'Piyobot')
-                .then(() => {
-                    piyo.reply(from, 'Nih\'s Stiker lo ')
-                    console.log(`Sticker Processed for ${processTime(t, moment())} Second`)
-                })
+case 'stiker':
+           if (isMedia && type === 'image') {
+                const mediaData = await decryptMedia(message, uaOverride)
+                const imageBase64 = `data:${mimetype};base64,${mediaData.toString('base64')}`
+                await piyo.sendImageAsSticker(from, imageBase64)
+            } else if (quotedMsg && quotedMsg.type == 'image') {
+                const mediaData = await decryptMedia(quotedMsg, uaOverride)
+                const imageBase64 = `data:${quotedMsg.mimetype};base64,${mediaData.toString('base64')}`
+                await piyo.sendImageAsSticker(from, imageBase64)
+            } else if (args.length === 2) {
+                const url = args[1]
+                if (url.match(isUrl)) {
+                    await client.sendStickerfromUrl(from, url, { method: 'get' })
+                        .catch(err => console.log('Caught exception: ', err))
+                } else {
+                    piyo.reply(from, `Terjadi Kesalahan`, id)
+                }
             }  else if (args[0] === 'nobg') {
                 if (isMedia || isQuotedImage) {
-                    try {
-                    var mediaData = await decryptMedia(message, uaOverride)
-                    var imageBase64 = `data:${mimetype};base64,${mediaData.toString('base64')}`
-                    var base64img = imageBase64
-                    var outFile = './media/noBg.png'
-		            // kamu dapat mengambil api key dari website remove.bg dan ubahnya difolder settings/api.json
-                    var result = await removeBackgroundFromImageBase64({ base64img, apiKey: apiNoBg, size: 'auto', type: 'auto', outFile })
-                    await fs.writeFile(outFile, result.base64img)
-                    await piyo.sendImageAsSticker(from, `data:${mimetype};base64,${result.base64img}`)
-                    } catch(err) {
-                    console.log(err)
-	   	            await piyo.reply(from, 'Maaf batas penggunaan hari ini sudah mencapai maksimal', id)
-                    }
-                }
-            } else if (args.length === 1) {
+                                const encryptMedia = isQuotedImage ? quotedMsg : message
+                		const _mimetype = isQuotedImage ? quotedMsg.mimetype : mimetype
+                		const mediaData = await decryptMedia(encryptMedia, uaOverride)
+                		const imageBase64 = `data:${_mimetype};base64,${mediaData.toString('base64')}`
+                                await piyo.sendImageAsSticker(from, imageBase64, {keepScale: true, removebg: true})
+                            } else {
+                                await piyo.reply(from, 'Format pesan salah...', id)
+                            }} else if (args.length === 1) {
                 if (!isUrl(url)) { await piyo.reply(from, 'Maaf, link yang kamu kirim tidak valid.', id) }
                 piyo.sendStickerfromUrl(from, url).then((r) => (!r && r !== undefined)
                     ? piyo.sendText(from, 'Maaf, link yang kamu kirim tidak memuat gambar.')
