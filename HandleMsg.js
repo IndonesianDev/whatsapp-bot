@@ -98,6 +98,7 @@ const _afk = JSON.parse(fs.readFileSync('./settings/afk.json'))
 const _premium = JSON.parse(fs.readFileSync('./settings/premium.json'))
 const _biodata = JSON.parse(fs.readFileSync('./settings/biodata.json'))
 const _registered = JSON.parse(fs.readFileSync('./settings/registered.json'))
+const uang = JSON.parse(fs.readFileSync('./settings/uang.json'))
 ///////////////////////////////////////////////////////////////////////////////
 
 
@@ -471,6 +472,74 @@ const isAfkOn = getAfk(sender.id)
                 await piyo.sendText(from, ind.afkDone(pushname))
             }
         }
+//////////////////////////////////////FUNCTION BALANCE/////////////////////////////////////
+        const addATM = (serial) => {
+            const obj = {id: serial, uang : 0}
+            uang.push(obj)
+            fs.writeFileSync('./settings/uang.json', JSON.stringify(uang))
+        }
+        
+        const addKoinUser = (serial, amount) => {
+            let position = false
+            Object.keys(uang).forEach((i) => {
+                if (uang[i].id === serial) {
+                    position = i
+                }
+            })
+            if (position !== false) {
+                uang[position].uang += amount;
+                fs.writeFileSync('./settings/uang.json', JSON.stringify(uang))
+            }
+        }
+        
+        const checkATMuser = (serial) => {
+            let position = false
+            Object.keys(uang).forEach((i) => {
+                if (uang[i].id === serial) {
+                    position = i
+                }
+            })
+            if (position !== false) {
+                return uang[position].uang
+            }
+        }
+        
+        const bayarLimit = (serial, amount) => {
+            let position = false
+            Object.keys(limit).forEach((i) => {
+                if (limit[i].id === serial) {
+                    position = i
+                }
+            })
+            if (position !== false) {
+                limit[position].limit -= amount;
+                fs.writeFileSync('./settings/limit.json', JSON.stringify(limit))
+            }
+        }
+            
+        const confirmATM = (serial, amount) => {
+            let position = false
+            Object.keys(uang).forEach((i) => {
+                if (uang[i].id === serial) {
+                    position = i
+                }
+            })
+            if (position !== false) {
+                uang[position].uang -= amount
+                fs.writeFileSync('./settings/uang.json', JSON.stringify(uang))
+            }
+        }
+	
+            if (isReg ) {
+            const checkATM = checkATMuser(serial)
+            try {
+                if (checkATM === undefined) addATM(serial)
+                const uangsaku = Math.floor(Math.random() * 10) + 50
+                addKoinUser(serial, uangsaku)
+            } catch (err) {
+                console.error(err)
+            }
+        }
 //////////////////////////////////////ANTI STICKER SPAM////////////////////////////////
 function isStickerMsg(id){
     if (isOwnerBot, isAdmin) {return false;}
@@ -665,6 +734,11 @@ case 'ownerbot':
             await piyo.sendContact(from, ownerNumber)
             .then(() => piyo.sendText(from, 'Jika kalian ingin request fitur silahkan chat nomor owner!'))
             break
+case 'bal':
+             if (!isRegistered) return piyo.reply(from, `Maaf ${pushname}, sepertinya kamu belum terdaftar sebagai user Piyobot, untuk pendaftaran bisa menggunakan /register nama | Jenis Kelamin. Contoh: /register ${pushname}|cewe`, id)
+             const kantong = checkATMuser(serial)
+             piyo.reply(from, `Halo ${pushname}, Kamu Memiliki Uang Sejumlah Rp. ${kantong}`, id)
+             break
 ///////////////////////////////////////////////////MENU STICKER////////////////////////////////////////////////////
 case 'stimg':
 case 'toimg':                                
@@ -3487,6 +3561,19 @@ case 'sspc':
                 fs.writeFileSync('./settings/limit.json',JSON.stringify(limit, 1));
                 piyo.reply(from, `Sisa limit request anda tersisa : *${limitCount}*\n\n_Note : Jika ingin menambah limit silahkan chat owner`, id)
             }
+            break
+case 'buylimit':
+             if (!isRegistered) return piyo.reply(from, `Maaf ${pushname}, sepertinya kamu belum terdaftar sebagai user Piyobot, untuk pendaftaran bisa menggunakan /register nama | Jenis Kelamin. Contoh: /register ${pushname}|cewe`, id)
+             if (args.length == 0) return piyo.reply(from, `Berapa limit yang mau di beli bre?\n1 Point Limit = Rp. 1500\n\nPastiin uang kakak cukup juga kak!\nCara Pembelian: #buylimit 1\nCara cek uang: ${prefix}bal`, id)
+             payout = body.slice(10)
+             const koinPerlimit = 1500 //Silahkan Custom Sendiri Price BuyLimit
+             const total = koinPerlimit * payout
+             if ( checkATMuser(serial) <= total) return piyo.reply(from, `maaf uang kamu belum mencukupi. silahkan kumpulkan dan beli nanti`, id)
+             if ( checkATMuser(serial) >= total ) {
+             confirmATM(serial, total)
+             bayarLimit(serial, payout)
+             await piyo.reply(from, `*「 PEMBAYARAN BERHASIL 」*\n\n❏ *pengirim* : Admin\n❏ *penerima* : ${pushname}\n❏ *nominal pembelian* : ${payout} \n❏ *harga limit* : ${koinPerlimit}/limit\n❏ *sisa uang mu* : Rp. ${checkATMuser(serial)}\n\nproses berhasil dengan nomer pembayaran \n${SN}`, id)
+                }
             break
 //////////////////////////////////////////////////////Owner Bot////////////////////////////////////////////////////
 case 'premium':
