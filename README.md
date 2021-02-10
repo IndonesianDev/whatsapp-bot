@@ -115,6 +115,12 @@ Setelah itu pindai kode QR menggunakan WhatsApp Anda di ponsel Anda!
 | Text to sticker GIF   |      ✔️      |
 | Sticker to image      |      ✔️      |
 
+|     Money Feature     | Availability |
+| :-------------------: | :----------: |
+| Money Check           |      ✔️      |
+| Buy Limit             |      ✔️      |
+| Transfer Money        |     Soon      |
+
 |      Downloader     | Availability |
 | :-----------------: | :----------: |
 | Facebook video      |      ✔️      |
