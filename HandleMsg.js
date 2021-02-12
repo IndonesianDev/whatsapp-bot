@@ -533,7 +533,7 @@ const isAfkOn = getAfk(sender.id)
             }
         }
 	
-            if (isReg ) {
+            if (isRegistered) {
             const checkATM = checkATMuser(serial)
             try {
                 if (checkATM === undefined) addATM(serial)
