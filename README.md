@@ -67,6 +67,7 @@ Edit value yang diperlukan di `settings/setting.json`.
     "medialimitCount": "5",
     "prefix": "/",
     "vhtearkey": "Your Apikey In Here",
+    "apikeyz": "Your Apikey In Here",
     "itech": "Your Apikey In Here"
 }
 
