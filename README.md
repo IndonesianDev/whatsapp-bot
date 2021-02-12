@@ -14,7 +14,9 @@
   <a href="https://github.com/VideFrelan"><img src="https://avatars1.githubusercontent.com/u/76523793?s=400&u=365f732cd3fc09ce75f6556715a00386005db57c&v=4" height="128" width="128" /></a>
 </p>
 
-<blockquote class="imgur-embed-pub" lang="en" data-id="a/iBeNzQw" data-context="false" ><a href="//imgur.com/a/iBeNzQw"></a></blockquote><script async src="//s.imgur.com/min/embed.js" charset="utf-8"></script>
+<p align="center">
+  <a href="https://xn--r1a.website/s/botwebapi"><img src="https://i.imgur.com/H3n89Xg.png"  height="128" width="128" /></a>
+  </p>
 
 <p align="center">
   <a href="https://github.com/AlvioAdjiJanuar"><img title="Author" src="https://img.shields.io/badge/Author-AlvioAdjiJanuar-darkred.svg?style=for-the-badge&logo=github" /></a>
