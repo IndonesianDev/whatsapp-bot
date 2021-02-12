@@ -1475,6 +1475,7 @@ case 'reminder': // by Slavyan
         }
         break
 case 'antiporn':
+    if (!q) return piyo,reply(from, `Fitur Premium ` id)
     piyo.reply(from, `Ini fitur premium, jika ingin membelinya silahkan chat\nwa.me/6281414046576` , id)
     break
 case 'antilink':                
