@@ -15,25 +15,12 @@
 </p>
 
 <p align="center">
+  <a href="https://т.website/s/botwebapi"><img src="https://xn--r1a.website/s/botwebapi" height = "127"width="128" /></a>
+
+<p align="center">
   <a href="https://github.com/AlvioAdjiJanuar"><img title="Author" src="https://img.shields.io/badge/Author-AlvioAdjiJanuar-darkred.svg?style=for-the-badge&logo=github" /></a>
 </p>
 
-<!DOCTYPE html>
-<html>
-<body>
-    <iframe id="github-iframe" src="" style="width:1000px;height:1000px;"></iframe>
-    <script>
-        fetch('https://api.github.com/repos/agalea91/crypto-monetary-base/contents/charts/relative_coin_supply_pct_estimates.html')
-            .then(function(response) {
-                return response.json();
-            }).then(function(data) {
-                iframe = document.getElementById('github-iframe');
-                iframe.src = 'data:text/html;base64,' + encodeURIComponent(data['content']);
-            });
-    </script>
-</body>
-</html>
-  
 <p align="center">
   <a href="https://github.com/IndonesianDev/whatsapp-bot"><img title="Stars" src="https://img.shields.io/github/stars/IndonesianDev/whatsapp-bot?color=black&style=flat-square" /></a>
   <a href="https://github.com/IndonesianDev/whatsapp-bot/network/members"><img title="Forks" src="https://img.shields.io/github/forks/IndonesianDev/whatsapp-bot??color=pink&style=flat-square" /></a>
