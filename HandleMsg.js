@@ -9,6 +9,7 @@ const appRoot = require('app-root-path')
 const emojiUnicode = require('emoji-unicode')
 const toMs = require('ms')
 const low = require('lowdb')
+const requests = require("node-fetch")
 const ms = require('parse-ms')
 const FileSync = require('lowdb/adapters/FileSync')
 const feature = require('./lib/poll');
@@ -118,6 +119,7 @@ let {
     limitCount, 
     memberLimit,
     prefix,
+    apikeyz,
     vhtearkey
 } = setting
 //////////////////////////////////////////////////////////////////////////////
@@ -2012,6 +2014,40 @@ case 'anime':
                 piyo.reply(from, `Maaf query tidak tersedia. Silahkan ketik ${prefix}anime untuk melihat list query`)
             }
             break
+case 'charsgenshin':{
+            const response = await requests("http://hujanapi.xyz/api/gichars?apikey=" + apikeyz)
+            const data = await response.json()
+            const liyue = data.result.liyue
+            const mondstadt = data.result.mondstadt
+            let fex = "\n\n*List Character Mondstadt*\n"
+            let num = 0
+            let fox = "*List Character Liyue*\n"
+            let no = 0
+            for (var a = 0; a < liyue.length; a++) {
+                no += 1
+                fox += "\n"+no+". "+liyue[a]
+            }
+            for (var a = 0; a < mondstadt.length; a++) {
+                num += 1
+                fex += "\n"+num+". "+mondstadt[a]
+            }
+            const mat = fox+" "+fex
+            piyo.reply(from, mat , id)
+}
+break
+            case 'genshin':{
+            if (!q) return piyo.reply(from, `Silahkan liat characternya\nDengan Ketik /charsgenshin ` , id)
+            const response = await requests("http://hujanapi.xyz/api/gichar?query="+ q +"&apikey="+apikeyz)
+            const datas = await response.json()
+            const asu = datas.result
+            let fox = "*Detail Character*\n"
+            fox += "\n*Title :* " + asu.title
+            fox += "\n*Info :* " + asu.intro
+            await piyo.sendFileFromUrl(from, asu.cover1 , 'piyo.jpg' , fox , id)
+            await piyo.sendFileFromUrl(from, asu.cv[0].audio[2] , 'piyo.mp3' , 'nih kak' , id)
+        }
+break
+			
 case 'kpop':     
         if (args.length == 0) return piyo.reply(from, `Untuk menggunakan ${prefix}kpop\nSilahkan ketik: ${prefix}kpop [query]\nContoh: ${prefix}kpop bts\n\nquery yang tersedia:\nblackpink, exo, bts`, id)
             if (args[0] == 'blackpink' || args[0] == 'exo' || args[0] == 'bts') {
@@ -2571,7 +2607,7 @@ case 'jadwalbola':
                 const { data } = await jdbola2.result
                 let xixixi = `*「 JADWAL BOLA 」*\n\n`
                 for (let i = 0; i < data.length; i++) {
-                    xixixi += `\n─────────────────\n\n*Kick-Off* : ${data[i].kickoff}\n*Pertandingan* : ${data[i].pertandingan}\n*Stasiun TV* : ${data[i].stasiuntv}`
+                    xixixi += `\n─────────────────\n\n*Kick-Off* : ${data[i].kickof}\n*Pertandingan* : ${data[i].pertandingan}\n*Stasiun TV* : ${data[i].stasiuntv}`
                 }
                 await piyo.sendText(from, xixixi, id)
             } catch (err) {
@@ -2857,6 +2893,20 @@ case 'infomobil':
                     await piyo.reply(from, `Error!`, id)
                 }
             break
+case 'nickepep':
+            if (!q) return piyo.reply(from, `Ketik /nickepep id ff nya ` ,  id)
+            await piyo.reply(from, ind.wait() , id)
+            const nick = await axios.get(`http://hujanapi.xyz/api/nickff?id=${q}&apikey=${apikeyz}`)
+            await piyo.reply(from, nick.data.result , id)
+            break
+			
+case 'nickml':
+            if (!q) return piyo.reply(from, `Ketik /nickml id ff nya ` ,  id)
+            await piyo.reply(from, ind.wait() , id)
+            const nick = await axios.get(`http://hujanapi.xyz/api/nickml?id=${q}&apikey=${apikeyz}`)
+            await piyo.reply(from, nick.data.result , id)
+            break
+			
 case 'infomotor':
             if (args.length == 0) return piyo.reply(from, `Kirim perintah *${prefix}infomotor [ Merek Motor ]*\n\nContoh : *${prefix}infomotor vario 150*`, id)
         const motoy = body.slice(11)
@@ -2872,16 +2922,90 @@ case 'infomotor':
                     await piyo.reply(from, `Error!`, id)
                 }
             break
-case 'bokep': // MFARELS
-case 'randombokep': // MFARELS
-case 'bkp': // MFARELS
-                if (!isPremium) return piyo.sendText(from, `Ini Fitur premium, silahkan beli premium ke owner`)
-                const mskkntl = fs.readFileSync('./lib/18+.json') // MFARELS
-                const kntlnya = JSON.parse(mskkntl) // MFARELS
-                const rindBkp = Math.floor(Math.random() * kntlnya.length) // MFARELS
-                const rindBkep = kntlnya[rindBkp] // MFARELS
-                piyo.sendFileFromUrl(from, rindBkep.image, 'Bokep.jpg', rindBkep.teks, id) // MFARELS
-                break
+			
+case 'xvideos': {
+            if (!isPremium) return piyo.reply(from, `Fitur Ini Khusus Premium ` ,id)
+            const xtext = message.body.replace('/xvideos', '')
+            pemisah = xtext.split("|")
+            const search = pemisah[0]
+            const responlo = await requests("http://hujanapi.xyz/api/xvideos?query="+search+"&count=10&apikey="+apikeyz)
+            const datas = await responlo.json()
+            const img = 'https://seeklogo.com/images/X/xvideos-logo-77E7B4F168-seeklogo.com.png'
+            const asu = datas.result
+            if (pemisah.length == 1)  {
+                let num = 0
+                let fox = "*_Xvideos Search_*\n\n"
+                for (var a = 0; a < asu.length; a++) {
+                    num += 1
+                    fox += "```"+asu[a].title+"```\n"+asu[a].url+"`````("+num+")```\n"
+                }
+                fox += "\n\n*Hey* @! *For detail*:\n```xvideos "+xtext+"|number```"
+                piyo.sendFileFromUrl(from, img,  'bokep.jpg' , fox, `${sender}` )
+            }
+            if (pemisah.length == 2) {
+                const num = pemisah[1]
+                const value = Number(pemisah[1])
+                let fox = "*_Detail Video*_\n"
+                fox += "\nTitle : " + asu[value].title
+                fox += "\nDuration : " + asu[value].duration
+                fox += "\nChannel : " + asu[value].channel
+                fox += "\nLink : " + asu[value].url
+                fox += "\n\n\nSource : xvideos.com"
+                await piyo.sendFileFromUrl(from, asu[value].image, 'bokep.jpg' ,  fox , id)
+            }
+        }
+break
+
+case 'xnxx': { 
+    if (!q) return await piyo.sendText(from, `Ketik /xnxx namanya`)
+            if (!isPremium) return piyo.reply(from, `Fitur Ini Khusus Premium ` ,id)
+            const xtext = message.body.replace('/xnxx', '')
+            pemisah = xtext.split("|")
+            const search = pemisah[0]
+            const responlo = await requests("http://hujanapi.xyz/api/xnxx?query="+xtext+"&count=10&apikey="+apikeyz)
+            const datas = await responlo.json()
+            const img = 'https://yt3.ggpht.com/ytc/AAUvwngpbURJyno0rvS4aza889YDF7-oXbRyopWO0bZO=s900-c-k-c0x00ffffff-no-rj'
+            const asu = datas.result
+            if (pemisah.length == 1)  {
+                let num = 0
+                let fox = "*_Xnxx Search_*\n\n"
+                for (var a = 0; a < asu.length; a++) {
+                    num += 1
+                    fox += "```"+asu[a].title+"```\n"+asu[a].url+"`````("+num+")```\n"
+                }
+                fox += "\n\n*Hey* @! *For detail*:\n```xnxx "+xtext+"|number```"
+                piyo.sendFileFromUrl(from, img,  'bokep.jpg' , fox, `${sender}` )
+            }
+            if (pemisah.length == 2) {
+                const num = pemisah[1]
+                const value = Number(pemisah[1])
+                let fox = "*_Detail Video*_\n"
+                fox += "\nTitle : " + asu[value].title
+                fox += "\nDuration : " + asu[value].duration
+                fox += "\nChannel : " + asu[value].channel
+                fox += "\nLink : " + asu[value].url
+                fox += "\n\n\nSource : xnxx.com"
+                await piyo.sendFileFromUrl(from, asu[value].image, 'bokep.jpg' ,  fox , id)
+            }
+        }
+        break
+
+case 'xnxxdl':{ 
+      if (!isPremium) return piyo.reply(from, `Khusus Premium ` , id )
+      const vioo = await axios.get(`http://hujanapi.xyz/api/xnxxdl?url=${q}&apikey=${apikeyz}`)
+      await piyo.reply(from, `Mohon tunggu , Video terikirim akan lebih lama jika size besar\nSize Videos : ${vioo.data.size}`  , id)
+      await piyo.sendFileFromUrl(from, vioo.data.vid , 'bokep.mp4' , `Title : ${vioo.data.judul}\nSize : ${vioo.data.size}` ,  id)
+}
+break
+
+case 'xvidl':{
+      if (!isPremium) return piyo.reply(from, `Khusus Premium ` , id )
+      const vio = await axios.get(`http://hujanapi.xyz/api/xvideosdl?url=${q}&apikey=${apikeyz}`)
+      await piyo.reply(from, `Mohon tunggu , Video terikirim akan lebih lama jika size besar\nSize Videos : ${vio.data.size}`  , id)
+      await piyo.sendFileFromUrl(from, vio.data.vid , 'bokep.mp4' , `Title : ${vio.data.judul}\nSize : ${vio.data.size}` ,  id)
+}
+break
+			
 case 'indohot':
             if (!isPremium) return piyo.reply(from, `Maaf, ini adalah fitur premium, untuk menggunakan fitur ini silahkan beli premium ke owner \nUntuk Harga\n\n 10kPerbulan\n5kPerpanjang`, id)
             const hot = body.slice(7)
