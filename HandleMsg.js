@@ -2933,8 +2933,8 @@ case 'infomobil':
 case 'nickepep':
             if (!q) return piyo.reply(from, `Ketik /nickepep id ff nya ` ,  id)
             await piyo.reply(from, ind.wait() , id)
-            const nick = await axios.get(`http://hujanapi.xyz/api/nickff?id=${q}&apikey=${apikeyz}`)
-            await piyo.reply(from, nick.data.result , id)
+            const nick1 = await axios.get(`http://hujanapi.xyz/api/nickff?id=${q}&apikey=${apikeyz}`)
+            await piyo.reply(from, nick1.data.result , id)
             break
 			
 case 'nickml':
