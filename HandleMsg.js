@@ -121,6 +121,7 @@ let {
     memberLimit,
     prefix,
     apikeyz,
+    apikeyx,
     vhtearkey
 } = setting
 //////////////////////////////////////////////////////////////////////////////
@@ -2023,6 +2024,16 @@ if (!isBotGroupAdmins) return piyo.reply(from, 'Gagal, silahkan tambahkan bot se
     piyo.reply(from, 'Success kick all member', id)
 break
 //////////////////////////////////////////////MENU IMAGE/////////////////////////////////////////////////////////
+case 'fisheye':
+            if (isMedia && type === 'image' || isQuotedImage) {
+                await piyo.reply(from, ind.wait(), id)
+                const encryptMedia = isQuotedImage ? quotedMsg : message
+                const mediaData = await decryptMedia(encryptMedia, uaOverride)
+                const imageLinkk = await uploadImages(mediaData, `fisheye.${sender.id}`)
+                const eye = await axios.get(`https://naufalhoster.xyz/tools/fisheye?apikey=${apikeyx}&url=${imageLinkk}`)
+                await piyo.sendFileFromUrl(from, eye.data.result.image , 'fish.jpg' , '' , id)
+            }
+            break
 case 'neko18':
                         const nsfwneko = await axios.get('https://tobz-api.herokuapp.com/api/nsfwneko?apikey=BotWeA')
                         const nsfwn = nsfwneko.data
