@@ -25,7 +25,9 @@
                                         <div class="col mr-2">
                                             <!--<script async src="https://telegram.org/js/telegram-widget.js?14" data-telegram-post="botwebapi/92" data-width="100%" data-userpic="true" data-dark="1"></script>-->
                                             <!--<script async src="https://telegram.org/js/telegram-widget.js?14" data-telegram-discussion="botwebapi" data-comments-limit="5" data-dark="1"></script>-->
-                                            <iframe id="preview" style="border:0px;height:500px;width:500px;margin:5px;box-shadow: 0 0 16px 3px rgba(0,0,0,.2); max-width: 100%;" src="https://xn--r1a.website/s/botwebapi" loading="lazy"></iframe>
+<figure class="video_container">
+<iframe width="425" height="350" frameborder="0" scrolling="no" marginheight="0" marginwidth="0" src="https://www.openstreetmap.org/export/embed.html?bbox=6.047544479370118%2C46.23053702499607%2C6.061706542968751%2C46.23821801159735&amp;layer=mapnik" style="border: 1px solid black"></iframe>
+</figure>
                                         </div>
                                     </div>
                                 </div>
