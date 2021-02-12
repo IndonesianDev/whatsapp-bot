@@ -15,10 +15,6 @@
 </p>
 
 <p align="center">
-  <a href="https://xn--r1a.website/s/botwebapi"><img src="https://i.imgur.com/H3n89Xg.png"  height="300" width="500" /></a>
-  </p>
-
-<p align="center">
   <a href="https://github.com/AlvioAdjiJanuar"><img title="Author" src="https://img.shields.io/badge/Author-AlvioAdjiJanuar-darkred.svg?style=for-the-badge&logo=github" /></a>
 </p>
 
