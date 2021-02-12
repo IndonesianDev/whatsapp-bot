@@ -159,6 +159,8 @@ Setelah itu pindai kode QR menggunakan WhatsApp Anda di ponsel Anda!
 | Reminder            |      ✔️      |
 | Image to URL        |      ✔️      |
 | Jadwal sholat       |      ✔️      |
+| To Mp3              |      ✔️      |
+| Bass                |      ✔️      |
 | Line sticker latest |      ✔️      |
 | Cek ongkir          |      ✔️      |
 
@@ -225,11 +227,15 @@ Setelah itu pindai kode QR menggunakan WhatsApp Anda di ponsel Anda!
 | Auto-sticker     |      ✔️      |
 | Mute group       |      ✔️      |
 
-|        NSFW        | Availability |
+|        18+         | Availability |
 | :----------------: | :----------: |
 | Fetish             |      ✔️      |
 | Waifu NSFW         |      ✔️      |
 | Waifu 18+          |      ✔️      |
+| Xvideos            |      ✔️      |
+| Xvidl              |      ✔️      |
+| Xnxx               |      ✔️      |
+| Xnxxdl             |      ✔️      |
 | nHentai downloader |      ✔️      |
 
 
