@@ -17,22 +17,8 @@
 <p align="center">
   <a href="https://github.com/AlvioAdjiJanuar"><img title="Author" src="https://img.shields.io/badge/Author-AlvioAdjiJanuar-darkred.svg?style=for-the-badge&logo=github" /></a>
 </p>
-<div class="row">
-                        <div class="col-xl-6 col-md-6 mb-4">
-                            <div class="card h-50 mb-4">
-                                <div class="card-body">
-                                    <div class="row align-items-center">
-                                        <div class="col mr-2">
-                                            <!--<script async src="https://telegram.org/js/telegram-widget.js?14" data-telegram-post="botwebapi/92" data-width="100%" data-userpic="true" data-dark="1"></script>-->
-                                            <!--<script async src="https://telegram.org/js/telegram-widget.js?14" data-telegram-discussion="botwebapi" data-comments-limit="5" data-dark="1"></script>-->
-<figure class="video_container">
-<iframe width="425" height="350" frameborder="0" scrolling="no" marginheight="0" marginwidth="0" src="https://www.openstreetmap.org/export/embed.html?bbox=6.047544479370118%2C46.23053702499607%2C6.061706542968751%2C46.23821801159735&amp;layer=mapnik" style="border: 1px solid black"></iframe>
-</figure>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
+
+[![Watch the video](https://i.imgur.com/vKb2F1B.png)](https://youtu.be/vt5fpE0bzSY)
   
 <p align="center">
   <a href="https://github.com/IndonesianDev/whatsapp-bot"><img title="Stars" src="https://img.shields.io/github/stars/IndonesianDev/whatsapp-bot?color=black&style=flat-square" /></a>
