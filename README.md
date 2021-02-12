@@ -79,6 +79,7 @@ Edit value yang diperlukan di `settings/setting.json`.
 
 `vhtearkey`: VHTear API token. Anda bisa mendapatkannya https://api.vhtear.com/ dengan membeli kunci API.
 `apikeyz`: Hujan Api token. Anda Bisa Mendapatkannya https://hujanapi.xyz
+`apikeyx`: Naufal Hoster token. Anda Bisa Mendapatkannya https://naufalhoster.xyz
 
 ## 🔍 Menginstal dependensi
 ```bash
@@ -161,6 +162,7 @@ Setelah itu pindai kode QR menggunakan WhatsApp Anda di ponsel Anda!
 | Jadwal sholat       |      ✔️      |
 | To Mp3              |      ✔️      |
 | Bass                |      ✔️      |
+| FishEye             |      ✔️      |
 | Line sticker latest |      ✔️      |
 | Cek ongkir          |      ✔️      |
 
