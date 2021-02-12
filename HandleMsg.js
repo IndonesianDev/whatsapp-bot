@@ -3686,6 +3686,14 @@ case 'sspc':
                 piyo.reply(from, `Sisa limit request anda tersisa : *${limitCount}*\n\n_Note : Jika ingin menambah limit silahkan chat owner`, id)
             }
             break
+case 'resetlimit':
+                if (!isOwnerBot) return aruga.reply(from, `Khusus owner` , id) 
+	     {
+                limit.splice(chat.id)
+                fs.writeFileSync('./settings/limit.json', JSON.stringify(limit))
+                await aruga.reply(from, `Sudah kak` , id)
+            }
+break
 case 'buylimit':
              if (!isRegistered) return piyo.reply(from, `Maaf ${pushname}, sepertinya kamu belum terdaftar sebagai user Piyobot, untuk pendaftaran bisa menggunakan /register nama | Jenis Kelamin. Contoh: /register ${pushname}|cewe`, id)
              if (args.length == 0) return piyo.reply(from, `Berapa limit yang mau di beli bre?\n1 Point Limit = Rp. 1500\n\nPastiin uang kakak cukup juga kak!\nCara Pembelian: #buylimit 1\nCara cek uang: ${prefix}bal`, id)
