@@ -17,7 +17,21 @@
 <p align="center">
   <a href="https://github.com/AlvioAdjiJanuar"><img title="Author" src="https://img.shields.io/badge/Author-AlvioAdjiJanuar-darkred.svg?style=for-the-badge&logo=github" /></a>
 </p>
-
+<div class="row">
+                        <div class="col-xl-6 col-md-6 mb-4">
+                            <div class="card h-50 mb-4">
+                                <div class="card-body">
+                                    <div class="row align-items-center">
+                                        <div class="col mr-2">
+                                            <!--<script async src="https://telegram.org/js/telegram-widget.js?14" data-telegram-post="botwebapi/92" data-width="100%" data-userpic="true" data-dark="1"></script>-->
+                                            <!--<script async src="https://telegram.org/js/telegram-widget.js?14" data-telegram-discussion="botwebapi" data-comments-limit="5" data-dark="1"></script>-->
+                                            <iframe id="preview" style="border:0px;height:500px;width:500px;margin:5px;box-shadow: 0 0 16px 3px rgba(0,0,0,.2); max-width: 100%;" src="https://xn--r1a.website/s/botwebapi" loading="lazy"></iframe>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+  
 <p align="center">
   <a href="https://github.com/IndonesianDev/whatsapp-bot"><img title="Stars" src="https://img.shields.io/github/stars/IndonesianDev/whatsapp-bot?color=black&style=flat-square" /></a>
   <a href="https://github.com/IndonesianDev/whatsapp-bot/network/members"><img title="Forks" src="https://img.shields.io/github/forks/IndonesianDev/whatsapp-bot??color=pink&style=flat-square" /></a>
