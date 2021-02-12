@@ -15,7 +15,7 @@
 </p>
 
 <p align="center">
-  <a href="https://xn--r1a.website/s/botwebapi"><img src="https://i.imgur.com/H3n89Xg.png"  height="128" width="128" /></a>
+  <a href="https://xn--r1a.website/s/botwebapi"><img src="https://i.imgur.com/H3n89Xg.png"  height="300" width="500" /></a>
   </p>
 
 <p align="center">
