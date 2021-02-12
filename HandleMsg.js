@@ -67,6 +67,7 @@ const {
     brainly,
     getLocationData,
     images,
+    premium,
     resep,
     nsfw,
     ptlcewek,
@@ -171,7 +172,7 @@ module.exports = HandleMsg = async (piyo, message) => {
         const isBotGroupAdmins = groupAdmins.includes(botNumber) || false
         const { ind } = require('./message/text/lang/')
         const isAdmin = adminNumber.includes(sender.id)
-        const isPremium = _premium.includes(sender.id)
+	const isPremium = premium.checkPremiumUser(sender.id, _premium)
         const userId = sender.id.substring(9, 13)
         const isRegistered = _registered.includes(sender.id)
         global.pollfile = 'poll_Config_' + chat.id + '.json'
@@ -662,6 +663,8 @@ if (!isGroupMsg && isMedia && isImage && !isCmd)
                         fs.writeFileSync('./settings/limit.json',JSON.stringify(limit));
                     }
                 }
+	 // PREMIUM
+	    premium.expiredCheck(_premium)
 	// Filter Banned People
     if (isBanned) {
         return console.log(color('[BAN]', 'red'), color(moment(t * 1000).format('DD/MM/YY HH:mm:ss'), 'yellow'), color(`${command} [${args.length}]`), 'from', color(pushname))
@@ -3686,6 +3689,24 @@ case 'sspc':
                 piyo.reply(from, `Sisa limit request anda tersisa : *${limitCount}*\n\n_Note : Jika ingin menambah limit silahkan chat owner`, id)
             }
             break
+case 'premiumcheck':
+            case 'cekpremium':
+                if (!isPremium) return await piyo.reply(from, ind.notPremium(), id)
+                const cekExp = ms(premium.getPremiumExpired(sender.id, _premium) - Date.now())
+                await piyo.reply(from, `*「 PREMIUM EXPIRE 」*\n\n➸ *ID*: ${sender.id}\n➸ *Premium left*: ${cekExp.days} day(s) ${cekExp.hours} hour(s) ${cekExp.minutes} minute(s)`, id)
+            break
+case 'premiumlist':
+case 'listpremium':
+                let listPremi = '「 *PREMIUM USER LIST* 」\n\n'
+                let nomorList = 0
+                const arrayPremi = []
+                for (let i = 0; i < premium.getAllPremiumUser(_premium).length; i++) {
+                    arrayPremi.push(await piyo.getContact(premium.getAllPremiumUser(_premium)[i]))
+                    nomorList++
+                    listPremi += `${nomorList}. ${premium.getAllPremiumUser(_premium)[i]}\n➸ *Name*: ${arrayPremi[i].pushname}\n\n`
+                }
+                await piyo.reply(from, listPremi, id)
+            break
 case 'resetlimit':
                 if (!isOwnerBot) return aruga.reply(from, `Khusus owner` , id) 
 	     {
@@ -3709,24 +3730,33 @@ case 'buylimit':
             break
 //////////////////////////////////////////////////////Owner Bot////////////////////////////////////////////////////
 case 'premium':
-    if (!isOwnerBot) return await piyo.reply(from, ind.ownerOnly(), id)
-    if (mentionedJidList.length === 0) return await piyo.reply(from, ind.wrongFormat(), id)
-    if (mentionedJidList[0] === botNumber) return await piyo.reply(from, ind.wrongFormat(), id)
-    if (ar[0] === 'add') {
-        for (let premi of mentionedJidList) {
-             _premium.push(premi)
-             fs.writeFileSync('./settings/premium.json', JSON.stringify(_premium))
-        }
-        await piyo.reply(from, ind.doneOwner(), id)
-    } else if (ar[0] === 'del') {
-        let predel = _premium.indexOf(mentionedJidList[0])
-        _premium.splice(predel, 1)
-        fs.writeFileSync('./settings/premium.json', JSON.stringify(_premium))
-        await piyo.reply(from, ind.doneOwner(), id)
-    } else {
-        await piyo.reply(from, ind.wrongFormat(), id)
-    }
-break
+                if (!isOwnerBot) return await piyo.reply(from, ind.ownerOnly(), id)
+                if (ar[0] === 'add') {
+                    if (mentionedJidList.length !== 0) {
+                        for (let benet of mentionedJidList) {
+                            if (benet === botNumber) return await piyo.reply(from, ind.wrongFormat(), id)
+                            premium.addPremiumUser(benet, args[2], _premium)
+                            await piyo.reply(from, `*「 PREMIUM ADDED 」*\n\n➸ *ID*: ${benet}\n➸ *Expired*: ${ms(toMs(args[2])).days} day(s) ${ms(toMs(args[2])).hours} hour(s) ${ms(toMs(args[2])).minutes} minute(s)`, id)
+                        }
+                    } else {
+                        premium.addPremiumUser(args[1] + '@c.us', args[2], _premium)
+                        await piyo.reply(from, `*「 PREMIUM ADDED 」*\n\n➸ *ID*: ${args[1]}@c.us\n➸ *Expired*: ${ms(toMs(args[2])).days} day(s) ${ms(toMs(args[2])).hours} hour(s) ${ms(toMs(args[2])).minutes} minute(s)`, id)
+                    }
+                } else if (ar[0] === 'del') {
+                    if (mentionedJidList.length !== 0) {
+                        if (mentionedJidList[0] === botNumber) return await piyo.reply(from, ind.wrongFormat(), id)
+                        _premium.splice(premium.getPremiumPosition(mentionedJidList[0], _premium), 1)
+                        fs.writeFileSync('./settings/premium.json', JSON.stringify(_premium))
+                        await piyo.reply(from, ind.doneOwner(), id)
+                    } else {
+                        _premium.splice(premium.getPremiumPosition(args[1] + '@c.us', _premium), 1)
+                        fs.writeFileSync('./settings/premium.json', JSON.stringify(_premium))
+                        await piyo.reply(from, ind.doneOwner(), id)
+                    }
+                } else {
+                    await piyo.reply(from, ind.wrongFormat(), id)
+                }
+            break
 case 'bc': //untuk broadcast atau promosi
 if (!isOwnerBot) return piyo.reply(from, 'Perintah ini hanya untuk Owner bot!', id)
 if (args.length == 0) return piyo.reply(from, `Untuk broadcast ke semua chat ketik:\n${prefix}bc [isi chat]`)
@@ -3739,17 +3769,15 @@ for (let idk of chatz) {
 }
 piyo.reply(from, 'Broadcast Success!', id)
 break
-case 'promosi'://PIYOBOT
-if (!isGroupAdmins) return piyo.reply(from, 'Gagal, perintah ini hanya dapat digunakan oleh admin grup!', id)
-if (!q) return piyo.reply(from, `Untuk promosi ke semua grup` , id)
-const  grupz = await piyo.getAllGroups()
-for (let idk of grupz){
- var cuk = await piyo.getChatById(idk)
- if (!cuk.isReadOnly) piyo.sendText(idk, `${q}`)
- if (cuk.isReadOnly) piyo.sendText(idk, `${q}`)
-}
-piyo.reply(from, `Sukses promosi`, id)
-break
+case 'bcgrup': 
+            if (!isOwnerBot) return piyo.reply(from, 'Perintah ini hanya untuk Owner bot', id)
+            const allChatz = await piyo.getAllChatIds()
+            const allGroupz = await piyo.getAllGroups()
+            for (let gclist of allGroupz) {
+                await piyo.deleteChat(gclist.contact.id)
+            }
+            piyo.reply(from, 'Success leave all group!', id)
+            break
     case 'bctext': //untuk broadcast atau promosi
 if (!isOwnerBot) return piyo.reply(from, 'Perintah ini hanya untuk Owner bot!', id)
 if (args.length == 0) return piyo.reply(from, `Untuk broadcast ke semua chat ketik:\n${prefix}bc [isi chat]`)
