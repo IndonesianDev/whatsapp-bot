@@ -74,10 +74,10 @@ Edit value yang diperlukan di `settings/setting.json`.
 
 `ownerBot`: your WhatsApp number.  
 `prefix`: bot's prefix.  
-`itech`: API token. Anda bisa mendapatkannya [di sini] (https://api.i-tech.id) dengan membuat akun. Setelah itu, setel IP statis server / host Anda di [sini] (https://api.i-tech.id/settings/profile). 
+`itech`: API token. Anda bisa mendapatkannya https://api.i-tech.id dengan membuat akun. Setelah itu, setel IP statis server / host Anda di https://api.i-tech.id/settings/profile. 
 
-`vhtearkey`: VHTear API token. Anda bisa mendapatkannya [di sini] (https://api.vhtear.com/) dengan membeli kunci API miliknya.
-`apikeyz`: Hujan Api token. Anda Bisa Mendapatkannya [di sini] (https://hujanapi.xyz)
+`vhtearkey`: VHTear API token. Anda bisa mendapatkannya https://api.vhtear.com/ dengan membeli kunci API.
+`apikeyz`: Hujan Api token. Anda Bisa Mendapatkannya https://hujanapi.xyz
 
 ## 🔍 Menginstal dependensi
 ```bash
