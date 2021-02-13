@@ -22,7 +22,7 @@ const path = require('path')
 const bent = require('bent')
 const Math_js = require('mathjs')
 const fs = require('fs-extra')
-const errorImg = 'https://i.imgur.com/528Q1YD.png'
+const errorImg = 'https://i.imgur.com/VKoNMIR.png'
 db.defaults({ group: []}).write()
 var tanggal  = moment.tz('Asia/Jakarta').format('YYYY-MM-DD')
 
