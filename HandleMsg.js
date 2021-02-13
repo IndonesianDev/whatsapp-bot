@@ -129,10 +129,9 @@ let {
 ///////////////////////////////API JSON///////////////////////////////////////
 const {
     apiNoBg,
-	apiSimi,
+    apiSimi
 } = JSON.parse(fs.readFileSync('./settings/api.json'))
 //////////////////////////////////////////////////////////////////////////////
-
 
 function formatin(duit){
     let	reverse = duit.toString().split('').reverse().join('');
@@ -144,7 +143,7 @@ function formatin(duit){
 const inArray = (needle, haystack) => {
     let length = haystack.length;
     for(let i = 0; i < length; i++) {
-        if(haystack[i].id == needle) return i;
+    if(haystack[i].id == needle) return i;
     }
     return false;
 }
@@ -165,7 +164,7 @@ module.exports = HandleMsg = async (piyo, message) => {
         const isGroupAdmins = groupAdmins.includes(sender.id) || false
         const chats = (type === 'chat') ? body : (type === 'image' || type === 'video') ? caption : ''
         const pengirim = sender.id
-		const pengirimm = JSON.parse(fs.readFileSync('./settings/registered.json'))
+	const pengirimm = JSON.parse(fs.readFileSync('./settings/registered.json'))
         const uwong = pengirimm[Math.floor(Math.random() * pengirimm.length)];
         const serial = sender.id
         const time = moment(t * 1000).format('DD/MM/YY HH:mm:ss')
