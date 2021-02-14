@@ -14,7 +14,7 @@
   <a href="https://github.com/VideFrelan"><img src="https://avatars1.githubusercontent.com/u/76523793?s=400&u=365f732cd3fc09ce75f6556715a00386005db57c&v=4" height="128" width="128" /></a>
 </p>
 
-<img src="https://raw.githubusercontent.com/AlvioAdjiJanuar/lord/master/videoplayback-2-online-video-cut.gif">/
+<img src="https://raw.githubusercontent.com/AlvioAdjiJanuar/lord/master/videoplayback-2-online-video-cut.gif">
 
 <p align="center">
   <a href="https://github.com/AlvioAdjiJanuar"><img title="Author" src="https://img.shields.io/badge/Author-AlvioAdjiJanuar-darkred.svg?style=for-the-badge&logo=github" /></a>
