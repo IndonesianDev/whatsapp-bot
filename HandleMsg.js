@@ -3837,12 +3837,11 @@ piyo.reply(from, 'Broadcast Success!', id)
 break
 case 'bcgrup': 
             if (!isOwnerBot) return piyo.reply(from, 'Perintah ini hanya untuk Owner bot', id)
-            const allChatz = await piyo.getAllChatIds()
-            const allGroupz = await piyo.getAllGroups()
-            for (let gclist of allGroupz) {
-                await piyo.deleteChat(gclist.contact.id)
+            const allGrouppz = await piyo.getAllGroups()
+            for (let gclistt of allGrouppz) {
+	await piyo.sendText(gclistt.contact.id , `${q}`) 
             }
-            piyo.reply(from, 'Success leave all group!', id)
+            piyo.reply(from, 'Succes Bc all group!', id)
             break
     case 'bctext': //untuk broadcast atau promosi
 if (!isOwnerBot) return piyo.reply(from, 'Perintah ini hanya untuk Owner bot!', id)
