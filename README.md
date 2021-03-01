@@ -4,6 +4,8 @@
 # Piyobot
 
 > Piyobot Adalah Bot Whatsapp Yang Sangat Kontol
+> Yang Punya udh pensi wwkw, silahkan chat wa saya jika ingin berkontribusi ke akun github ini
+> wa.me/6281414046576
 > BACA README GOBLOK BIAR LU TAU BELI APIKEYNYA DIMANA
 >
 
