@@ -723,6 +723,15 @@ case 'nulis': {
 case 'mentol':       
         await piyo.sendText(from, menuId.textmentol (pushname))
         break
+case 'menulogo':
+        await piyo.sendText(from, menuId.menulogo (pushname))
+        break
+case 'menusticker':
+        await piyo.sendText(from, menuId.menusticker (pushname))
+        break
+case 'menuhiburan':  
+        await piyo.sendText(from, menuId.textmenuhiburan (pushname))
+        break
 case 'menutobat':      
         await piyo.sendText(from, menuId.textmenutobat (pushname))
         break
@@ -2446,6 +2455,115 @@ case 'infofetish':
                 piyo.reply(from, 'Ada yang Error!', id)
             })
             break
+case 'nuliskanan': {
+                        //if (!isPremium) return piyo.reply(from, 'Maaf, ini adalah fitur premium, untuk menggunakan fitur ini silahkan donasi, Kirim #donasi untuk melihat info donasi', id)
+                        if (!args.length >= 1) return piyo.reply(from, 'Kirim /nuliskanan teks', id) 
+                        const tulisan = body.slice(12)
+                        piyo.sendText(from, 'sabar ya lagi nulis')
+                        const splitText = tulisan.replace(/(\S+\s*){1,9}/g, '$&\n')
+                        const fixHeight = splitText.split('\n').slice(0, 31).join('\n')
+                        spawn('convert', [
+                            './media/images/buku/sebelumkanan.jpg',
+                            '-font',
+                            './lib/font/Indie-Flower.ttf',
+                            '-size',
+                            '960x1280',
+                            '-pointsize',
+                            '23',
+                            '-interline-spacing',
+                            '2',
+                            '-annotate',
+                            '+128+129',
+                            fixHeight,
+                            './media/images/buku/setelahkanan.jpg'
+                        ])
+                        .on('error', () => piyo.reply(from, 'Error gan', id))
+                        .on('exit', () => {
+                            piyo.sendImage(from, './media/images/buku/setelahkanan.jpg', 'after.jpg', `Wes rampung dik, donasi dong buat biaya server. bales /donasi untuk melihat cara donasi\nDitulis selama: ${processTime(t, moment())} _detik_`, id)
+                        })
+                    }
+                        break
+case 'nuliskiri':                     
+        if (!args.length >= 1) return piyo.reply(from, 'Kirim /nuliskiri teks', id) 
+            const tulisan = body.slice(11)
+            piyo.sendText(from, 'sabar ya lagi nulis')
+            const splitText = tulisan.replace(/(\S+\s*){1,9}/g, '$&\n')
+            const fixHeight = splitText.split('\n').slice(0, 31).join('\n')
+            spawn('convert', [
+                './media/images/buku/sebelumkiri.jpg',
+                '-font',
+                './lib/font/Indie-Flower.ttf',
+                '-size',
+                '960x1280',
+                '-pointsize',
+                '22',
+                '-interline-spacing',
+                '2',
+                '-annotate',
+                '+140+153',
+                fixHeight,
+                './media/images/buku/setelahkiri.jpg'
+            ])
+            .on('error', () => piyo.reply(from, 'Error gan', id))
+            .on('exit', () => {
+                piyo.sendImage(from, './media/images/buku/setelahkiri.jpg', 'after.jpg', `Wes rampung dik, donasi dong buat biaya server. bales /donasi untuk melihat cara donasi\nDitulis selama: ${processTime(t, moment())} _detik_`, id)
+            })
+        break
+                    case 'foliokiri': {
+                        //if (!isPremium) return piyo.reply(from, 'Maaf, ini adalah fitur premium, untuk menggunakan fitur ini silahkan donasi, Kirim #donasi untuk melihat info donasi', id)
+                        if (!args.length >= 1) return piyo.reply(from, 'Kirim /foliokiri teks', id) 
+                        const tulisan = body.slice(11)
+                        piyo.sendText(from, 'sabar ya lagi nulis')
+                        const splitText = tulisan.replace(/(\S+\s*){1,13}/g, '$&\n')
+                        const fixHeight = splitText.split('\n').slice(0, 38).join('\n')
+                        spawn('convert', [
+                            './media/images/folio/sebelumkiri.jpg',
+                            '-font',
+                            './lib/font/Indie-Flower.ttf',
+                            '-size',
+                            '1720x1280',
+                            '-pointsize',
+                            '23',
+                            '-interline-spacing',
+                            '4',
+                            '-annotate',
+                            '+48+185',
+                            fixHeight,
+                            './media/images/folio/setelahkiri.jpg'
+                        ])
+                        .on('error', () => piyo.reply(from, 'Error gan', id))
+                        .on('exit', () => {
+                            piyo.sendImage(from, './media/images/folio/setelahkiri.jpg', 'after.jpg', `Wes rampung dik, donasi dong buat biaya server. bales /donasi untuk melihat cara donasi\nDitulis selama: ${processTime(t, moment())} _detik_`, id)
+                        })
+                    }
+                        break
+case 'foliokanan': {
+                        if (!args.length >= 1) return piyo.reply(from, 'Kirim /foliokanan teks', id) 
+                        const tulisan = body.slice(12)
+                        piyo.sendText(from, 'sabar ya lagi nulis')
+                        const splitText = tulisan.replace(/(\S+\s*){1,13}/g, '$&\n')
+                        const fixHeight = splitText.split('\n').slice(0, 38).join('\n')
+                        spawn('convert', [
+                            './media/images/folio/sebelumkanan.jpg',
+                            '-font',
+                            './lib/font/Indie-Flower.ttf',
+                            '-size',
+                            '960x1280',
+                            '-pointsize',
+                            '23',
+                            '-interline-spacing',
+                            '3',
+                            '-annotate',
+                            '+89+190',
+                            fixHeight,
+                            './media/images/folio/setelahkanan.jpg'
+                        ])
+                        .on('error', () => piyo.reply(from, 'Error gan', id))
+                        .on('exit', () => {
+                            piyo.sendImage(from, './media/images/folio/setelahkanan.jpg', 'after.jpg', `Wes rampung dik, donasi dong buat biaya server. bales /donasi untuk melihat cara donasi\nDitulis selama: ${processTime(t, moment())} _detik_`, id)
+                        })
+                    }
+                        break
 case 'brainly':
                 if (!isPremium) return piyo.reply(from, `Maaf, ini adalah fitur premium, untuk menggunakan fitur ini silahkan beli premium ke ownerMurah kok`, id)
                 if (args.length >= 2){
