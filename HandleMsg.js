@@ -14,6 +14,7 @@ const ms = require('parse-ms')
 const FileSync = require('lowdb/adapters/FileSync')
 const feature = require('./lib/poll');
 const ffmpeg = require('fluent-ffmpeg')
+const { Readable, Writable } = require('stream')
 const db_group = new FileSync(appRoot+'/lib/data/group.json')
 const db = low(db_group)
 const notice = ['piyobot', 'piyobot']
@@ -698,10 +699,6 @@ if (!isGroupMsg && isMedia && isImage && !isCmd)
             }
 	 // PREMIUM
 	    premium.expiredCheck(_premium)
-	// Filter Banned People
-    if (isBanned) {
-        return console.log(color('[BAN]', 'red'), color(moment(t * 1000).format('DD/MM/YY HH:mm:ss'), 'yellow'), color(`${command} [${args.length}]`), 'from', color(pushname))
-    }
         switch (command) {
         // Menu and TnC
 
