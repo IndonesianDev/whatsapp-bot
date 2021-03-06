@@ -3889,11 +3889,11 @@ case 'listpremium':
                 await piyo.reply(from, listPremi, id)
             break
 case 'resetlimit':
-                if (!isOwnerBot) return aruga.reply(from, `Khusus owner` , id) 
+                if (!isOwnerBot) return piyo.reply(from, `Khusus owner` , id) 
 	     {
                 limit.splice(chat.id)
                 fs.writeFileSync('./settings/limit.json', JSON.stringify(limit))
-                await aruga.reply(from, `Sudah kak` , id)
+                await piyo.reply(from, `Sudah kak` , id)
             }
 break
 case 'buylimit':
