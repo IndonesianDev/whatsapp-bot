@@ -125,8 +125,6 @@ let {
     apikeyx,
     vhtearkey
 } = setting
-//////////////////////////////////////////////////////////////////////////////
-
 ///////////////////////////////API JSON///////////////////////////////////////
 const {
     apiNoBg,
@@ -328,14 +326,14 @@ module.exports = HandleMsg = async (piyo, message) => {
             '5%'
             ]
         const nomormutualan = ['Isi nomor yang ada di registered']
-		// [IDENTIFY]
-		const isOwnerBot = ownerNumber.includes(pengirim)
+	// [IDENTIFY]
+	const isOwnerBot = ownerNumber.includes(pengirim)
         const isBanned = banned.includes(pengirim)
         const isSimi = simi.includes(chatId)
         const isChat = chatt.includes(chatId)
         const isDetectorOn = _antilink.includes(chat.id)
         const isInviteLink = await piyo.inviteInfo(body)
-		const isNgegas = ngegas.includes(chatId)
+	const isNgegas = ngegas.includes(chatId)
         const AntiStickerSpam = antisticker.includes(chatId)
         // Log
         if (isCmd && !isGroupMsg) { console.log(color('[EXEC]'), color(moment(t * 1000).format('DD/MM/YY HH:mm:ss'), 'yellow'), color(`${command} [${args.length}]`), 'from', color(pushname)) }
@@ -416,7 +414,73 @@ const getAfkReason = (userId) => {
             }
         }
 ////////////////////////////////////////AFK///////////////////////////////////////////
-
+////////////////////////////////REPLY WITH AUDIO////////////////////////////////////////
+const vn = [
+        './media/an2.ogg',
+        './media/an1.ogg',
+        './media/ana4.ogg'
+        ]
+//AUTOMATE
+if (chats == 'assalamualaikum'){
+    piyo.sendPtt(from, './media/ana3.ogg' , id)
+}
+if (chats == 'Assalamualaikum'){
+    piyo.sendPtt(from, './media/ana3.ogg' , id)
+}
+if (chats == 'p'){
+    if (!isGroupMsg){
+        let randomvn = vn[Math.floor(Math.random() * vn.length)]
+        piyo.sendPtt(from , randomvn , id)
+}
+}
+if (chats == 'P'){
+    if (!isGroupMsg){
+        let randomvn = vn[Math.floor(Math.random() * vn.length)]
+        piyo.sendPtt(from , randomvn , id)
+}
+}
+if (chats == 'bot'){
+    if (!isGroupMsg){
+        let randomvn = vn[Math.floor(Math.random() * vn.length)]
+        piyo.sendPtt(from , randomvn , id)
+}
+}
+if (chats == 'bot'){
+    if (isGroupMsg){
+        let randomvn = vn[Math.floor(Math.random() * vn.length)]
+        piyo.sendPtt(from , randomvn , id)
+}
+}
+if (chats == 'bot ini owner'){
+    if (isOwnerBot){
+        piyo.sendPtt(from , './media/owner.ogg' , id)
+}
+}
+if (chats == 'kontol'){
+    piyo.sendPtt(from, './media/ana2.ogg' , id)
+}
+if (chats == 'memek'){
+    piyo.sendPtt(from, './media/ana2.ogg' , id)
+}
+if (chats == 'anjing'){
+    piyo.sendPtt(from, './media/ana2.ogg' , id)
+}
+if (chats == 'bangsat'){
+    piyo.sendPtt(from, './media/ana2.ogg' , id)
+}
+if (chats == 'ngentot'){
+    piyo.sendPtt(from, './media/ana2.ogg' , id)
+}
+if (chats == 'babi'){
+    piyo.sendPtt(from, './media/ana2.ogg' , id)
+}
+if (chats == 'monyet'){
+    piyo.sendPtt(from, './media/ana2.ogg' , id)
+}
+if (chats == 'Bot'){
+        let randomvn = vn[Math.floor(Math.random() * vn.length)]
+        piyo.sendPtt(from , randomvn , id)
+}
 //////////////////////////////////////REMINDER///////////////////////////////////////
 const addReminder = (userId, message, time) => {
     const obj = { id: userId, msg: message, time: Date.now() + toMs(time) }
@@ -3477,14 +3541,15 @@ case 'register':
                 await piyo.reply(from, ind.registered(), id)
             break
 case 'apakah' :
-           const apakah = require('node-gtts')('id')
-                const answer = ['iya', 'tidak', 'mungkin']
-                if (args .length === 1) return await piyo.reply(from, 'apakah apa babi, yang jelas napa', id)
-                let randomAnsw = Math.floor(Math.random() * answer.length)
-                apakah.save('./media/resID.mp3', answer[randomAnsw], () => {
-                    piyo.sendPtt(from, './media/resID.mp3', id)
-                })
-                break;
+        const answer = [
+        './media/iya.mp3',
+        './media/ngga.mp3',
+        './media/mungkin.mp3'
+        ]
+        let randomansw = answer[Math.floor(Math.random() * answer.length)]
+        piyo.sendPtt(from , randomansw , id)
+    };
+                break
 
         // Other Command
 case 'lk21':
