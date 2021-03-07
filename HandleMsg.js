@@ -123,6 +123,7 @@ let {
     prefix,
     apikeyz,
     apikeyx,
+    lolhuman,
     vhtearkey
 } = setting
 ///////////////////////////////API JSON///////////////////////////////////////
@@ -848,6 +849,23 @@ case 'bal':
              piyo.reply(from, `Halo ${pushname}, Kamu Memiliki Uang Sejumlah Rp. ${kantong}`, id)
              break
 ///////////////////////////////////////////////////MENU STICKER////////////////////////////////////////////////////
+case 'takestick':
+                    if (quotedMsg && quotedMsg.type == 'sticker') {
+                        if (!q.includes('|')) return await piyo.reply(from, `Untuk mengubah watermark sticker, reply sticker dengan caption ${prefix}takestick package_name | author_name\n\nContoh: ${prefix}takestick piyo | bot`, id)
+                        await piyo.reply(from, ind.wait(), id)
+                        const packnames = q.substring(0, q.indexOf('|') - 1)
+                        const authors = q.substring(q.lastIndexOf('|') + 2)
+                        const mediaData = await decryptMedia(quotedMsg)
+                        const imageBase64 = `data:${quotedMsg.mimetype};base64,${mediaData.toString('base64')}`
+                        await piyo.sendImageAsSticker(from, imageBase64, { author: `${authors}`, pack: `${packnames}` })
+                        .catch(async (err) => {
+                            console.error(err)
+                            await piyo.reply(from, 'Error!', id)
+                        })
+                    } else {
+                        await piyo.reply(from, `Reply sticker yang ingin dicolong dengan caption ${prefix}takestick package_name | author_name\n\nContoh: ${prefix}takestick piyo | bot`, id)
+                    }
+        break
 case 'stimg':
 case 'toimg':                                
             if (quotedMsg && quotedMsg.type == 'sticker') {
@@ -862,23 +880,22 @@ case 'toimg':
         break
 case 'sticker':
 case 'stiker':
-           if (isMedia && type === 'image') {
-                const mediaData = await decryptMedia(message, uaOverride)
-                const imageBase64 = `data:${mimetype};base64,${mediaData.toString('base64')}`
-                await piyo.sendImageAsSticker(from, imageBase64)
-            } else if (quotedMsg && quotedMsg.type == 'image') {
-                const mediaData = await decryptMedia(quotedMsg, uaOverride)
-                const imageBase64 = `data:${quotedMsg.mimetype};base64,${mediaData.toString('base64')}`
-                await piyo.sendImageAsSticker(from, imageBase64)
-            } else if (args.length === 2) {
-                const url = args[1]
-                if (url.match(isUrl)) {
-                    await client.sendStickerfromUrl(from, url, { method: 'get' })
-                        .catch(err => console.log('Caught exception: ', err))
-                } else {
-                    piyo.reply(from, `Terjadi Kesalahan`, id)
+           if (isMedia && isImage || isQuotedImage) {
+                    try {
+                await piyo.reply(from, msg.wait(), id)
+                    const encryptMedia = isQuotedImage ? quotedMsg : message
+                    const _mimetype = isQuotedImage ? quotedMsg.mimetype : mimetype
+		    const author = 'isi nama lo'
+		    const pack = 'isi pack nya'
+                    const mediaData = await decryptMedia(encryptMedia, uaOverride)
+                    const imageBase64 = `data:${_mimetype};base64,${mediaData.toString('base64')}`
+                    await piyo.sendImageAsSticker(from, imageBase64, { author: `${author}`, pack: `${pack}` })
+                    console.log(`Sticker processed for ${processTime(t, moment())} seconds`)
+                } catch (err) {
+                    console.error(err)
+                    await piyo.reply(from, 'Error!', id)
                 }
-            }  else if (args[0] === 'nobg') {
+            } else if (args[0] === 'nobg') {
                 if (isMedia || isQuotedImage) {
                                 const encryptMedia = isQuotedImage ? quotedMsg : message
                 		const _mimetype = isQuotedImage ? quotedMsg.mimetype : mimetype
@@ -2093,6 +2110,17 @@ if (!isBotGroupAdmins) return piyo.reply(from, 'Gagal, silahkan tambahkan bot se
     piyo.reply(from, 'Success kick all member', id)
 break
 //////////////////////////////////////////////MENU IMAGE/////////////////////////////////////////////////////////
+case 'whatanime':
+if (isMedia && type === 'image' || isQuotedImage) {
+                    await piyo.reply(from, ind.wait(), id)
+                    const encryptMedia = isQuotedImage ? quotedMsg : message
+                    const mediaData = await decryptMedia(encryptMedia, uaOverride)
+                    const imageLink = await uploadImages(mediaData, `anime.${sender.id}`)
+                    const ank = await axios.get(`http://lolhuman.herokuapp.com/api/wait?apikey=${lolhuman}&url=${imageLink}`)
+                    const anj = ank.data.result
+                    await piyo.sendFileFromUrl(from, anj.video , 'piyo.mp4', `*Terdeteksi Anime Berikut :*\n*Nama :* ${anj.title_romaji}\n*Nama Lain :* ${anj.title_native}\n*DiWaktu :* ${anj.at}\n*Episode :* ${anj.episode}\n*Kesamaan :* ${anj.similarity}`, id)
+}
+break
 case 'fisheye':
             if (isMedia && type === 'image' || isQuotedImage) {
                 await piyo.reply(from, ind.wait(), id)
