@@ -73,6 +73,7 @@ Edit value yang diperlukan di `settings/setting.json`.
     "vhtearkey": "Your Apikey In Here",
     "apikeyz": "Your Apikey In Here",
     "apikeyx": "Your Apikey In Here",
+    "lolhuman": "Your Apikey In Here",
     "itech": "Your Apikey In Here"
 }
 
