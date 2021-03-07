@@ -86,6 +86,7 @@ Edit value yang diperlukan di `settings/setting.json`.
 `apikeyz`: Hujan Api token. Anda Bisa Mendapatkannya https://hujanapi.xyz
 
 `apikeyx`: Naufal Hoster token. Anda Bisa Mendapatkannya https://naufalhoster.xyz
+
 `lolhuman`: Lolhuman token. Anda bisa Mendapatkannya Di https://lolhuman.herokuapp.com/
 
 Untuk Mendapatkan Apikey nya , daftar akun terlebih dahulu di website tersebut
