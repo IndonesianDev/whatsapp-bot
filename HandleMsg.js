@@ -3576,7 +3576,6 @@ case 'apakah' :
         ]
         let randomansw = answer[Math.floor(Math.random() * answer.length)]
         piyo.sendPtt(from , randomansw , id)
-    };
                 break
 
         // Other Command
