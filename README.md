@@ -80,12 +80,15 @@ Edit value yang diperlukan di `settings/setting.json`.
 
 `ownerBot`: your WhatsApp number.  
 `prefix`: bot's prefix.  
-`itech`: API token. Anda bisa mendapatkannya https://api.i-tech.id dengan membuat akun. Setelah itu, setel IP statis server / host Anda di https://api.i-tech.id/settings/profile. 
+`itech`: API token. Anda bisa mendapatkannya https://api.i-tech.id
 
 `vhtearkey`: VHTear API token. Anda bisa mendapatkannya https://api.vhtear.com/ dengan membeli kunci API.
 `apikeyz`: Hujan Api token. Anda Bisa Mendapatkannya https://hujanapi.xyz
 
 `apikeyx`: Naufal Hoster token. Anda Bisa Mendapatkannya https://naufalhoster.xyz
+`lolhuman`: Lolhuman token. Anda bisa Mendapatkannya Di https://lolhuman.herokuapp.com/
+
+Untuk Mendapatkan Apikey nya , daftar akun terlebih dahulu di website tersebut
 
 ## 🔍 Menginstal dependensi
 ```bash
@@ -122,6 +125,7 @@ Setelah itu pindai kode QR menggunakan WhatsApp Anda di ponsel Anda!
 | Send/reply MP4        |      ✔️      |
 | Text to sticker       |      ✔️      |
 | Text to sticker GIF   |      ✔️      |
+| Take Sticker          |      ✔️      |
 | Sticker to image      |      ✔️      |
 
 |     Money Feature     | Availability |
@@ -195,14 +199,13 @@ Setelah itu pindai kode QR menggunakan WhatsApp Anda di ponsel Anda!
 | Freefire logo         |      ✔️      |
 | Freefire banner       |      ✔️      |
 
-|      Weeb Zone     | Availability |
+|      WIBU AREA     | Availability |
 | :----------------: | :----------: |
 | Random neko girl   |      ✔️      |
 | Random wallpaper   |      ✔️      |
 | Kusonime scrapper  |      ✔️      |
 | Komiku scrapper    |      ✔️      |
 | Anime tracer       |      ✔️      |
-| Source finder      |      ✔️      |
 | Random waifu       |      ✔️      |
 
 |        Bot       | Availability |
