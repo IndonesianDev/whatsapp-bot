@@ -3569,6 +3569,10 @@ case 'register':
                 await piyo.reply(from, ind.registered(), id)
             break
 case 'apakah' :
+case 'apakah' :
+    fetch('https://raw.githubusercontent.com/AlvioAdjiJanuar/ana/main/test.txt')
+    .then(res => res.text())
+    .then(body => {
         const answer = [
         './media/iya.mp3',
         './media/ngga.mp3',
@@ -3576,7 +3580,8 @@ case 'apakah' :
         ]
         let randomansw = answer[Math.floor(Math.random() * answer.length)]
         piyo.sendPtt(from , randomansw , id)
-                break
+    })
+			break
 
         // Other Command
 case 'lk21':
