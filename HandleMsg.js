@@ -4161,8 +4161,8 @@ await piyo.reply(from, `Maaf ${pushname}, Command *${arghh[0]}* Tidak Terdaftar 
 }
         // Piyobot Function
         if ((!isCmd && chatId && isChat)&& message.type === 'chat'){
-           const piyoget = await axios.get(`http://id.julianofc.my.id/api/rest/simsimi/?qs=${encodeURIComponent(message.body)}`)           
-           await piyo.reply(from, `Piyobot Menjawab: ${piyoget.data.answer}`, id)
+           const piyoget = await axios.get(`https://videfikri.com/api/simsimi/?teks=${encodeURIComponent(message.body)}`)           
+           await piyo.reply(from, `Piyobot Menjawab: ${piyoget.data.result.jawaban}`, id)
             }
 			// Simi-simi function
             if ((!isCmd && isGroupMsg && chatId && isSimi) && message.type === 'chat') {
