@@ -882,7 +882,7 @@ case 'sticker':
 case 'stiker':
            if (isMedia && isImage || isQuotedImage) {
                     try {
-                await piyo.reply(from, msg.wait(), id)
+                await piyo.reply(from, ind.wait(), id)
                     const encryptMedia = isQuotedImage ? quotedMsg : message
                     const _mimetype = isQuotedImage ? quotedMsg.mimetype : mimetype
 		    const author = 'isi nama lo'
