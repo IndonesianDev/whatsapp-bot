@@ -256,9 +256,9 @@ module.exports = HandleMsg = async (piyo, message) => {
             'jomblo selamanya',
             'ga bisa berak',
             'ketiban pesawat',
-	        'jadi anak mulung',
-	        'ga jadi pacar zeus',
-	        'jadi jelek'
+	    'jadi anak mulung',
+	    'ga jadi pacar zeus',
+	    'jadi jelek'
             ]
             const kutuk = [
                 'Sapi',
@@ -3910,15 +3910,15 @@ case 'sspc':
         }else{
             if (args.length !== 1) return piyo.reply(from, `Untuk mengaktifkan piyo pada  Chat\n\nPenggunaan\n${prefix}piyo on --mengaktifkan\n${prefix}piyo off --nonaktifkan\n`, id)
 			if (args[0] == 'on') {
-				piyo.push(chatId)
-				fs.writeFileSync('./settings/piyo.json', JSON.stringify(piyo))
-                piyo.reply(from, 'Mengaktifkan bot piyo-piyo!', id)
-			} else if (args[0] == 'off') {
-				let inxx = piyo.indexOf(chatId)
-				piyo.splice(inxx, 1)
-				fs.writeFileSync('./settings/piyo.json', JSON.stringify(piyo))
+				chatt.push(chatId)
+				fs.writeFileSync('./settings/piyo.json', JSON.stringify(chatt))
+                                piyo.reply(from, 'Mengaktifkan bot piyo-piyo!', id)
+			        } else if (args[0] == 'off') {
+				let inxx = chatt.indexOf(chatId)
+				chatt.splice(inxx, 1)
+				fs.writeFileSync('./settings/piyo.json', JSON.stringify(chatt))
 				piyo.reply(from, 'Menonaktifkan bot piyo-piyo!', id)
-			} else {
+			        } else {
 				piyo.reply(from, `Untuk mengaktifkan piyo \n\nPenggunaan\n${prefix}piyo on --mengaktifkan\n${prefix}piyo off --nonaktifkan\n`, id)
             }
         }
