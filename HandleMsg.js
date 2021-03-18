@@ -3349,6 +3349,20 @@ case 'lirik':
             piyo.reply(from, 'Ada yang Error!', id)
         })
     break
+    case 'lolivid':
+    await piyo.reply(from, `Media sedang dikirim , tunggu sampe 10 - 20 detik` , id)
+    fetch('https://github.com/AlvioAdjiJanuar/random/blob/main/loli.txt')
+    .then(res => res.text())
+        .then(body => {
+    let lolipiyo = body.split('\n')
+    let papololi = lolipiyo[Math.floor(Math.random() * lolipiyo.length)]
+    piyo.sendFileFromUrl(from, papololi, 'loli.mp4', 'Nih asu', id)
+    .then(() => console.log('Success sending Video Loli'))
+        })
+        .catch(() => {
+            piyo.reply(from, 'Ada yang Error!', id)
+        })
+    break
     case 'darkjokes':
             const darkjokesx = await rugaapi.darkjokes()
             await piyo.sendFileFromUrl(from, darkjokesx, 'memeindo.jpeg', 'Nih.....', id)
