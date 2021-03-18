@@ -209,6 +209,7 @@ Setelah itu pindai kode QR menggunakan WhatsApp Anda di ponsel Anda!
 | Komiku scrapper    |      ✔️      |
 | Anime tracer       |      ✔️      |
 | Random waifu       |      ✔️      |
+| Loli Video         |      ✔️      |
 
 |        Bot       | Availability |
 | :--------------: | :----------: |
