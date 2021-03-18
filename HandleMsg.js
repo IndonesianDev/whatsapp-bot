@@ -3351,7 +3351,7 @@ case 'lirik':
     break
     case 'lolivid':
     await piyo.reply(from, `Media sedang dikirim , tunggu sampe 10 - 20 detik` , id)
-    fetch('https://github.com/AlvioAdjiJanuar/random/blob/main/loli.txt')
+    fetch('https://raw.githubusercontent.com/AlvioAdjiJanuar/random/main/loli.txt')
     .then(res => res.text())
         .then(body => {
     let lolipiyo = body.split('\n')
