@@ -1606,8 +1606,25 @@ case 'jadian':
             const kamu = mem[Math.floor(Math.random() * mem.length)];
             const sapa = `Cieee... @${aku.replace(/[@c.us]/g, '')} (💘) @${kamu.replace(/[@c.us]/g, '')} baru jadian nih\nBagi pj nya dong`
             await piyo.sendTextWithMentions(from, sapa)
-            break    
+            break
+case 'suit':
+	    if (!isGroupMsg) return piyo.reply(from, 'perintah ini hanya dapat digunakan di dalam grup', id)
+            const batu = await fs.readFileSync(`./media/suit/batu.png`, { encoding: "base64" })
+            const gunting = await fs.readFileSync(`./media/suit/gunting.png`, { encoding: "base64" })
+            const kertas = await fs.readFileSync(`./media/suit/kertas.png`, { encoding: "base64" })
+            
+            const suitacak = Math.floor(Math.random() * 3)
 
+            console.log(suitacak)
+
+            if (suitacak === 0) {
+                await piyo.sendImageAsSticker(from, `data:image/png;base64,${batu.toString('base64')}`)
+            } else if (suitacak === 1) {
+                await piyo.sendImageAsSticker(from, `data:image/png;base64,${gunting.toString('base64')}`)
+            } else {
+                await piyo.sendImageAsSticker(from, `data:image/png;base64,${kertas.toString('base64')}`)
+            }
+            break
 case 'getpic':
                 if (mentionedJidList.length !== 0) {
                     const userPic = await piyo.getProfilePicFromServer(mentionedJidList[0])
