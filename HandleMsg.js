@@ -3090,58 +3090,19 @@ case 'play2':
                         })
                     break   
 case 'ytmp3':
-                        if (isLimit(serial)) return piyo.reply(from, `Maaf ${pushname}, Kuota Limit Kamu Sudah Habis, Ketik ${prefix}limit Untuk Mengecek Kuota Limit Kamu`, id)
-                        if (arghh.length === 1) return piyo.reply(from, `Kirim perintah *${prefix}ytmp3 [ Link Yt ]*, untuk contoh silahkan kirim perintah *${prefix}readme*`, id)
-                        let isLinks = arghh[1].match(/(?:https?:\/{2})?(?:w{3}\.)?youtu(?:be)?\.(?:com|be)(?:\/watch\?v=|\/)([^\s&]+)/)
-                        if (!isLinks) return piyo.reply(from, `Salah ngab`, id)
-                        try {
-                            piyo.reply(from, ind.wait(), id)
-                            const vhtearyt3 = await fetch(`https://api.vhtear.com/ytdl?link=${q}&apikey=${vhtearkey}`)
-                            if (!vhtearyt3.ok) throw new Error(`Error ytmp3 3 : ${vhtearyt3.statusText}`)
-                            const vhtearyt33 = await vhtearyt3.json()
-                             if (vhtearyt33.status == false) {
-                                piyo.reply(from, `*Maaf Terdapat kesalahan saat mengambil data, mohon pilih media lain...*`, id)
-                            } else {
-                                if(Number(vhtearyt33.result.size.split(' MB')[0]) >= 10.00) return piyo.sendFileFromUrl(from, vhtearyt33.result.imgUrl, `thumb.jpg`, `*「 YOUTUBE MP3 」*\n\n• *Judul* : ${vhtearyt33.result.title}\n• *Filesize* : ${vhtearyt33.result.size}\n\n_Maaf, Durasi audio melebihi 10 MB. Silahkan download audio melalui link dibawah_.\n${vhtearyt33.result.UrlMp3}`, id)
-                                const { title, ext, size, UrlMp3, status, imgUrl } = await vhtearyt33.result
-                                console.log(`VhTear Giliran ${ext}\n${size}\n${status}`)
-                                const captions = `*「 YOUTUBE MP3 」*\n\n• *Judul* : ${title}\n• *Filesize* : ${size}\n\n_Silahkan tunggu file media sedang dikirim mungkin butuh beberapa menit_`
-                                piyo.sendFileFromUrl(from, imgUrl, `thumb.jpg`, captions, id)
-                                //await piyo.sendFile(from, UrlMp3, `${title}.mp3`, '', id)
-                                await piyo.sendFileFromUrl(from, UrlMp3, `${title}.mp3`, '', id).catch(() => piyo.reply(from, `Error ngab`, id))
-                                await limitAdd(serial)
-                            }
-                        } catch (err) {
-                            piyo.sendText(ownerNumber, 'Error ytmp3 : '+ err)
-                            piyo.reply(from, `Error ngab`, id)
-                        }
-                        break
+        await piyo.reply(from, ind.wait() , id)
+        const yte = await axios.get(`https://st4rz.herokuapp.com/api/yta2?url=${q}`)
+        await piyo.sendFileFromUrl(from , yte.data.thumb , 'piyo.jpg' , `*「 YOUTUBE MP3 」*\n\n• *Judul* : ${yte.data.title}\n\n_Silahkan tunggu file media sedang dikirim mungkin butuh beberapa menit_`, id)
+        await piyo.sendFileFromUrl(from, yte.data.result, 'piyo.mp3' , 'nih kak' , id)
+        break
+			
 case 'ytmp4':
-                        if (isLimit(serial)) return piyo.reply(from, `Maaf ${pushname}, Kuota Limit Kamu Sudah Habis, Ketik ${prefix}limit Untuk Mengecek Kuota Limit Kamu`, id)
-                        if (arghh.length === 1) return piyo.reply(from, `Kirim perintah *${prefix}ytmp4 [ Link Yt ]*, untuk contoh silahkan kirim perintah *${prefix}readme*`)
-                        let isLin = arghh[1].match(/(?:https?:\/{2})?(?:w{3}\.)?youtu(?:be)?\.(?:com|be)(?:\/watch\?v=|\/)([^\s&]+)/)
-                        if (!isLin) return piyo.reply(from, `Salah ngab`, id)
-                        try {
-                            piyo.reply(from, ind.wait(), id)
-                            const ytvh = await fetch(`http://api.vhtear.com/ytdl?link=${arghh[1]}&apikey=${vhtearkey}`)
-                            if (!ytvh.ok) throw new Error(`Error Get Video : ${ytvh.statusText}`)
-                            const ytvh2 = await ytvh.json()
-                             if (ytvh2.status == false) {
-                                piyo.reply(from, `*Maaf Terdapat kesalahan saat mengambil data, mohon pilih media lain...*`, id)
-                            } else {
-                                if (Number(ytvh2.result.size.split(' MB')[0]) > 20.00) return piyo.sendFileFromUrl(from, ytvh2.result.imgUrl, 'thumb.jpg', `*「 YOUTUBE MP4 」*\n\n• *Judul* : ${ytvh2.result.title}\n• *Filesize* : ${ytvh2.result.size}\n\n__Maaf, Durasi video melebihi 30 MB. Silahkan download video melalui link dibawah_.\n${ytvh2.result.UrlVideo}`, id)
-                                const { title, UrlVideo, imgUrl, size, status, ext } = await ytvh2.result
-                                console.log(`VHTEAR : ${ext}\n${size}\n${status}`)
-                                piyo.sendFileFromUrl(from, imgUrl, 'thumb.jpg', `*「 YOUTUBE MP4 」*\n\n• *Judul* : ${title}\n• *Filesize* : ${size}\n\n_Silahkan tunggu file media sedang dikirim mungkin butuh beberapa menit_`, id)
-                                await piyo.sendFileFromUrl(from, UrlVideo, `${title}.mp4`, '', id).catch(() => piyo.reply(from, `Error ngab`, id))
-                              limitAdd(serial)
-                            }
-                        } catch (err) {
-                            piyo.sendText(ownerNumber, 'Error ytmp4 : '+ err)
-                            piyo.reply(from, `error ngab`, id)
-                            console.log(err)
-                        }
-                        break
+        await piyo.reply(from, ind.wait() , id)
+        const yt = await axios.get(`https://st4rz.herokuapp.com/api/ytv2?url=${q}`)
+        await piyo.sendFileFromUrl(from , yt.data.thumb , 'piyo.jpg' , `*「 YOUTUBE MP4 」*\n\n• *Judul* : ${yt.data.title}\n\n_Silahkan tunggu file media sedang dikirim mungkin butuh beberapa menit_`, id)
+        await piyo.sendFileFromUrl(from, yt.data.result, 'piyo.mp4' , 'nih kak' , id)
+        break
+			
 case 'igstalk':
                         if (arghh.length === 1)  return piyo.reply(from, 'Kirim perintah /igstalk @username\nContoh /igstalk duar_amjay', id)
                         argz = body.trim().split(' ')
