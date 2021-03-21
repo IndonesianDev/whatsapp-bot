@@ -128,6 +128,10 @@ Setelah itu pindai kode QR menggunakan WhatsApp Anda di ponsel Anda!
 | Text to sticker       |      ✔️      |
 | Text to sticker GIF   |      ✔️      |
 | Take Sticker          |      ✔️      |
+| Add  Sticker          |      ✔️      |
+| Get  Sticker          |      ✔️      |
+| Del  Sticker          |      ✔️      |
+| List Sticker          |      ✔️      |
 | Sticker to image      |      ✔️      |
 
 |     Money Feature     | Availability |
@@ -176,6 +180,7 @@ Setelah itu pindai kode QR menggunakan WhatsApp Anda di ponsel Anda!
 | Bass                |      ✔️      |
 | FishEye             |      ✔️      |
 | Line sticker latest |      ✔️      |
+| Quiziz Hack         |      ✔️      |
 | Cek ongkir          |      ✔️      |
 
 |          Fun          | Availability |
