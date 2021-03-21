@@ -57,6 +57,7 @@
       "sastrawijs": "^1.0.3",
       "sharp": "^0.27.1",
       "stream": "^0.0.2",
+      "util": "^0.12.3",
       "video-url-link": "git+https://github.com/YogaSakti/video-url-link.git"
    },
    "devDependencies": {
