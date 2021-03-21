@@ -15,6 +15,8 @@ const FileSync = require('lowdb/adapters/FileSync')
 const feature = require('./lib/poll');
 const ffmpeg = require('fluent-ffmpeg')
 const util = require('util')
+const quiziz = require('quizizz.js')
+const hackq = new quiziz.QuizizzClient();
 const { Readable, Writable } = require('stream')
 const db_group = new FileSync(appRoot+'/lib/data/group.json')
 const db = low(db_group)
@@ -2146,7 +2148,7 @@ case 'cekzodiak':
                         })
                    break
 case 'maps':
-                    if (arghh.length === 1) return piyo.reply(from, 'Kirim perintah */maps [optional]*, Contoh : */maps Jakarta*')
+                    if (arghh.length === 1) return piyo.reply(from, 'Kirim perintah */maps [optional]*, Contoh : */maps Jakarta*' , id)
                     console.log(q)
                     try {
                     const mapz2 = await axios.get('https://mnazria.herokuapp.com/api/maps?search=' + q)
@@ -2160,6 +2162,14 @@ case 'maps':
                      piyo.sendText(ownerNumber, 'Error Maps : '+ err)
                    }
                   break
+case 'quiziz': 
+	            if(!q) return piyo.reply(from, `Kirim perintah */quiziz idnya* , Contoh : */quiziz 16126165*` , id)
+		    const quiz = await hackq.fetchQuiz(`${q}`)
+		    await piyo.sendText(from, quiz , id)
+break
+	            
+		    
+		    
 ///////////////////////////////////////////Owner Group////////////////////////////////////////////////////////////
 case 'kickall': //mengeluarkan semua member
 if (!isGroupMsg) return piyo.reply(from, 'Maaf, perintah ini hanya dapat dipakai didalam grup!', id)
