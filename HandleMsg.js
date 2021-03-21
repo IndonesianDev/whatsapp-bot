@@ -849,6 +849,55 @@ case 'bal':
              piyo.reply(from, `Halo ${pushname}, Kamu Memiliki Uang Sejumlah Rp. ${kantong}`, id)
              break
 ///////////////////////////////////////////////////MENU STICKER////////////////////////////////////////////////////
+case 'addsticker':
+            if (!q) return piyo.reply(from, `Hai  Kak ${pushname} untuk menggunakan fitur save stiker ketik */addsticker* _Nama nya_`, id)
+            if (quotedMsg) {
+                if (quotedMsg.type === 'sticker') {
+                    try {
+                        mediaData = await decryptMedia(quotedMsg, uaOverride)
+                        fs.writeFileSync(`./media/sticker/${q}.jpg`, mediaData)
+                        piyo.reply(from, `Stiker berhasil tersimpan!\n\nUntuk melihat list ketik */liststiker*`, id)
+                    } catch(err) {
+                        piyo.reply(from, `Gagal save sticker!`, id)
+                        piyo.reply(ownerNumber, util.format(err), id)
+                    }
+                } else {
+                    piyo.reply(from, `Harus reply stiker!`, id)
+                }
+            } else {
+                piyo.reply(from, `Gaada data yang direply gan`, id)
+            }
+            break
+case 'liststiker':
+            const liststicker = fs.readdirSync('./media/sticker/')
+            let capliststik = `Ketik perintah */getstiker _Nama nya_* untuk mengambil data stiker\n\n*Jumlah stiker* : ${liststicker.length}\n\n*Stiker tersimpan :*\n`
+            for (let i = 0; i < liststicker.length; i++) {
+                capliststik += `\n➣ ${liststicker[i].replace('.jpg','')}`
+            }
+            piyo.reply(from, capliststik, id)
+            break
+
+case 'getstiker':
+            if (!q) return piyo.reply(from, `Hai Kak ${pushname} untuk menggunakan fitur get stiker ketik */getstiker* _Nama nya_`, id)
+            try {
+                const datastick = await fs.readFileSync('./media/sticker/' + q + '.jpg', { encoding: "base64" })
+                await piyo.sendImageAsSticker(from, `data:image/jpeg;base64,${datastick.toString('base64')}`)
+            } catch (err){
+                piyo.reply(from, `Kesalahan mengambil stiker! cek kembali nama stiker dengan ketik */liststiker*`)
+            }
+            break
+
+case 'delstiker':
+            if (isOwnerBot) return piyo.reply(from, `Hanya untuk owner bot!`, id)
+            try {
+                await fs.unlinkSync('./media/sticker/' + q + '.jpg').then(() => {
+                    piyo.reply(from, `Menghapus Stiker ${q}`, id)
+                })
+            } catch (err) {
+
+            }
+            break
+			
 case 'takestick':
                     if (quotedMsg && quotedMsg.type == 'sticker') {
                         if (!q.includes('|')) return await piyo.reply(from, `Untuk mengubah watermark sticker, reply sticker dengan caption ${prefix}takestick package_name | author_name\n\nContoh: ${prefix}takestick piyo | bot`, id)
