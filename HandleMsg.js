@@ -3057,51 +3057,56 @@ case 'joox':
                                     await piyo.reply(from, 'Error!', id)
                                 })
                         break
-case 'play':
-                            piyo.reply(from,'Wait.. Sedang di proses!',id)
-                            const serplay2 = body.slice(7)
-                              const getvids = await axios.get(`https://api.zeks.xyz/api/ytplaymp3?q=${q}&apikey=benbenz`)
-                           if (getvids.data.status == false) return piyo.reply(from, getvids.data.message, id)
-                       const responses = await fetch(getvids.data.result.url_audio);
-                           const buffer = await responses.buffer(); 
-                           await piyo.sendFileFromUrl(from, getvids.data.result.thumbnail, 'gambar.jpg', `「 PLAY 」\n\n➸ Judul : ${getvids.data.result.title}\n➸ Filesize : ${getvids.data.result.size}\n➸ Link : ${getvids.data.result.source}\n\n_Music Sedang Dikirim_`,id)
-                          await fs.writeFile(`./media/play2.mp3`, buffer)
-                         await piyo.sendFile(from,'./media/play2.mp3', `${getvids.data.result.title}`,id)
-                       await limitAdd(serial)
-                    break
-case 'play2':
-            if (!q) return piyo.reply(from , `Silahkan  ketik /play2 judulnya` , id)
+case 'play': //PAKE API VIDE FIKRI BIAR ADA SIZE LAGUNYA
+            if (!q) return piyo.reply(from , `Silahkan  ketik /play judulnya` , id)
+            await piyo.reply(from,'Wait..',id)
+	    const getvids = await axios.get(`https://videfikri.com/api/ytplay/?query=${q}`)
+	    if (getvids.data.result.status == 400) return piyo.reply(from, getvids.data.result.pesan , id)
+            if (Number(getvids.data.result.size.split('MB')[0]) >= 10.00) return piyo.reply(from, 'Maaf durasi music sudah melebihi batas maksimal 10 MB!', id)
+	    await piyo.sendFileFromUrl(from, getvids.data.result.thumbnail, 'gambar.jpg', `Title: ${getvids.data.result.title}\n\n───────────⚪───────────\n(っ◔◡◔)っ   ◄◄⠀▐▐ ⠀►► ───○ 🔊\n───────────⚪───────────\n➥Size: ${getvids.data.result.size}\n➥Type: Mp3\n➥Duration: ${getvids.data.result.duration}\n\n*Mohon Tunggu Bot Akan Mengirim Audio!*`, id)
+            const responno = await fetch(getvids.data.result.url)
+            const bufferj = await responno.buffer()
+            await fs.writeFile('./media/play.mp3', bufferj)
+            await piyo.sendFile(from, './media/play.mp3', 'nih kak', '',  id)			
+            break
+			
+case 'playv':
+            if (!q) return piyo.reply(from , `Silahkan  ketik /playv judulnya` , id)
             if (!isPremium) return piyo.reply(from, `Maaf, ini adalah fitur premium, untuk menggunakan fitur ini silahkan beli premium ke owner \nUntuk Harga\n\n10k Perbulan\n5k Perpanjang`, id)
-            axios.get(`https://piyoytdl.herokuapp.com/search?q=${q}`) 
-                        .then(async (res) => {      
-                            await piyo.reply(from, ind.wait(), id)
-                            const serplay22 = body.slice(7)
-                              const getvidss = await axios.get(`https://api.zeks.xyz/api/ytmp4?url=https://youtu.be/${res.data[0].id}&apikey=benbenz`)
-                       const responte = await fetch(getvidss.data.result.url_video);
-                           const buffer = await responte.buffer(); 
-                           await piyo.sendFileFromUrl(from, getvidss.data.result.thumbnail, 'gambar.jpg', `「 PLAY 」\n\n➸ Judul : ${getvidss.data.result.title}\n\n_Video Sedang Dikirim_`,id)
-                          await fs.writeFile(`./media/play3.mp4`, buffer)
-                         await piyo.sendFile(from,'./media/play3.mp4', `${getvidss.data.result.title}` , 'nih kak',id)
-                       await limitAdd(serial)
-                   })
-                        .catch(async (err) => {
-                            console.error(err)
-                            await piyo.reply(from, 'Ada yang Error!', id)
-                        })
-                    break   
+            piyo.reply(from, 'Wait.. Sedang Di Proses!',id)
+	    const getvid = await axios.get(`https://api.zeks.xyz/api/ytplaymp4?q=${q}&apikey=benbenz`)
+	    if (getvid.data.status == false) return piyo.reply(from, `Website sedang error` , id)
+	    const { title , url_video , size , thumbnail , source } = getvid.data.result
+	    if (Number(size.split(' MB')[0]) > 15.00) return piyo.sendFileFromUrl(from, thumbnail , 'thumb.jpg', `「 PLAY MP4 」\n\n• Judul : ${title}\n• Filesize : ${size}\n\n_Maaf, Durasi video melebihi 15 MB. Silahkan download video melalui link dibawah.\n${url_video}`, id)
+	    await piyo.sendFileFromUrl(from, thumbnail , 'gambar.jpg', `「 PLAY 」\n\n➸ Judul : ${title}\n➸ Filesize : ${size}\n➸ Link : ${source}\n\n_Video Sedang Dikirim_`,id)
+	    await piyo.sendFileFromUrl(from, url_video , 'piyo.mp4' , 'Nih Kak' , id)
+            break
+			
+case 'playvn':
+	   if (!q) return piyo.reply(from , `Silahkan  ketik /playvn judulnya` , id)
+           await piyo.reply(from, `Wait` , id)
+           const plan = await axios.get(`https://videfikri.com/api/ytplay/?query=${q}`)
+	   if (Number(plan.data.result.size.split('MB')[0]) >= 10.00) return piyo.reply(from, 'Maaf durasi music sudah melebihi batas maksimal 10 MB!', id)
+           await piyo.sendFileFromUrl(from, plan.data.result.thumbnail, 'gambar.jpg' , `Title: ${plan.data.result.title}\n\nTunggu Sebentar Bot Sedang Mengirim Voice Not ` , id)
+           const plon = await fetch(plan.data.result.url)
+           const buplon = await plon.buffer()
+           await fs.writeFile('./media/playvn.mp3', buplon)
+           await piyo.sendPtt(from, './media/playvn.mp3' , id)
+           break
+			
 case 'ytmp3':
-        await piyo.reply(from, ind.wait() , id)
-        const yte = await axios.get(`https://st4rz.herokuapp.com/api/yta2?url=${q}`)
-        await piyo.sendFileFromUrl(from , yte.data.thumb , 'piyo.jpg' , `*「 YOUTUBE MP3 」*\n\n• *Judul* : ${yte.data.title}\n\n_Silahkan tunggu file media sedang dikirim mungkin butuh beberapa menit_`, id)
-        await piyo.sendFileFromUrl(from, yte.data.result, 'piyo.mp3' , 'nih kak' , id)
-        break
+            await piyo.reply(from, ind.wait() , id)
+            const yte = await axios.get(`https://st4rz.herokuapp.com/api/yta2?url=${q}`)
+            await piyo.sendFileFromUrl(from , yte.data.thumb , 'piyo.jpg' , `*「 YOUTUBE MP3 」*\n\n• *Judul* : ${yte.data.title}\n\n_Silahkan tunggu file media sedang dikirim mungkin butuh beberapa menit_`, id)
+            await piyo.sendFileFromUrl(from, yte.data.result, 'piyo.mp3' , 'nih kak' , id)
+            break
 			
 case 'ytmp4':
-        await piyo.reply(from, ind.wait() , id)
-        const yt = await axios.get(`https://st4rz.herokuapp.com/api/ytv2?url=${q}`)
-        await piyo.sendFileFromUrl(from , yt.data.thumb , 'piyo.jpg' , `*「 YOUTUBE MP4 」*\n\n• *Judul* : ${yt.data.title}\n\n_Silahkan tunggu file media sedang dikirim mungkin butuh beberapa menit_`, id)
-        await piyo.sendFileFromUrl(from, yt.data.result, 'piyo.mp4' , 'nih kak' , id)
-        break
+            await piyo.reply(from, ind.wait() , id)
+            const yt = await axios.get(`https://st4rz.herokuapp.com/api/ytv2?url=${q}`)
+            await piyo.sendFileFromUrl(from , yt.data.thumb , 'piyo.jpg' , `*「 YOUTUBE MP4 」*\n\n• *Judul* : ${yt.data.title}\n\n_Silahkan tunggu file media sedang dikirim mungkin butuh beberapa menit_`, id)
+            await piyo.sendFileFromUrl(from, yt.data.result, 'piyo.mp4' , 'nih kak' , id)
+            break
 			
 case 'igstalk':
                         if (arghh.length === 1)  return piyo.reply(from, 'Kirim perintah /igstalk @username\nContoh /igstalk duar_amjay', id)
