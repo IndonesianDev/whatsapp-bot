@@ -45,13 +45,14 @@ const {
     menupremium, 
     menuhiburan,
     nsfwmenu,
+    menulama,
+    menubaru,
     diamondd,
     payment,
     mentol,
     wibuarea,
     Toxic,
     menunulis,
-    menufree,
     help,
     diamond,
     rules,
@@ -814,17 +815,20 @@ case 'help':
         const premiu = isPremium ? 'Premium' : 'Free'
         await piyo.sendText(from, menuId.texthelp(pushname, premiu , _registered , contol))
         break
-case 'menufree':            
+case 'menubaru':
+        await piyo.sendText(from, menuId.textmenubaru(pushname))
+        break
+case 'menulama':            
         const updater = updatepiyobot ? 'yes' : 'no'
         await piyo.sendText(from, menuId.textmenufree(pushname, updater))
         .then(() => ((isGroupMsg) && (isGroupAdmins)) ? piyo.sendText(from, `Menu Admin Grup: *${prefix}menuadmin*`) : null)
-         break
+        break
 case 'menu':
-            const premi = isPremium ? 'Premium' : 'Free'
-            const coloo = await piyo.getAllChatIds()
-            let tod = `${timee}`;
-            await piyo.sendText(from, menuId.textmenu(pushname, premi , _registered , coloo , tod))
-            break
+        const premi = isPremium ? 'Premium' : 'Free'
+        const coloo = await piyo.getAllChatIds()
+        let tod = `${timee}`;
+        await piyo.sendText(from, menuId.textmenu(pushname, premi , _registered , coloo , tod))
+        break
 case 'rules':
 case 'rule':
             await piyo.sendText(from, menuId.textRules())
@@ -884,7 +888,8 @@ case 'getstiker':
             if (!q) return piyo.reply(from, `Hai Kak ${pushname} untuk menggunakan fitur get stiker ketik */getstiker* _Nama nya_`, id)
             try {
                 const datastick = await fs.readFileSync('./media/sticker/' + q + '.jpg', { encoding: "base64" })
-                await piyo.sendImageAsSticker(from, `data:image/jpeg;base64,${datastick.toString('base64')}`)
+		const imageBase64 = `data:image/jpeg;base64,${datastick.toString('base64')}`
+                await piyo.sendImageAsSticker(from, imageBase64 , { author: 'Piyo', pack: 'Piyo BOT' })
             } catch (err){
                 piyo.reply(from, `Kesalahan mengambil stiker! cek kembali nama stiker dengan ketik */liststiker*`)
             }
@@ -917,7 +922,7 @@ case 'takestick':
                     } else {
                         await piyo.reply(from, `Reply sticker yang ingin dicolong dengan caption ${prefix}takestick package_name | author_name\n\nContoh: ${prefix}takestick piyo | bot`, id)
                     }
-        break
+        break			
 case 'stimg':
 case 'toimg':                                
             if (quotedMsg && quotedMsg.type == 'sticker') {
@@ -3015,6 +3020,11 @@ case 'tiktok':
                         await piyo.reply(from, 'Error!', id)
                     })
             break
+case 'tiktokmusic':
+            if (!q) return aruga.reply(from, `Silahkan ketik /tiktokmusic link tiktoknya` , id)
+            await piyo.reply(from, ind.wait() , id)
+            await piyo.sendFileFromUrl(from, `https://lolhuman.herokuapp.com/api/tiktokmusic?apikey=${lolhuman}&url=${q}` , 'tiktok.mp3' , '' , id)
+            break
 case 'igstory':
                 if (isLimit(serial)) return piyo.reply(from, `Maaf ${pushname}, Kuota Limit Kamu Sudah Habis, Ketik ${prefix}limit Untuk Mengecek Kuota Limit Kamu`, id)
                 if (!q) return piyo.reply(from, ind.wrongFormat(), id)
@@ -3538,7 +3548,7 @@ case 'motivasi':
             .then(body => {
                 let splitbijak = body.split('\n')
                 let randombijak = splitbijak[Math.floor(Math.random() * splitbijak.length)]
-                piyo.reply(from, randombijak, id)
+                piyo.reply(from, randombijak, id)		    
             })
             .catch(() => {
                 piyo.reply(from, 'Ada yang Error!', id)
