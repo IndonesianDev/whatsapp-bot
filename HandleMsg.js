@@ -3563,6 +3563,7 @@ case 'motivasi':
                 piyo.reply(from, 'Ada yang Error!', id)
             })
             break
+			
             case 'cersex':
             await piyo.sendText(from, ind.wait() , id)               
             rugaapi.cersex()
@@ -3577,17 +3578,14 @@ case 'motivasi':
                 await piyo.sendText(from, `${result}` ,id)
             })
             break
+			
             case 'nhpdf':
             if (args.length === 0) return piyo.reply(from, `Pake Kodenya mas` , id)
-            if (!isPremium) return piyo.reply(from, `Maaf, ini adalah fitur premium, untuk menggunakan fitur ini silahkan beli premium ke owner Murah kok`, id)
             await piyo.reply(from, ind.wait(), id)
-            rugaapi.nhpdf(q)
-            .then(async ({ result })  => {
-                const pdff = `Piyobot Nhentai~`
-                await piyo.sendFileFromUrl(from, result.pdf_file , pdff , 'Piyobot.pdf' , id) 
-                await piyo.sendText(from, `Judul : ${result.title}`, id)
-			})
+            const nh = await axios.get(`https://lolhuman.herokuapp.com/api/nhentaipdf/${q}?apikey=${lolhuman}`)
+            await piyo.sendFileFromUrl(from, nh.data.result , 'piyo.pdf' , '' , id)
             break
+			
             case 'listhero':
                 await piyo.sendText(from, ind.wait(), id)
             rugaapi.epep()
