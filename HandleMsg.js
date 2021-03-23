@@ -3767,8 +3767,7 @@ case 'playstore':
                 } catch (err) {
                     piyo.reply(from, err, id)
                 }
-            break
-	
+            break	
 	case 'tomp3':
         if ((isMedia || isQuotedVideo || isQuotedFile)) {
             piyo.reply(from, ind.wait(), id)
@@ -3811,7 +3810,26 @@ case 'playstore':
             })
         }
         limitAdd(serial)
-    break
+       break
+	case 'toptt':
+            if (quotedMsg){
+                if (quotedMsg.type === 'audio') { 
+                    try {
+                        await piyo.reply(from, `Tunggu sebentar` , id)
+                        mediaData = await decryptMedia(quotedMsg, uaOverride)
+                        fs.writeFileSync(`./media/audio/vn.mp3`, mediaData)
+                        piyo.reply(from, `Lagu berhasil di convert ke voice not\ntunggu sebentar bot akan mengirim voice notnya`, id)
+                        await piyo.sendPtt(from, `./media/audio/asu.mp3` , id)
+                    } catch(err) {
+                        piyo.reply(from, `Gagal Convert Audio`, id)
+                    }
+                } else {
+                    piyo.reply(from, `Harus reply audio!`, id)
+                }
+            } else {
+                piyo.reply(from, `Gaada data yang direply gan`, id)
+            }
+         break
         case 'translate':
                 
             if (args.length != 1) return piyo.reply(from, `Maaf, format pesan salah.\nSilahkan reply sebuah pesan dengan caption ${prefix}translate <kode_bahasa>\ncontoh ${prefix}translate id`, id)
