@@ -1177,78 +1177,43 @@ case '8bit':
     if (!q) return await piyo.reply(from, `Salah kak, /8bit nama kaka | nama kaka` , id)
     await piyo.reply(from, ind.wait() , id)
     console.log('Creating 8bit  Maker')
-    const bitt = await axios.get(`https://tobz-api.herokuapp.com/api/photooxy?theme=bit8&text1=${bit1}&text2=${bit1}&apikey=BotWeA`)
-    await piyo.sendFileFromUrl(from, bitt.data.result , '8bit.jpg' , 'nih kak' ,id)
+    await piyo.sendFileFromUrl(from, `https://videfikri.com/api/textmaker/8bit/?text1=${bit1}&text2=${bit2}` , 'piyo.jpg' , 'Nih Kak' , id)
     break
 case 'shadow':
     if (!q) return await piyo.reply(from, `Ketik /shadow teksnya` , id)
     await piyo.reply(from, ind.wait() , id)
     console.log('Creating shadow  Maker')
-    const shw = await axios.get(`https://tobz-api.herokuapp.com/api/photooxy?theme=shadow&text=${q}&apikey=BotWeA`)
-    await piyo.sendFileFromUrl(from, shw.data.result, 'error.jpg' , 'Kalo filenya berbentuk dokumen berarti eror' , id)
+    await piyo.sendFileFromUrl(from, `https://videfikri.com/api/textmaker/shadowtext/?text=${q}` , 'piyo.jpg' , 'Nih Kak' , id)
     break
 case 'burn':
     if (!q) return await piyo.reply(from, `Ketik /burn teksnya` , id)
     await piyo.reply(from, ind.wait() , id)
     console.log('Creating burn  Maker')
-    const bun = await axios.get(`https://tobz-api.herokuapp.com/api/photooxy?theme=burn_paper&text=${q}&apikey=BotWeA`)
-    await piyo.sendFileFromUrl(from, bun.data.result, 'error.jpg' , 'Kalo filenya berbentuk dokumen berarti eror' , id)
+    await piyo.sendFileFromUrl(from, `https://videfikri.com/api/textmaker/burnpaper/?text=${q}` , 'piyo.jpg' , 'Nih Kak' , id)
     break
 case 'kopi':
     if (!q) return await piyo.reply(from, `Ketik /coffe teksnya` , id)
     await piyo.reply(from, ind.wait() , id)
     console.log('Creating coffe  Maker')
-    const kop = await axios.get(`https://tobz-api.herokuapp.com/api/photooxy?theme=coffee&text=${q}&apikey=BotWeA`)
-    await piyo.sendFileFromUrl(from, kop.data.result, 'error.jpg' , 'Kalo filenya berbentuk dokumen berarti eror' , id)
+    await piyo.sendFileFromUrl(from, `https://videfikri.com/api/textmaker/coffeecup/?text=${q}` , 'piyo.jpg' , 'Nih Kak' , id)
     break
 case 'love':
     if (!q) return await piyo.reply(from, `Ketik /love teksnya` , id)
     await piyo.reply(from, ind.wait() , id)
     console.log('Creating love  Maker')
-    const lop = await axios.get(`https://tobz-api.herokuapp.com/api/photooxy?theme=love_paper&text=${q}&apikey=BotWeA`)
-    await piyo.sendFileFromUrl(from, lop.data.result, 'error.jpg' , 'Kalo filenya berbentuk dokumen berarti eror' , id)
+    await piyo.sendFileFromUrl(from, `https://videfikri.com/api/textmaker/lovemsg/?text=${q}` , 'piyo.jpg' , 'Nih Kak' , id)
     break
 case 'wood':
     if (!q) return await piyo.reply(from, `Ketik /wood teksnya` , id)
     await piyo.reply(from, ind.wait() , id)
     console.log('Creating wood  Maker')
-    const plop = await axios.get(`https://tobz-api.herokuapp.com/api/photooxy?theme=wood_block&text=${q}&apikey=BotWeA`)
-    await piyo.sendFileFromUrl(from, plop.data.result, 'error.jpg' , 'Kalo filenya berbentuk dokumen berarti eror' , id)
-    break
-case 'qowh':
-    if (!q) return await piyo.reply(from, `Ketik /qowh teksnya` , id)
-    await piyo.reply(from, ind.wait() , id)
-    console.log('Creating quote_on_wood_heart  Maker')
-    const pplop = await axios.get(`https://tobz-api.herokuapp.com/api/photooxy?theme=quote_on_wood_heart&text=${q}&apikey=BotWeA`)
-    await piyo.sendFileFromUrl(from, pplop.data.result, 'error.jpg' , 'Kalo filenya berbentuk dokumen berarti eror' , id)
-    break
-case 'grass':
-    if (!q) return await piyo.reply(from, `Ketik /grass teksnya` , id)
-    await piyo.reply(from, ind.wait() , id)
-    console.log('Creating message_under_the_grass  Maker')
-    const ppplop = await axios.get(`https://tobz-api.herokuapp.com/api/photooxy?theme=message_under_the_grass&text=${q}&apikey=BotWeA`)
-    await piyo.sendFileFromUrl(from, ppplop.data.result, 'error.jpg' , 'Kalo filenya berbentuk dokumen berarti eror' , id)
-    break
-case 'boards':
-    if (!q) return await piyo.reply(from, `Ketik /boards teksnya` , id)
-    await piyo.reply(from, ind.wait() , id)
-    console.log('Creating boards  Maker')
-    const yo1 = await axios.get(`https://tobz-api.herokuapp.com/api/photooxy?theme=wooden_boards&text=${q}&apikey=BotWeA`)
-    await piyo.sendFileFromUrl(from, yo1.data.result, 'error.jpg' , 'Kalo filenya berbentuk dokumen berarti eror' , id)
-    break
-case 'metal':
-    if (!q) return await piyo.reply(from, `Ketik /metal teksnya` , id)
-    await piyo.reply(from, ind.wait() , id)
-    console.log('Creating boards  metalic_text_glow')
-    const yo2 = await axios.get(`https://tobz-api.herokuapp.com/api/photooxy?theme=metalic_text_glow&text=${q}&apikey=BotWeA`)
-    await piyo.sendFileFromUrl(from, yo2.data.result, 'error.jpg' , 'Kalo filenya berbentuk dokumen berarti eror' , id)
+    await piyo.sendFileFromUrl(from, `https://videfikri.com/api/textmaker/woodblock/?text=${q}` , 'piyo.jpg' , 'Nih Kak' , id)
     break
 case 'potter':
     if (!q) return await piyo.reply(from, `Ketik /potter teksnya` , id)
     await piyo.reply(from, ind.wait() , id)
     console.log('Creating boards  harry poter')
-    const yo3 = await axios.get(`https://tobz-api.herokuapp.com/api/photooxy?theme=harry_potter&text=${q}&apikey=BotWeA`)
-    await piyo.sendFileFromUrl(from, yo3.data.result, 'error.jpg' , 'Kalo filenya berbentuk dokumen berarti eror' , id)
+    await piyo.sendFileFromUrl(from, `https://videfikri.com/api/textmaker/hpotter/?text=${q}` , 'piyo.jpg' , 'Nih Kak' , id)
     break
 case 'tlight':
     if (!q) return await piyo.reply(from, `Ketik /tlight teksnya` , id)
@@ -1263,13 +1228,6 @@ case '3d':
     console.log('Creating 3d')
     const yo6 = await axios.get(`https://api.zeks.xyz/api/text3dbox?apikey=administrator&text=${q}`)
     await piyo.sendFileFromUrl(from, yo6.data.result, 'error.jpg' , 'Kalo filenya berbentuk dokumen berarti eror' , id)
-    break
-case 'warface':
-    if (!q) return await piyo.reply(from, `Ketik /warface teksnya` , id)
-    await piyo.reply(from, ind.wait() , id)
-    console.log('Creating warface')
-    const yo4 = await axios.get(`https://tobz-api.herokuapp.com/api/photooxy?theme=warface&text=${q}&apikey=BotWeA`)
-    await piyo.sendFileFromUrl(from, yo4.data.result, 'error.jpg' , 'Kalo filenya berbentuk dokumen berarti eror' , id)
     break
 case 'pubg':
             if (!q) return piyo.reply(from, `Ketik /pubg teksnya` , id)
@@ -1288,7 +1246,7 @@ case 'blackpink':
     piyo.reply(from, ind.wait(), id)
     const blpk = body.slice(11)
     if (blpk.length > 10) return piyo.reply(from, '*Teks Terlalu Panjang!*\n_Maksimal 10 huruf!_', id)
-    await piyo.sendFileFromUrl(from, `https://api.vhtear.com/blackpinkicon?text=${blpk}&apikey=${vhtearkey}`, 'blackpink.jpg', '', id)
+    await piyo.sendFileFromUrl(from, `https://api.zeks.xyz/api/logobp?text=${blpk}&apikey=apivinz`, 'blackpink.jpg', '', id)
     break 
 case 'pornhub':
     if (args.length == 2) return piyo.reply(from, `Kirim perintah */pornhub [ |Teks1|Teks2 ]*, contoh */pornhub |Alvio|Piyobot*`, id)
@@ -1299,7 +1257,7 @@ case 'pornhub':
         const lpornhub2 = argz[2]
         if (lpornhub.length > 10) return piyo.reply(from, '*Teks1 Terlalu Panjang!*\n_Maksimal 10 huruf!_', id)
         if (lpornhub2.length > 10) return piyo.reply(from, '*Teks2 Terlalu Panjang!*\n_Maksimal 10 huruf!_', id)
-        piyo.sendFileFromUrl(from, `https://api.vhtear.com/pornlogo?text1=${lpornhub}&text2=${lpornhub2}&apikey=${vhtearkey}`)
+        piyo.sendFileFromUrl(from, `https://api.zeks.xyz/api/phlogo?text1=${lpornhub}&text2=${lpornhub2}&apikey=apivinz`)
     } else {
         await piyo.reply(from, `Wrong Format!\n[❗] Kirim perintah */pornhub [ |Teks1|Teks2 ]*, contoh */pornhub |Piyo|Alvio*`, id)
     }
@@ -1323,7 +1281,7 @@ case 'ffmaker':
     if (!q) return await piyo.reply(from, `Salah kak, /ffmaker alok | nama kaka` , id)
     await piyo.reply(from, ind.wait() , id)
     console.log('Creating FF Maker')
-    await piyo.sendFileFromUrl(from, `https://api.vhtear.com/logoff?hero=${ff1}&text=${ff2}&apikey=${vhtearkey}`, 'error.jpg', '', id)
+    await piyo.sendFileFromUrl(from, `https://api.zeks.xyz/api/epep?text=${q}&apikey=apivinz`, 'error.jpg', '', id)
     await piyo.sendText(from, `Nih kak` , id)
     .then(() => console.log('Success creating image!'))
             .catch(async (err) => {
@@ -1363,10 +1321,9 @@ case 'wolf2':
             piyo.reply(from, 'Tunggu sebentar dan pastikan format yang anda masukkan benar', id)
             const wolf12 = argz[1]
             const wolf22 = argz[2]
-            const wolf2 = await axios.get(`https://tobz-api.herokuapp.com/api/textpro?theme=wolflogo2&text1=${wolf12}&text2=${wolf22}&apikey=BotWeA`)
-            piyo.sendFileFromUrl(from, wolf2.data.result, 'wolf2.jpg', 'neh bang', id)
+            piyo.sendFileFromUrl(from, `https://api.zeks.xyz/api/wolflogo?apikey=apivinz&text1=${wolf12}&text2=${wolf22}`, 'wolf2.jpg', 'neh bang', id)
         } else {
-            await piyo.reply(from, `Wrong Formt!\n[❗] Kirim perintah *${prefix}wolf2 [ |Teks1|Teks2 ]*, contoh *${prefix}wolf2 |aqulzz|xinz*`, id)
+            await piyo.reply(from, `Wrong Formt!\n[❗] Kirim perintah *${prefix}wolf2 [ |Teks1|Teks2 ]*, contoh *${prefix}wolf2 |piyo|bot*`, id)
         }
         break
 case 'wolf':
@@ -1376,10 +1333,9 @@ case 'wolf':
             piyo.reply(from, 'Tunggu sebentar dan pastikan format yang anda masukkan benar', id)
             const wolf1 = argz[1]
             const wolf2 = argz[2]
-            const wolf = await axios.get(`https://tobz-api.herokuapp.com/api/textpro?theme=wolflogo1&text1=${wolf1}&text2=${wolf2}&apikey=BotWeA`)
-            piyo.sendFileFromUrl(from, wolf.data.result, 'wolf.jpg', 'neh bang', id)
+            piyo.sendFileFromUrl(from, `https://api.zeks.xyz/api/wolflogo?apikey=apivinz&text1=${wolf1}&text2=${wolf2}`, 'wolf2.jpg', 'neh bang', id)
         } else {
-            await piyo.reply(from, `Wrong Format!\n[❗] Kirim perintah *${prefix}wolf [ |Teks1|Teks2 ]*, contoh *${prefix}wolf |aqulzz|xinz*`, id)
+            await piyo.reply(from, `Wrong Formt!\n[❗] Kirim perintah *${prefix}wolf2 [ |Teks1|Teks2 ]*, contoh *${prefix}wolf2 |piyo|bot*`, id)
         }
         break
 case 'ninja':
@@ -1478,7 +1434,7 @@ case 'glitchtext':
                 const teks1 = q.substring(0, q.indexOf('|') - 1)
                 const teks2 = q.substring(q.lastIndexOf('|') + 2)
                 await piyo.reply(from, ind.wait(), id)
-        await piyo.sendFileFromUrl(from, `https://api.vhtear.com/glitchtext?text1=${teks1}&text2=${teks2}&apikey=${vhtearkey}`, 'glitch.jpg', '', id)
+        await piyo.sendFileFromUrl(from, `https://videfikri.com/api/textmaker/tiktokeffect/?text1=${teks1}&text2=${teks2}`, 'glitch.jpg', '', id)
                     .then(() => console.log('Success creating image!'))
                     .catch(async (err) => {
                         console.error(err)
@@ -2214,15 +2170,9 @@ case 'fisheye':
             }
             break
 case 'neko18':
-                        const nsfwneko = await axios.get('https://tobz-api.herokuapp.com/api/nsfwneko?apikey=BotWeA')
-                        const nsfwn = nsfwneko.data
-                        if (nsfwn.result.endsWith('.png')) {
-                            var ext = '.png'
-                        } else {
-                            var ext = '.jpg'
-                        }
-                        piyo.sendImage(from, nsfwn.result, `NsfwNeko${ext}`, 'NsfwNeko!', id)
-                        await limitAdd(serial)
+              await piyo.reply(from, ind.wait(), id)
+	      await piyo.sendFileFromUrl(from, `https://lolhuman.herokuapp.com/api/random/nsfw/neko?apikey=${lolhuman}` , 'neko.jpg' , 'Nih kak' , id)
+              await limitAdd(serial)
                         break
 case 'anime':               
             if (args.length == 0) return piyo.reply(from, `Untuk menggunakan ${prefix}anime\nSilahkan ketik: ${prefix}anime [query]\nContoh: ${prefix}anime random\n\nquery yang tersedia:\nrandom, waifu, husbu, neko`, id)
@@ -2315,15 +2265,9 @@ break
 case 'randomhentai':
     if (isGroupMsg) return piyo.reply(from, 'Perintah ini hanya bisa dilakukan di chat personal!', id)
     if (isLimit(serial)) return piyo.reply(from, `_Hai ${pushname} Limit request anda sudah mencapai batas, Akan direset kembali setiap jam 9 dan gunakan seperlunya!_`, id)
-    const hentai = await axios.get(`https://tobz-api.herokuapp.com/api/hentai?apikey=BotWeA`)
-    const henta = hentai.data
-    if (henta.result.endsWith('.png')) {
-        var ext = '.png'
-    } else {
-        var ext = '.jpg'
-    }
-    limitAdd(serial)
-    piyo.sendImage(from, henta.result, `RandomHentai${ext}`, 'Random Hentai!', id)
+    await piyo.reply(from, ind.wait(), id)
+    await piyo.sendFileFromUrl(from, `https://lolhuman.herokuapp.com/api/random/nsfw/hentai?apikey=${lolhuman}` , 'hentai.jpg' , 'Nih kak' , id)
+    await limitAdd(serial)
     break
     case 'gifhentai':
         if (isGroupMsg) return piyo.reply(from, 'Perintah ini hanya bisa dilakukan di chat personal!', id)
