@@ -70,21 +70,16 @@ Edit value yang diperlukan di `settings/setting.json`.
     "prefix": "/",
     "vhtearkey": "Your Apikey In Here",
     "apikeyz": "Your Apikey In Here",
-    "apikeyx": "Your Apikey In Here",
     "lolhuman": "Your Apikey In Here",
-    "itech": "Your Apikey In Here"
 }
 
 ```
 
 `ownerBot`: your WhatsApp number.  
 `prefix`: bot's prefix.  
-`itech`: API token. Anda bisa mendapatkannya https://api.i-tech.id
 
 `vhtearkey`: VHTear API token. Anda bisa mendapatkannya https://api.vhtear.com/ dengan membeli kunci API.
 `apikeyz`: Hujan Api token. Anda Bisa Mendapatkannya https://hujanapi.xyz
-
-`apikeyx`: Naufal Hoster token. Anda Bisa Mendapatkannya https://naufalhoster.xyz
 
 `lolhuman`: Lolhuman token. Anda bisa Mendapatkannya Di https://lolhuman.herokuapp.com/
 
