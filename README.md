@@ -77,9 +77,8 @@ Edit value yang diperlukan di `settings/setting.json`.
 
 `ownerBot`: your WhatsApp number.  
 `prefix`: bot's prefix.  
-`vhtearkey`: VHTear API token. Anda bisa mendapatkannya https://api.vhtear.com/ dengan membeli kunci API.
-
-`apikeyz`: Hujan Api token. Anda Bisa Mendapatkannya https://hujanapi.xyz
+`vhtearkey`: VHTear API token. Anda bisa mendapatkannya https://api.vhtear.com/ dengan membeli kunci API Berbayar.
+`apikeyz`: Hujan Api token. Anda Bisa Mendapatkannya https://hujanapi.xyz silahkan daftar untuk mendapatkan apikey
 
 `lolhuman`: Lolhuman token. Anda bisa Mendapatkannya Di https://lolhuman.herokuapp.com/
 
