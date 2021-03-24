@@ -60,7 +60,6 @@ const {
     songmenu,
     menutobat,
     menupenting,
-    ytdl,
     Jsholat,
     tiktokmenu,
     Lirik,
@@ -97,6 +96,7 @@ const simi = JSON.parse(fs.readFileSync('./settings/simi.json'))
 const chatt = JSON.parse(fs.readFileSync('./settings/piyo.json'))
 const ngegas = JSON.parse(fs.readFileSync('./settings/ngegas.json'))
 const setting = JSON.parse(fs.readFileSync('./settings/setting.json'))
+const uang = JSON.parse(fs.readFileSync('./settings/uang.json'))
 const _nsfw = JSON.parse(fs.readFileSync('./settings/nsfw.json'))
 const _welcome = JSON.parse(fs.readFileSync('./settings/welcome.json'))
 const _reminder = JSON.parse(fs.readFileSync('./settings/reminder.json'))
@@ -105,7 +105,6 @@ const _afk = JSON.parse(fs.readFileSync('./settings/afk.json'))
 const _premium = JSON.parse(fs.readFileSync('./settings/premium.json'))
 const _biodata = JSON.parse(fs.readFileSync('./settings/biodata.json'))
 const _registered = JSON.parse(fs.readFileSync('./settings/registered.json'))
-const uang = JSON.parse(fs.readFileSync('./settings/uang.json'))
 ///////////////////////////////////////////////////////////////////////////////
 
 
@@ -126,7 +125,6 @@ let {
     memberLimit,
     prefix,
     apikeyz,
-    apikeyx,
     lolhuman,
     vhtearkey
 } = setting
@@ -2159,16 +2157,6 @@ if (isMedia && type === 'image' || isQuotedImage) {
                     await piyo.sendFileFromUrl(from, anj.video , 'piyo.mp4', `*Terdeteksi Anime Berikut :*\n*Nama :* ${anj.title_romaji}\n*Nama Lain :* ${anj.title_native}\n*DiWaktu :* ${anj.at}\n*Episode :* ${anj.episode}\n*Kesamaan :* ${anj.similarity}`, id)
 }
 break
-case 'fisheye':
-            if (isMedia && type === 'image' || isQuotedImage) {
-                await piyo.reply(from, ind.wait(), id)
-                const encryptMedia = isQuotedImage ? quotedMsg : message
-                const mediaData = await decryptMedia(encryptMedia, uaOverride)
-                const imageLinkk = await uploadImages(mediaData, `fisheye.${sender.id}`)
-                const eye = await axios.get(`https://naufalhoster.xyz/tools/fisheye?apikey=${apikeyx}&url=${imageLinkk}`)
-                await piyo.sendFileFromUrl(from, eye.data.result.image , 'fish.jpg' , '' , id)
-            }
-            break
 case 'neko18':
               await piyo.reply(from, ind.wait(), id)
 	      await piyo.sendFileFromUrl(from, `https://lolhuman.herokuapp.com/api/random/nsfw/neko?apikey=${lolhuman}` , 'neko.jpg' , 'Nih kak' , id)
@@ -2909,12 +2897,12 @@ case 'fb':
                 await piyo.reply(from, ind.wait(), id)
                 rugaapi.facebook(q)
                 .then(async ({ result }) => {
-                            await piyo.sendFileFromUrl(from, result.VideoUrl, 'videofb.mp4', '', id)
+                            await aruga.sendFileFromUrl(from, result.result.url, 'videofb.mp4', '', id)
                             console.log(from, 'Success sending Facebook video!')
                     })
                     .catch(async (err) => {
                         console.error(err)
-                        await piyo.reply(from, `Ada yang Error!`, id)
+                        await aruga.reply(from, result.result.pesan, id)
                     })
             break
 case 'instagram': //RECODE BY ALVIO ADJI JANUAR
@@ -3833,7 +3821,7 @@ case 'mtk':
 			if (args.length == 0) return piyo.reply(from, `Mengubah kalimat menjadi hilih\n\nketik ${prefix}hilih kalimat`, id)
 			rugaapi.hilih(body.slice(11))
 			.then(async(res) => {
-				await piyo.reply(from, `${res}`, id)
+				await piyo.reply(from, res.kata , id)
 			})
             break
             case 'resep':
