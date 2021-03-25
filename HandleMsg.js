@@ -1936,6 +1936,26 @@ case 'setprofile':
             }
             break
 ///////////////////////////////////////////////////MENU SENDER//////////////////////////////////////////////////
+case 'gantiprofile':
+     if (!isOwnerBot) return piyo.reply(from, `Khusus owner` , id)
+     if (!q) return piyo.reply(from, `Ketik ${prefix}gantiprofile nama | biostatus ` , id)
+     const pof = q.substring(0, q.indexOf('|') - 1)
+     const pof2 = q.substring(q.lastIndexOf('|') + 2)
+     await piyo.setMyName(pof)
+     await piyo.setMyStatus(pof2)
+     console.log('Succes To Change Name And Info')
+     piyo.sendText(from, 'Succes To Change Name And Info' , id)
+     if (isMedia && type == 'image' || isQuotedImage) {
+     const dataMedia = isQuotedImage ? quotedMsg : message
+     const _mimetype = dataMedia.mimetype
+     const mediaData = await decryptMedia(dataMedia, uaOverride)
+     const imageBase64 = `data:${_mimetype};base64,${mediaData.toString('base64')}`
+     await piyo.setProfilePic(imageBase64)
+     console.log('Succes To Change Profile Picture')
+     piyo.sendText(from, 'Succes To Change Profile Picture' , id)
+     await piyo.sendText(from, `Sudah kak >_<` , id)
+      }
+      break
 case 'mystat':{
     const userid = sender.id
     const ban = banned.includes(userid)
