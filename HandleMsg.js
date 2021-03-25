@@ -88,7 +88,7 @@ const {
 } = require('./utils')
 
 const { uploadImages } = require('./utils/fetcher')
-
+const { imagetotext  } = require('./lib/rdt')
 
 //////////////////////////////FOLDER SYSTEM///////////////////////////////////
 const banned = JSON.parse(fs.readFileSync('./settings/banned.json'))
@@ -2167,6 +2167,22 @@ if (!isBotGroupAdmins) return piyo.reply(from, 'Gagal, silahkan tambahkan bot se
     piyo.reply(from, 'Success kick all member', id)
 break
 //////////////////////////////////////////////MENU IMAGE/////////////////////////////////////////////////////////
+case 'totext': 
+if (isMedia && type === 'image' || isQuotedImage) {
+	        await piyo.reply(from, ind.wait(), id)
+	        const encryptMedia = isQuotedImage ? quotedMsg : message
+                mediaData = await decryptMedia(encryptMedia, uaOverride)
+                fs.writeFileSync(`./media/images/ocr.jpg`, mediaData)
+                imagetotext(`./media/images/ocr.jpg`)
+                .then(data => {
+                piyo.sendText(from, `*Image To Text* \n\nHasil: \n\n${data}`, id)
+                })
+                .catch(err => {
+                console.log(err)
+                })
+                }
+                 break
+			
 case 'whatanime':
 if (isMedia && type === 'image' || isQuotedImage) {
                     await piyo.reply(from, ind.wait(), id)
