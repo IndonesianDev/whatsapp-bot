@@ -814,7 +814,8 @@ case 'help':
         await piyo.sendText(from, menuId.texthelp(pushname, premiu , _registered , contol))
         break
 case 'menubaru':
-        await piyo.sendText(from, menuId.textmenubaru(pushname))
+	const nadhirasayang = './media/azure.png'
+        await piyo.sendFile(from, nadhirasayang , 'piyo.png' , menuId.textmenubaru(pushname))
         break
 case 'menulama':            
         const updater = updatepiyobot ? 'yes' : 'no'
