@@ -4080,19 +4080,31 @@ case 'buylimit':
 //////////////////////////////////////////////////////Owner Bot////////////////////////////////////////////////////
 case 'sewa':
                     if (!isOwnerBot) return await piyo.reply(from, ind.ownerOnly(), id)
+                    if (ar.length == 0) return piyo.reply(from , `Ketik /sewa add/del harinya\nContoh: /sewa add 30d` , id)
+                    if (ar.length == 1) return piyo.reply(from , `Ketik /sewa add/del harinya\nContoh: /sewa add 30d` , id)
                     if (ar[0] === 'add') 
-                    {
-                            sewa.addSewaGroup(chat.id , args[1], _sewa)
-                            await piyo.reply(from, ` *「 SEWA ADDED 」*\n\n➸ *ID*: ${chat.id}\n➸ *Expired*: ${ms(toMs(args[1])).days} day(s) ${ms(toMs(args[1])).hours} hour(s) ${ms(toMs(args[1])).minutes} minute(s)\n\nBot Akan Keluar Secara Otomatis\nDalam waktu yang sudah di tentukan`, id)
-                            await piyo.sendContact(from, ownerNumber)
-                    }
-		    else if (ar[0] === 'del')
+                     {
+                        sewa.addSewaGroup(chat.id , args[1], _sewa)
+                        await piyo.reply(from, ` *「 SEWA ADDED 」*\n\n➸ *ID*: ${chat.id}\n➸ *Expired*: ${ms(toMs(args[1])).days} day(s) ${ms(toMs(args[1])).hours} hour(s) ${ms(toMs(args[1])).minutes} minute(s)\n\nBot Akan Keluar Secara Otomatis\nDalam waktu yang sudah di tentukan`, id)
+                        await piyo.sendContact(from, ownerNumber)
+                        await piyo.sendText(from, `*CHAT OWNER JIKA INGIN PERPANJANG DURASI*` , id)
+                        await piyo.sendTextWithMentions(from, `@${ownerNumber} Silahkan Baca Pesan Pribadi Saya`)
+                        await piyo.sendText(ownerNumber, `Sukses Menyewakan bot kedalam grup ${formattedTitle}\nSalin ID Dibawah Untuk Mendelete Sewaan Di Grup Tersebut\nDengan Ketik /sewa del IDnya` , id)
+                        await piyo.sendText(ownerNumber, `${chat.id}`)
+                    } 
+                    else if (ar[0] === 'del')
                     {
                         _sewa.splice(sewa.getSewaPosition(chat.id, _sewa), 1)
                         fs.writeFileSync('./settings/sewa.json', JSON.stringify(_sewa))
                         await piyo.reply(from, ind.doneOwner(), id)
+                    } 
+                    else 
+                    {
+                        _sewa.splice(sewa.getSewaPosition(args[1] , _sewa), 1)
+                        fs.writeFileSync('./settings/sewa.json', JSON.stringify(_sewa))
+                        await piyo.reply(from, ind.doneOwner(), id)
                     }
-                break
+                    break
 case 'premium':
                 if (!isOwnerBot) return await piyo.reply(from, ind.ownerOnly(), id)
                 if (ar[0] === 'add') {
