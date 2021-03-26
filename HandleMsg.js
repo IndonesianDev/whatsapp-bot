@@ -72,6 +72,7 @@ const {
     getLocationData,
     images,
     premium,
+    sewa,
     resep,
     nsfw,
     ptlcewek,
@@ -103,6 +104,7 @@ const _reminder = JSON.parse(fs.readFileSync('./settings/reminder.json'))
 const _autostiker = JSON.parse(fs.readFileSync('./settings/autostiker.json'))
 const _afk = JSON.parse(fs.readFileSync('./settings/afk.json'))
 const _premium = JSON.parse(fs.readFileSync('./settings/premium.json'))
+const _sewa = JSON.parse(fs.readFileSync('./settings/sewa.json'))
 const _biodata = JSON.parse(fs.readFileSync('./settings/biodata.json'))
 const _registered = JSON.parse(fs.readFileSync('./settings/registered.json'))
 ///////////////////////////////////////////////////////////////////////////////
@@ -175,6 +177,7 @@ module.exports = HandleMsg = async (piyo, message) => {
         const { ind } = require('./message/text/lang/')
         const isAdmin = adminNumber.includes(sender.id)
 	const isPremium = premium.checkPremiumUser(sender.id, _premium)
+	const isSewa = sewa.checkSewa(chat.id , _sewa)
         const userId = sender.id.substring(9, 13)
         const isRegistered = _registered.includes(sender.id)
         global.pollfile = 'poll_Config_' + chat.id + '.json'
@@ -764,8 +767,9 @@ if (!isGroupMsg && isMedia && isImage && !isCmd)
 	    function baseURI(buffer = Buffer.from([]), metatype = 'text/plain') {
                 return `data:${metatype};base64,${buffer.toString('base64')}`
             }
-	 // PREMIUM
-	    premium.expiredCheck(_premium)
+	 // PREMIUM + SEWA
+	premium.expiredCheck(_premium)
+	sewa.expiredCheck(_sewa , piyo , message , groupId)
         switch (command) {
         // Menu and TnC
 
@@ -1937,6 +1941,21 @@ case 'setprofile':
             }
             break
 ///////////////////////////////////////////////////MENU SENDER//////////////////////////////////////////////////
+case 'sewacheck':
+     if (!isSewa) return await piyo.reply(from, `Kamu Belom Sewa Bot`, id)
+     const cekExpp = ms(sewa.getSewaExpired(groupId, _sewa) - Date.now())
+     await piyo.reply(from, `* 「 SEWA EXPIRED 」*\n\n➸ *ID*: ${groupId}\n➸ *Sewa left*: ${cekExpp.days} day(s) ${cekExpp.hours} hour(s) ${cekExpp.minutes} minute(s)`, id)
+     break
+case 'listsewa':
+      let listsewa = '「 *SEWA GROUP LIST* 」\n\n'
+      let nomorListsewa = 0
+      const arraysewa = []
+      for (let i = 0; i < sewa.getAllSewa(_sewa).length; i++) {
+      nomorListsewa++
+      listsewa += `${nomorListsewa}. ${sewa.getAllSewa(_sewa)[i]}\n\n`
+      }
+     await piyo.reply(from, listsewa, id)
+     break
 case 'gantiprofile':
      if (!isOwnerBot) return piyo.reply(from, `Khusus owner` , id)
      if (!q) return piyo.reply(from, `Ketik ${prefix}gantiprofile nama | biostatus ` , id)
@@ -2934,12 +2953,12 @@ case 'fb':
                 await piyo.reply(from, ind.wait(), id)
                 rugaapi.facebook(q)
                 .then(async ({ result }) => {
-                            await aruga.sendFileFromUrl(from, result.result.url, 'videofb.mp4', '', id)
+                            await piyo.sendFileFromUrl(from, result.result.url, 'videofb.mp4', '', id)
                             console.log(from, 'Success sending Facebook video!')
                     })
                     .catch(async (err) => {
                         console.error(err)
-                        await aruga.reply(from, result.result.pesan, id)
+                        await piyo.reply(from, result.result.pesan, id)
                     })
             break
 case 'instagram': //RECODE BY ALVIO ADJI JANUAR
@@ -2990,7 +3009,7 @@ case 'tiktok':
                     })
             break
 case 'tiktokmusic':
-            if (!q) return aruga.reply(from, `Silahkan ketik /tiktokmusic link tiktoknya` , id)
+            if (!q) return piyo.reply(from, `Silahkan ketik /tiktokmusic link tiktoknya` , id)
             await piyo.reply(from, ind.wait() , id)
             await piyo.sendFileFromUrl(from, `https://lolhuman.herokuapp.com/api/tiktokmusic?apikey=${lolhuman}&url=${q}` , 'tiktok.mp3' , '' , id)
             break
@@ -4059,6 +4078,21 @@ case 'buylimit':
                 }
             break
 //////////////////////////////////////////////////////Owner Bot////////////////////////////////////////////////////
+case 'sewa':
+                    if (!isOwnerBot) return await piyo.reply(from, ind.ownerOnly(), id)
+                    if (ar[0] === 'add') 
+                    {
+                            sewa.addSewaGroup(chat.id , args[1], _sewa)
+                            await piyo.reply(from, ` *「 SEWA ADDED 」*\n\n➸ *ID*: ${chat.id}\n➸ *Expired*: ${ms(toMs(args[1])).days} day(s) ${ms(toMs(args[1])).hours} hour(s) ${ms(toMs(args[1])).minutes} minute(s)\n\nBot Akan Keluar Secara Otomatis\nDalam waktu yang sudah di tentukan`, id)
+                            await piyo.sendContact(from, ownerNumber)
+                    }
+		    else if (ar[0] === 'del')
+                    {
+                        _sewa.splice(sewa.getSewaPosition(chat.id, _sewa), 1)
+                        fs.writeFileSync('./settings/sewa.json', JSON.stringify(_sewa))
+                        await piyo.reply(from, ind.doneOwner(), id)
+                    }
+                break
 case 'premium':
                 if (!isOwnerBot) return await piyo.reply(from, ind.ownerOnly(), id)
                 if (ar[0] === 'add') {
