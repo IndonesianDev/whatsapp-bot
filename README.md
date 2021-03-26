@@ -228,6 +228,7 @@ Setelah itu pindai kode QR menggunakan WhatsApp Anda di ponsel Anda!
 | Leave all groups   |      ✔️      |
 | Ban                |      ✔️      |
 | Add premium user   |      ✔️      |
+| Add Sewa group     |      ✔️      |
 
 |    Moderation    | Availability |
 | :--------------: | :----------: |
