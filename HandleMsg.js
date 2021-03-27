@@ -211,6 +211,7 @@ module.exports = HandleMsg = async (piyo, message) => {
         const isQuotedFile  = quotedMsg && quotedMsg.type === 'file'
         const isQuotedAudio  = quotedMsg && quotedMsg.type === 'audio'
         const isQuotedGif = quotedMsg && quotedMsg.type === 'gif'
+	const isQuotedSticker = quotedMsg && quotedMsg.type === 'sticker'
         const cecan = [
             {
             lahwoi : "Pacar piyo yang ke 1",
@@ -2199,7 +2200,20 @@ if (isMedia && type === 'image' || isQuotedImage) {
                 .catch(err => {
                 console.log(err)
                 })
-                }
+                } 
+else if (type === 'sticker' || isQuotedSticker) {
+                   const dataMedia = isQuotedSticker ? quotedMsg : message
+		   const _mimetype = dataMedia.mimetype
+		   const mediaData = await decryptMedia(dataMedia, uaOverride)
+                   fs.writeFileSync(`./media/sticker/ocr.jpg`, mediaData)
+                   imagetotext(`./media/sticker/ocr.jpg`)
+                   .then(data => {
+                   aruga.sendText(dari, `*Read Data Text in Sticker* \n\nHasil: \n\n${data}`, id)
+                   })
+                   .catch(err => {
+                   console.log(err)
+                   })
+                 }
                  break
 			
 case 'whatanime':
