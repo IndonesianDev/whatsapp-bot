@@ -17,7 +17,7 @@
    "homepage": "https://github.com/IndonesianDev/whatsapp-bot",
    "license": "ISC",
    "dependencies": {
-      "@open-wa/wa-automate": "^3.9.15",
+      "@open-wa/wa-automate": "^3.9.17",
       "@vitalets/google-translate-api": "^4.0.0",
       "app-root-path": "^3.0.0",
       "axios": "^0.21.1",
@@ -47,6 +47,7 @@
       "nhentai-js": "^4.0.0",
       "node-fetch": "^2.6.1",
       "node-gtts": "^2.0.2",
+      "node-tesseract-ocr": "^2.0.0",
       "image-to-base64": "^2.1.1",
       "parse-ms": "^2.1.0",
       "promise": "^8.1.0",
