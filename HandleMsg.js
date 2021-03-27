@@ -3093,18 +3093,32 @@ case 'playvn':
            break
 			
 case 'ytmp3':
-            await piyo.reply(from, ind.wait() , id)
-            const yte = await axios.get(`https://st4rz.herokuapp.com/api/yta2?url=${q}`)
-            await piyo.sendFileFromUrl(from , yte.data.thumb , 'piyo.jpg' , `*「 YOUTUBE MP3 」*\n\n• *Judul* : ${yte.data.title}\n\n_Silahkan tunggu file media sedang dikirim mungkin butuh beberapa menit_`, id)
-            await piyo.sendFileFromUrl(from, yte.data.result, 'piyo.mp3' , 'nih kak' , id)
-            break
+       await piyo.reply(from, ind.wait() , id)
+       try{
+        const yte = await axios.get(`https://api.zeks.xyz/api/ytmp3?url=${q}&apikey=apivinz`)
+        const { thumbnail , title , url_audio , size } = yte.data.result
+        await piyo.sendFileFromUrl(from, thumbnail , 'piyo.jpg' , `*「 YOUTUBE MP3 」*\n\n• *Judul* : ${title}\n\n• *Size* : ${size}\n\nSilahkan tunggu file media sedang dikirim mungkin butuh beberapa menit_`, id)
+        await piyo.sendFileFromUrl(from, url_audio , 'piyo.mp3' , '' , id)
+        } catch (err) {
+                    console.error(err.message)
+                    await piyo.sendFileFromUrl(from, errorurl2, 'error.png', '💔️ Maaf, Ada Sedikit Error')
+                    piyo.sendText(from, 'Fitur Error : ' + err)
+              }
+        break
 			
-case 'ytmp4':
-            await piyo.reply(from, ind.wait() , id)
-            const yt = await axios.get(`https://st4rz.herokuapp.com/api/ytv2?url=${q}`)
-            await piyo.sendFileFromUrl(from , yt.data.thumb , 'piyo.jpg' , `*「 YOUTUBE MP4 」*\n\n• *Judul* : ${yt.data.title}\n\n_Silahkan tunggu file media sedang dikirim mungkin butuh beberapa menit_`, id)
-            await piyo.sendFileFromUrl(from, yt.data.result, 'piyo.mp4' , 'nih kak' , id)
-            break
+        case 'ytmp4':
+       await piyo.reply(from, ind.wait() , id)
+       try{
+        const yt = await axios.get(`https://api.zeks.xyz/api/ytmp4?url=${q}&apikey=apivinz`)
+        const { thumbnail , title , url_video , size } = yt.data.result
+        await piyo.sendFileFromUrl(from, thumbnail , 'piyo.jpg' , `*「 YOUTUBE MP4 」*\n\n• *Judul* : ${title}\n\n• *Size* : ${size}\n\nSilahkan tunggu file media sedang dikirim mungkin butuh beberapa menit_`, id)
+        await piyo.sendFileFromUrl(from, url_video , 'piyo.mp4' , 'Nih Kak' , id)
+        } catch (err) {
+                    console.error(err.message)
+                    await piyo.sendFileFromUrl(from, errorurl2, 'error.png', '💔️ Maaf, Ada Sedikit Error')
+                    piyo.sendText(from, 'Fitur Error : ' + err)
+              }
+        break
 			
 case 'igstalk':
                         if (arghh.length === 1)  return piyo.reply(from, 'Kirim perintah /igstalk @username\nContoh /igstalk duar_amjay', id)
