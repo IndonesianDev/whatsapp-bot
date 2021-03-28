@@ -824,7 +824,7 @@ case 'menubaru':
         break
 case 'menulama':            
         const updater = updatepiyobot ? 'yes' : 'no'
-        await piyo.sendText(from, menuId.textmenufree(pushname, updater))
+        await piyo.sendText(from, menuId.textmenulama(pushname, updater))
         .then(() => ((isGroupMsg) && (isGroupAdmins)) ? piyo.sendText(from, `Menu Admin Grup: *${prefix}menuadmin*`) : null)
         break
 case 'menu':
