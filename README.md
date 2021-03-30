@@ -170,6 +170,9 @@ Setelah itu pindai kode QR menggunakan WhatsApp Anda di ponsel Anda!
 | Tafsir Al-Qur'an    |      ✔️      |
 | LK21                |      ✔️      |
 | Reminder            |      ✔️      |
+| Tebak Gambar        |      ✔️      |
+| Next Kuiz           |      ✔️      |
+| Stop Kuiz           |      ✔️      |
 | Image to URL        |      ✔️      |
 | Jadwal sholat       |      ✔️      |
 | To Mp3              |      ✔️      |
