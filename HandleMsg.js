@@ -1788,7 +1788,7 @@ try{
             let stopis = kuis.indexOf(chatId)
             kuis.splice(stopis,1)
             fs.writeFileSync('./settings/kuis.json', JSON.stringify(kuis , null, 2))
-            piyo.sendFile(from, './media/pphana.jpg' , 'piyo.jpg' , 'Yah kok udahan sih :(\nNanti Main Kuis Lagi Yak' , id)
+            piyo.sendFileFromUrl(from, 'https://i.imgur.com/qkIGnR1.jpg' , 'piyo.jpg' , 'Yah kok udahan sih :(\nNanti Main Kuis Lagi Yak' , id)
             } catch (err) {
             }
             break 
