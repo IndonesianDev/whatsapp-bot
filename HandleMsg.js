@@ -98,6 +98,7 @@ const chatt = JSON.parse(fs.readFileSync('./settings/piyo.json'))
 const ngegas = JSON.parse(fs.readFileSync('./settings/ngegas.json'))
 const setting = JSON.parse(fs.readFileSync('./settings/setting.json'))
 const uang = JSON.parse(fs.readFileSync('./settings/uang.json'))
+const kuis = JSON.parse(fs.readFileSync('./settings/kuis.json'))
 const _nsfw = JSON.parse(fs.readFileSync('./settings/nsfw.json'))
 const _welcome = JSON.parse(fs.readFileSync('./settings/welcome.json'))
 const _reminder = JSON.parse(fs.readFileSync('./settings/reminder.json'))
@@ -107,6 +108,7 @@ const _premium = JSON.parse(fs.readFileSync('./settings/premium.json'))
 const _sewa = JSON.parse(fs.readFileSync('./settings/sewa.json'))
 const _biodata = JSON.parse(fs.readFileSync('./settings/biodata.json'))
 const _registered = JSON.parse(fs.readFileSync('./settings/registered.json'))
+const _tebak = JSON.parse(fs.readFileSync('./settings/tebakgambar.json'))
 ///////////////////////////////////////////////////////////////////////////////
 
 
@@ -197,14 +199,15 @@ module.exports = HandleMsg = async (piyo, message) => {
         const argus = commandd.split(' ')
         const uaOverride = process.env.UserAgent
         const q = args.join(' ')
-        const isNsfw = isGroupMsg ? _nsfw.includes(chat.id) : false
         const ar = body.trim().split(/ +/).slice(1)
         const url = args.length !== 0 ? args[0] : ''
         const isQuotedImage = quotedMsg && quotedMsg.type === 'image'
         const errorurl2 = 'https://steamuserimages-a.akamaihd.net/ugc/954087817129084207/5B7E46EE484181A676C02DFCAD48ECB1C74BC423/?imw=512&&ima=fit&impolicy=Letterbox&imcolor=%23000000&letterbox=false'
         const errorur121= 'https://i.imgur.com/VKoNMIR.png'
         const _antilink = JSON.parse(fs.readFileSync('./settings/antilink.json'))
+	const isNsfw = isGroupMsg ? _nsfw.includes(chat.id) : false
         const isWelcomeOn = isGroupMsg ? _welcome.includes(chat.id) : false
+	const isKuis = isGroupMsg ? kuis.includes(chat.id) : false
         const isImage = type === 'image'
         const reason = q ? q : 'Nothing.'
         const isQuotedVideo = quotedMsg && quotedMsg.type === 'video'
@@ -527,6 +530,19 @@ const getReminderPosition = (userId) => {
         }
     })
     return position
+}
+//////////////////////////////////////TEBAK GAMBAR/////////////////////////////////
+if (isGroupMsg){
+if (_tebak.includes(chats))
+    {
+        await piyo.reply(from, `Jawaban Benar , Kamu mendapatkan 5 Points` , id)
+        let tebak = _tebak.indexOf(chats);
+        _tebak.splice(tebak,1)
+        fs.writeFileSync('./settings/tebakgambar.json', JSON.stringify(_tebak , null, 2))
+        let kuiis = kuis.indexOf(chatId)
+        kuis.splice(kuiis,1)
+        fs.writeFileSync('./settings/kuis.json', JSON.stringify(kuis , null, 2))
+    }
 }
 //////////////////////////////////////REMINDER///////////////////////////////////////
 const isAfkOn = getAfk(sender.id)
@@ -1728,28 +1744,54 @@ case 'caklontong':
                }
                break
 
-case 'tebakgambar':
-               if (!isGroupMsg) return piyo.reply(from, 'Perintah ini hanya bisa di gunakan dalam group!', id)
-    try{
-                const resp = await axios.get('https://api.vhtear.com/tebakgambar&apikey=' + vhtearkey)
-                if (resp.data.error) return piyo.reply(from, resp.data.error, id)
-                const jwban = `➸ Jawaban : ${resp.data.result.jawaban}\n➸Poin : ${resp.data.result.poin}`
-                piyo.sendFileFromUrl(from, resp.data.result.soalImg, 'tebakgambar.jpg', '_Silahkan Jawab Maksud Dari Gambar Ini_',id)
-                piyo.sendText(from, `30 Detik Lagi...`, id)
-                await rugaapi.sleep(10000)
-                piyo.sendText(from, `20 Detik Lagi...`, id)
-                await rugaapi.sleep(10000)
-                piyo.sendText(from, `10 Detik Lagi...`, id)
-                await rugaapi.sleep(10000)
-                piyo.sendText(from, `Silahkan Taruh Jawaban...`, id)
-                await rugaapi.sleep(3000)
-               await piyo.sendText(from, jwban, id)
-                } catch (err) {
-                    console.error(err.message)
-                    await piyo.sendFileFromUrl(from, errorurl2, 'error.png', '💔️ Maaf, Soal Quiz tidak ditemukan')
-                    piyo.sendText(ownerNumber, 'Tebak Gambar Error : ' + err)
-               }
-               break
+case 'tebakgambar': //piyobot
+	   if (isKuis) return piyo.reply(from, `Kuis Sedang Berlangsung` , id)
+           if (!isGroupMsg) return piyo.reply(from, 'Perintah ini hanya bisa di gunakan dalam group!', id)
+try{
+            const resp = await axios.get('https://videfikri.com/api/tebakgambar')
+            if (resp.data.error) return piyo.reply(from, resp.data.error, id)
+            piyo.sendFileFromUrl(from, resp.data.result.soal_gbr, 'tebakgambar.jpg', '_Silahkan Jawab Maksud Dari Gambar Ini_\nHanya Satu Jawaban Untuk Satu Orang\nJawab Semua Dengan Huruf kecil\nContoh = anak maling\nDiberi waktu 30detik Untuk Menjawab Kuiz',id)
+            _tebak.push(resp.data.result.jawaban.toLowerCase())
+            fs.writeFileSync('./settings/tebakgambar.json', JSON.stringify(_tebak))
+            kuis.push(chat.id)
+            fs.writeFileSync('./settings/kuis.json', JSON.stringify(kuis))
+	    await rugaapi.sleep(5000)
+	    await piyo.sendText(from, `Jika Tidak Bisa Menjawab Soal Ini\nSilahkan /nextkuiz untuk menggantikan soal atau soal berikutnya\nDan /stopkuiz untuk memberhentikan kuiz`, id)
+            } catch (err) {
+           }
+           break
+
+case 'nextkuiz':
+	   if (!isKuis) return piyo.reply(from, 'Tidak Ada Yang Menjalankan Kuiz' , id)
+           if (!isGroupMsg) return piyo.reply(from, 'Perintah ini hanya bisa di gunakan dalam group!', id)
+try{
+            let tebakk = _tebak.indexOf(chats);
+            _tebak.splice(tebakk,1)
+            fs.writeFileSync('./settings/tebakgambar.json', JSON.stringify(_tebak , null, 2))
+            await piyo.reply(from, `Mohon Tunggu sebentar , Sedang Mengambil Kuiz` , id)
+            const respek = await axios.get('https://videfikri.com/api/tebakgambar')
+            if (respek.data.error) return piyo.reply(from, respek.data.error, id)
+            piyo.sendFileFromUrl(from, respek.data.result.soal_gbr, 'tebakgambar.jpg', '_Silahkan Jawab Maksud Dari Gambar Ini_\nHanya Satu Jawaban Untuk Satu Orang\nJawab Semua Dengan Huruf kecil\nContoh anak maling ',id)
+            _tebak.push(respek.data.result.jawaban.toLowerCase())
+            fs.writeFileSync('./settings/tebakgambar.json', JSON.stringify(_tebak))
+            } catch (err) {
+            }
+            break
+
+case 'stopkuiz':
+	    if (!isKuis) return piyo.reply(from, `Main Stop Stop Aja , Kuisnya gk ada bre\nBilang aja lu mau  liat cewe piyo kan` , id)
+            if (!isGroupMsg) return piyo.reply(from, 'Perintah ini hanya bisa di gunakan dalam group!', id)
+try{
+            let stop = _tebak.indexOf(chats);
+            _tebak.splice(stop,1)
+            fs.writeFileSync('./settings/tebakgambar.json', JSON.stringify(_tebak , null, 2))
+            let stopis = kuis.indexOf(chatId)
+            kuis.splice(stopis,1)
+            fs.writeFileSync('./settings/kuis.json', JSON.stringify(kuis , null, 2))
+            piyo.sendFile(from, './media/pphana.jpg' , 'piyo.jpg' , 'Yah kok udahan sih :(\nNanti Main Kuis Lagi Yak' , id)
+            } catch (err) {
+            }
+            break 
 
 case 'sider':
             if (!isGroupMsg) return piyo.reply(from, `Perintah ini hanya bisa di gunakan dalam group!`, id)                
@@ -2208,7 +2250,7 @@ else if (type === 'sticker' || isQuotedSticker) {
                    fs.writeFileSync(`./media/sticker/ocr.jpg`, mediaData)
                    imagetotext(`./media/sticker/ocr.jpg`)
                    .then(data => {
-                   aruga.sendText(dari, `*Read Data Text in Sticker* \n\nHasil: \n\n${data}`, id)
+                   piyo.sendText(dari, `*Read Data Text in Sticker* \n\nHasil: \n\n${data}`, id)
                    })
                    .catch(err => {
                    console.log(err)
