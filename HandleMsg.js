@@ -97,6 +97,7 @@ const simi = JSON.parse(fs.readFileSync('./settings/simi.json'))
 const chatt = JSON.parse(fs.readFileSync('./settings/piyo.json'))
 const ngegas = JSON.parse(fs.readFileSync('./settings/ngegas.json'))
 const setting = JSON.parse(fs.readFileSync('./settings/setting.json'))
+const isPorn = JSON.parse(fs.readFileSync('./settings/antiporn.json'))
 const uang = JSON.parse(fs.readFileSync('./settings/uang.json'))
 const kuis = JSON.parse(fs.readFileSync('./settings/kuis.json'))
 const _nsfw = JSON.parse(fs.readFileSync('./settings/nsfw.json'))
@@ -201,15 +202,16 @@ module.exports = HandleMsg = async (piyo, message) => {
         const q = args.join(' ')
         const ar = body.trim().split(/ +/).slice(1)
         const url = args.length !== 0 ? args[0] : ''
-        const isQuotedImage = quotedMsg && quotedMsg.type === 'image'
         const errorurl2 = 'https://steamuserimages-a.akamaihd.net/ugc/954087817129084207/5B7E46EE484181A676C02DFCAD48ECB1C74BC423/?imw=512&&ima=fit&impolicy=Letterbox&imcolor=%23000000&letterbox=false'
         const errorur121= 'https://i.imgur.com/VKoNMIR.png'
         const _antilink = JSON.parse(fs.readFileSync('./settings/antilink.json'))
 	const isNsfw = isGroupMsg ? _nsfw.includes(chat.id) : false
         const isWelcomeOn = isGroupMsg ? _welcome.includes(chat.id) : false
 	const isKuis = isGroupMsg ? kuis.includes(chat.id) : false
+	const isAntiPorn = isGroupMsg ? isPorn.includes(chat.id) : false
         const isImage = type === 'image'
         const reason = q ? q : 'Nothing.'
+        const isQuotedImage = quotedMsg && quotedMsg.type === 'image'
         const isQuotedVideo = quotedMsg && quotedMsg.type === 'video'
         const isQuotedFile  = quotedMsg && quotedMsg.type === 'file'
         const isQuotedAudio  = quotedMsg && quotedMsg.type === 'audio'
@@ -269,31 +271,32 @@ module.exports = HandleMsg = async (piyo, message) => {
 	    'ga jadi pacar zeus',
 	    'jadi jelek'
             ]
-            const kutuk = [
-                'Sapi',
-                'Batu',
-                'Babi',
-                'Anak soleh dan soleha',
-                'pohon pisang',
-                'janda',
-                'bangsat',
-                'buaya',
-                'Jangkrik',
-                'Kambbiingg',
-                'Bajing',
-                'kang seblak',
-                'kang gorengan',
-                'kang siomay',
-                'badut ancol',
-                'Tai',
-                'Kebo',
-                'Badak biar Asli',
-                'tai kotok',
-                'Bwebwek',
-                'Orang Suksesss...... tapi boong',
-                'Beban Keluarga' //tambahin  aja
-                ]
-             const estetek = [
+	
+        const kutuk = [
+            'Sapi',
+            'Batu',
+            'Babi',
+            'Anak soleh dan soleha',
+            'pohon pisang',
+            'janda',
+            'bangsat',
+            'buaya',
+            'Jangkrik',
+            'Kambbiingg',
+            'Bajing',
+            'kang seblak',
+            'kang gorengan',
+            'kang siomay',
+            'badut ancol',
+            'Tai',
+            'Kebo',
+            'Badak biar Asli',
+            'tai kotok',
+            'Bwebwek',
+            'Orang Suksesss...... tapi boong',
+            'Beban Keluarga' //tambahin  aja
+            ]
+        const estetek = [
             "https://i.ibb.co/Xk1kggV/Aesthetic-Wallpaper-for-Phone.jpg",
             "https://i.ibb.co/wBNyv8X/image.jpg",
             "https://i.ibb.co/hgcJbg7/Leaving-Facebook.jpg",
@@ -348,6 +351,7 @@ module.exports = HandleMsg = async (piyo, message) => {
         // Log
         if (isCmd && !isGroupMsg) { console.log(color('[EXEC]'), color(moment(t * 1000).format('DD/MM/YY HH:mm:ss'), 'yellow'), color(`${command} [${args.length}]`), 'from', color(pushname)) }
         if (isCmd && isGroupMsg) { console.log(color('[EXEC]'), color(moment(t * 1000).format('DD/MM/YY HH:mm:ss'), 'yellow'), color(`${command} [${args.length}]`), 'from', color(pushname), 'in', color(name || formattedTitle)) }
+	    
 // Serial Number Generator
 function GenerateRandomNumber(min,max){
     return Math.floor(Math.random() * (max - min + 1)) + min;
@@ -737,6 +741,19 @@ if (!isGroupMsg && isMedia && isImage && !isCmd)
                     await piyo.reply(from, `Error!\n${err}`, id)
                 })
         }
+// Anti-Porn Lol Human , Diusahakan apikeya beli premium atau vip
+// Thanks to Vide Frelan  / vide fikri 
+// Kalo mau yang detek sticker juga , chat saya aja
+if (isGroupMsg && isAntiPorn && !isGroupAdmins && isBotGroupAdmins) {
+    if (type === 'image') {
+    const datafacol = await decryptMedia(message)
+    const fotofacol = await uploadImages(datafacol, `fotoface.${sender.id}`)
+    const getnsfw = await axios.get(`https://lolhuman.herokuapp.com/api/nsfwcheck?apikey=${lolhuman}&img=${fotofacol}`)
+    const persen = getnsfw.data.result
+    console.log(persen)
+    if (Number(getnsfw.data.result.split('%')[0]) >= 30.00) return piyo.reply(from, `*Terdeteksi Mengirim Gambar Yang Berbau Porno*\nKeyakinan Gambar : ${persen}`, id).then(() => piyo.removeParticipant(groupId, sender.id))
+    }
+}
 // Anti-group link detector
         if (isGroupMsg && !isGroupAdmins && isBotGroupAdmins && isDetectorOn && !isOwner) {
             if (chats.match(new RegExp(/(https:\/\/chat.whatsapp.com)/gi))) {
@@ -1594,10 +1611,24 @@ case 'reminder': // by Slavyan
             }
         }
         break
-case 'antiporn':
-    if (!q) return piyo,reply(from, `Fitur Premium `, id)
-    piyo.reply(from, `Ini fitur premium, jika ingin membelinya silahkan chat\nwa.me/6281414046576` , id)
-    break
+case 'antiporn': //ini antipornnya beli dulu apikenya, cuma support gambar / kalo mau support sticker dan video bisa ke saya , wa.me/6281414046576
+     if (!isGroupMsg) return piyo.reply(from, `Fitur ini hanya bisa diaktifkan didalam grup!`, id)
+     if (!isGroupAdmins) return piyo.reply(from, 'Perintah ini hanya bisa digunakan oleh Admin Grup!', id)
+     if (!isBotGroupAdmins) return piyo.reply(from, 'Jadikan bot sebagai Admin terlebih dahulu!', id)
+     if (ar[0] == 'on') {
+        if (isAntiPorn) return piyo.reply(from, 'Anti-porn sudah pernah diaktifkan di grup ini sebelumnya!', id)
+        isPorn.push(chatId)
+        fs.writeFileSync('./settings/antiporn.json', JSON.stringify(isPorn))
+        piyo.reply(from, '*ANTI PORN*\n\nPerhatian untuk member grup\nJika ada member yang mengirimkan porn, maka otomatis akan dikick dari grup ini!\n\n*Piyobot*', id)
+        } else if (ar[0] == 'off') {
+        let inlink = isPorn.indexOf(chatId)
+        isPorn.splice(inlink, 1)
+        fs.writeFileSync('./settings/antiporn.json', JSON.stringify(isPorn))
+        piyo.reply(from, 'Anti Porn Sudah Dimatikan Di Grup Ini', id)
+            } else {
+        piyo.reply(from, `Untuk mengaktifkan antiporn gunakan\n${prefix}antiporn on \n${prefix}antiporn off `, id)
+            }
+            break
 case 'antilink':                
     if (!isGroupMsg) return await piyo.reply(from, ind.groupOnly(), id)
     if (!isGroupAdmins) return await piyo.reply(from, ind.adminOnly(), id)
