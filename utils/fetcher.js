@@ -77,7 +77,6 @@ const uploadImages = (buffData, type) => {
         const _buffData = type ? await resizeImage(buffData, false) : buffData
         fs.writeFile(filePath, _buffData, { encoding: 'base64' }, (err) => {
             if (err) return reject(err)
-            console.log('Uploading image to telegra.ph server...')
             const fileData = fs.readFileSync(filePath)
             const form = new FormData()
             form.append('file', fileData, 'tmp.' + ext)
