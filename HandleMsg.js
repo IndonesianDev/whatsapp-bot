@@ -4250,22 +4250,28 @@ case 'bcgrup':
             if (!isOwnerBot) return piyo.reply(from, 'Perintah ini hanya untuk Owner bot', id)
             const allGrouppz = await piyo.getAllGroups()
             for (let gclistt of allGrouppz) {
-	await piyo.sendText(gclistt.contact.id , `${q}`) 
+	    await piyo.sendText(gclistt.contact.id , `${q}`) 
             }
             piyo.reply(from, 'Succes Bc all group!', id)
             break
-    case 'bctext': //untuk broadcast atau promosi
-if (!isOwnerBot) return piyo.reply(from, 'Perintah ini hanya untuk Owner bot!', id)
-if (args.length == 0) return piyo.reply(from, `Untuk broadcast ke semua chat ketik:\n${prefix}bc [isi chat]`)
-let msgg = body.slice(4)
-const chatzz = await piyo.getAllChatIds()
-for (let idk of chatzz) {
-    var cvk = await piyo.getChatById(idk)
-    if (!cvk.isReadOnly) piyo.sendText(idk, `${msgg}`)
-    if (cvk.isReadOnly) piyo.sendText(idk, `${msgg}`)
-}
-piyo.reply(from, 'Broadcast Success!', id)
-break
+case 'bcimg':
+        if (!isOwnerBot) return piyo.reply(from, `Khususs Owner ` , id)
+        if (!q) return piyo.reply(from, `Hai  Kak ${pushname} untuk menggunakan fitur bcimg, Silahkan kirim gambar/reply gambarnya , ketik /bcimg teksnya`, id)
+        if (isMedia && type === 'image' || isQuotedImage) {
+        await piyo.reply(from, ind.wait(), id)
+        const encryptMedia = isQuotedImage ? quotedMsg : message
+        const mediaData = await decryptMedia(encryptMedia, uaOverride)
+        fs.writeFileSync(`./media/images/bc.jpg`, mediaData)
+        const chaim = await piyo.getAllChatIds()
+        for (let grp of chaim) {
+            var cukk = await piyo.getChatById(grp)
+            if (!cukk.isReadOnly) piyo.sendFile(grp, `./media/images/bc.jpg` ,'piyo.jg' ,`[PIYOBOT BROADCAST]\n\n${q}` , id)
+            if (cukk.isReadOnly) piyo.sendFile(grp, `./media/images/bc.jpg` ,'piyo.jpg' ,`[PIYOBOT BROADCAST]\n\n${q}` , id)
+        }
+        await piyo.reply(from, 'Broadcast Success!', id)
+        fs.unlinkSync(`./media/images/bc.jpg`)
+        }
+        break
 case 'ban':
             if (!isOwnerBot) return piyo.reply(from, 'Perintah ini hanya untuk Owner bot!', id)
             if (args.length == 0) return piyo.reply(from, `Untuk banned seseorang agar tidak bisa menggunakan commands\n\nCaranya ketik: \n${prefix}ban add 628xx --untuk mengaktifkan\n${prefix}ban del 628xx --untuk nonaktifkan\n\ncara cepat ban banyak digrup ketik:\n${prefix}ban @tag @tag @tag`, id)
