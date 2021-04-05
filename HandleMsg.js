@@ -355,8 +355,12 @@ module.exports = HandleMsg = async (piyo, message) => {
 	const isKode = premiumcode.includes(q)
         const AntiStickerSpam = antisticker.includes(chatId)
         // Log
-        if (isCmd && !isGroupMsg) { console.log(color('[EXEC]'), color(moment(t * 1000).format('DD/MM/YY HH:mm:ss'), 'yellow'), color(`${command} [${args.length}]`), 'from', color(pushname)) }
-        if (isCmd && isGroupMsg) { console.log(color('[EXEC]'), color(moment(t * 1000).format('DD/MM/YY HH:mm:ss'), 'yellow'), color(`${command} [${args.length}]`), 'from', color(pushname), 'in', color(name || formattedTitle)) }
+        if (isCmd && !isGroupMsg && !isBanned) console.log(color('[CMD]'), color(time, 'yellow'), color(`${command} [${args.length}]`), 'from', color(pushname))
+        if (isCmd && isGroupMsg && !isBanned) console.log(color('[CMD]'), color(time, 'yellow'), color(`${command} [${args.length}]`), 'from', color(pushname), 'in', color(name || formattedTitle))
+
+        // IsBanned
+        if (isCmd && isBanned && !isGroupMsg) return console.log(color('[BAN]', 'red'), color(time, 'yellow'), color(`${command} [${args.length}]`), 'from', color(pushname))
+        if (isCmd && isBanned && isGroupMsg) return console.log(color('[BAN]', 'red'), color(time, 'yellow'), color(`${command} [${args.length}]`), 'from', color(pushname), 'in', color(name || formattedTitle))
 	    
 // Serial Number Generator
 function GenerateRandomNumber(min,max){
@@ -4359,22 +4363,32 @@ case 'bcimg':
 case 'ban':
             if (!isOwnerBot) return piyo.reply(from, 'Perintah ini hanya untuk Owner bot!', id)
             if (args.length == 0) return piyo.reply(from, `Untuk banned seseorang agar tidak bisa menggunakan commands\n\nCaranya ketik: \n${prefix}ban add 628xx --untuk mengaktifkan\n${prefix}ban del 628xx --untuk nonaktifkan\n\ncara cepat ban banyak digrup ketik:\n${prefix}ban @tag @tag @tag`, id)
-            if (args[0] == 'add') {
-                banned.push(args[1]+'@c.us')
-                fs.writeFileSync('./settings/banned.json', JSON.stringify(banned))
-                piyo.reply(from, 'Mampus gua ban lu anjg!')
-            } else
-            if (args[0] == 'del') {
-                let xnxx = banned.indexOf(args[1]+'@c.us')
-                banned.splice(xnxx,1)
-                fs.writeFileSync('./settings/banned.json', JSON.stringify(banned))
-                piyo.reply(from, 'Nih gua udh unbaned!')
-            } else {
-             for (let i = 0; i < mentionedJidList.length; i++) {
-                banned.push(mentionedJidList[i])
-                fs.writeFileSync('./settings/banned.json', JSON.stringify(banned))
-                piyo.reply(from, 'Mampus gua ban lu anjg!', id)
+            if (ar[0] === 'add') {
+                if (mentionedJidList.length !== 0) {
+                    for (let benet of mentionedJidList) {
+                        if (benet === botNumber) return await piyo.reply(from, ind.wrongFormat(), id)
+                        banned.push(benet)
+                        fs.writeFileSync('./settings/banned.json', JSON.stringify(banned))
+                    }
+                    await piyo.reply(from, 'Mampus gua ban lu anjg!', id)
+                } else {
+                    banned.push(args[1] + '@c.us')
+                    fs.writeFileSync('./settings/banned.json', JSON.stringify(banned))
+                    await piyo.reply(from, 'Mampus gua ban lu anjg!', id)
                 }
+            } else if (ar[0] === 'del') {
+                if (mentionedJidList.length !== 0) {
+                    if (mentionedJidList[0] === botNumber) return await piyo.reply(from, ind.wrongFormat(), id)
+                    banned.splice(mentionedJidList[0], 1)
+                    fs.writeFileSync('./settings/banned.json', JSON.stringify(banned))
+                    await piyo.reply(from, 'Nih gua udh unbaned!', id)
+                } else{
+                    banned.splice(args[1] + '@c.us', 1)
+                    fs.writeFileSync('./settings/banned.json', JSON.stringify(banned))
+                    await piyo.reply(from, 'Nih gua udh unbaned!', id)
+                }
+            } else {
+                await piyo.reply(from, ind.wrongFormat(), id)
             }
             break
          // AUTO STIKER
