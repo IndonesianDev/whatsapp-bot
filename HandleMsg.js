@@ -84,7 +84,8 @@ const {
 const { 
     msgFilter, 
     color, 
-    processTime, 
+    processTime,
+    createcode,
     isUrl
 } = require('./utils')
 
@@ -100,6 +101,10 @@ const setting = JSON.parse(fs.readFileSync('./settings/setting.json'))
 const isPorn = JSON.parse(fs.readFileSync('./settings/antiporn.json'))
 const uang = JSON.parse(fs.readFileSync('./settings/uang.json'))
 const kuis = JSON.parse(fs.readFileSync('./settings/kuis.json'))
+const code15 = JSON.parse(fs.readFileSync('./settings/code15.json'))
+const code30 = JSON.parse(fs.readFileSync('./settings/code30.json'))
+const code60 = JSON.parse(fs.readFileSync('./settings/code60.json'))
+const premiumcode = JSON.parse(fs.readFileSync('./settings/premiumcode.json'))
 const _nsfw = JSON.parse(fs.readFileSync('./settings/nsfw.json'))
 const _welcome = JSON.parse(fs.readFileSync('./settings/welcome.json'))
 const _reminder = JSON.parse(fs.readFileSync('./settings/reminder.json'))
@@ -347,6 +352,7 @@ module.exports = HandleMsg = async (piyo, message) => {
         const isDetectorOn = _antilink.includes(chat.id)
         const isInviteLink = await piyo.inviteInfo(body)
 	const isNgegas = ngegas.includes(chatId)
+	const isKode = premiumcode.includes(q)
         const AntiStickerSpam = antisticker.includes(chatId)
         // Log
         if (isCmd && !isGroupMsg) { console.log(color('[EXEC]'), color(moment(t * 1000).format('DD/MM/YY HH:mm:ss'), 'yellow'), color(`${command} [${args.length}]`), 'from', color(pushname)) }
@@ -547,6 +553,48 @@ if (_tebak.includes(chats))
         kuis.splice(kuiis,1)
         fs.writeFileSync('./settings/kuis.json', JSON.stringify(kuis , null, 2))
     }
+}
+//////////////////////////////////////PREMIUM CODE///////////////////////////////////
+if (code15.includes(q))
+{
+    let hari = '15'
+    await piyo.reply(from, `Sukses Memasukan Premium Code 15 Hari` , id)
+    premium.addPremiumUser(sender.id, '15d', _premium)
+    await piyo.reply(from, `*「 PREMIUM 15 HARI 」*\n\n➸ *NAMA*: ${pushname}\n➸ *ID*: ${sender.id}\n➸ *Expired*: ${ms(toMs(hari)).days} day(s) ${ms(toMs(hari)).hours} hour(s) ${ms(toMs(hari)).minutes} minute(s)`, id)
+    let codee = code15.indexOf(q);
+    code15.splice(codee,1)
+    fs.writeFileSync('./settings/code15.json', JSON.stringify(code15 , null, 2))
+    let prem = premiumcode.indexOf(q);
+    premiumcode.splice(prem,1)
+    fs.writeFileSync('./settings/premiumcode.json', JSON.stringify(premiumcode , null, 2))
+}
+
+if (code30.includes(q))
+{
+    let hari = '30d'
+    await piyo.reply(from, `Sukses Memasukan Premium Code 30 Hari / 1BULAN` , id)
+    premium.addPremiumUser(sender.id, '30d', _premium)
+    await piyo.reply(from, `*「 PREMIUM 30 HARI 」*\n\n➸ *NAMA*: ${pushname}\n➸ *ID*: ${sender.id}\n➸ *Expired*: ${ms(toMs(hari)).days} day(s) ${ms(toMs(hari)).hours} hour(s) ${ms(toMs(hari)).minutes} minute(s)`, id)
+    let codeee = code30.indexOf(q);
+    code30.splice(codeee,1)
+    fs.writeFileSync('./settings/code30.json', JSON.stringify(code30 , null, 2))
+    let prem = premiumcode.indexOf(q);
+    premiumcode.splice(prem,1)
+    fs.writeFileSync('./settings/premiumcode.json', JSON.stringify(premiumcode , null, 2))
+}
+
+if (code60.includes(q))
+{
+    let hari = '60d'
+    await piyo.reply(from, `Sukses Memasukan Premium Code 60 Hari / 2BULAN` , id)
+    premium.addPremiumUser(sender.id, '60d', _premium)
+    await piyo.reply(from, `*「 PREMIUM 60 HARI 」*\n\n➸ *NAMA*: ${pushname}\n➸ *ID*: ${sender.id}\n➸ *Expired*: ${ms(toMs(hari)).days} day(s) ${ms(toMs(hari)).hours} hour(s) ${ms(toMs(hari)).minutes} minute(s)`, id)
+    let codeeee = code60.indexOf(q);
+    code60.splice(codeeee,1)
+    fs.writeFileSync('./settings/code60.json', JSON.stringify(code60 , null, 2))
+    let prem = premiumcode.indexOf(q);
+    premiumcode.splice(prem,1)
+    fs.writeFileSync('./settings/premiumcode.json', JSON.stringify(premiumcode , null, 2))
 }
 //////////////////////////////////////REMINDER///////////////////////////////////////
 const isAfkOn = getAfk(sender.id)
@@ -2015,6 +2063,9 @@ case 'setprofile':
             }
             break
 ///////////////////////////////////////////////////MENU SENDER//////////////////////////////////////////////////
+case 'premiumcode':
+     if (!isKode) return await piyo.reply(from, `Kode Tersebut Tidak Ada / Sudah Di Gunakan` , id)
+     break
 case 'sewacheck':
      if (!isSewa) return await piyo.reply(from, `Kamu Belom Sewa Bot`, id)
      const cekExpp = ms(sewa.getSewaExpired(groupId, _sewa) - Date.now())
@@ -4179,6 +4230,39 @@ case 'buylimit':
                 }
             break
 //////////////////////////////////////////////////////Owner Bot////////////////////////////////////////////////////
+case 'getcode': { 
+            if (!isOwnerBot) return await piyo.reply(from, ind.ownerOnly(), id)
+	    if (!q) return await piyo.reply(from, `Silahkan ketik /getcode harinya\nContoh: /getcode 15` , id)
+            if (ar[0] === '15') {
+            await piyo.reply(from, ind.wait() , id)
+            const codeuser = createcode(15)
+            code15.push(codeuser)
+            fs.writeFileSync('./settings/code15.json', JSON.stringify(code15))
+            await piyo.sendText(ownerNumber, `*「 PREMIUM 15 HARI 」*\n\n➸ *CODE :* ${codeuser}\n➸ *CARA PAKAI*\n➸ Ketik /premiumcode codenya` , id)
+            premiumcode.push(codeuser)
+            fs.writeFileSync('./settings/premiumcode.json', JSON.stringify(premiumcode))
+            } else {
+            if (ar[0] === '30'){
+            await piyo.reply(from, ind.wait() , id)
+            const codeuserr = createcode(15)
+            code30.push(codeuserr)
+            fs.writeFileSync('./settings/code30.json', JSON.stringify(code30))
+            await piyo.sendText(ownerNumber, `*「 PREMIUM 30 HARI 」*\n\n➸ *CODE :* ${codeuserr}\n➸ *CARA PAKAI*\n➸ Ketik /premiumcode codenya` , id)
+            premiumcode.push(codeuserr)
+            fs.writeFileSync('./settings/premiumcode.json', JSON.stringify(premiumcode))
+              } 
+            }  
+            if (ar[0] === '60'){
+            await piyo.reply(from, ind.wait() , id)
+            const codeuserrr = createcode(15)
+            code60.push(codeuserrr)
+            fs.writeFileSync('./settings/code60.json', JSON.stringify(code60))
+            await piyo.sendText(ownerNumber, `*「 PREMIUM 60 HARI 」*\n\n➸ *CODE :* ${codeuserrr}\n➸ *CARA PAKAI*\n➸ Ketik /premiumcode codenya` , id)
+            premiumcode.push(codeuserrr)
+            fs.writeFileSync('./settings/premiumcode.json', JSON.stringify(premiumcode))
+            }
+        }
+            break
 case 'sewa':
                     if (!isOwnerBot) return await piyo.reply(from, ind.ownerOnly(), id)
                     if (ar.length == 0) return piyo.reply(from , `Ketik /sewa add/del harinya\nContoh: /sewa add 30d` , id)
