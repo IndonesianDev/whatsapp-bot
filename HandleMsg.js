@@ -4344,7 +4344,7 @@ case 'bcgrup':
             break
 case 'bcimg':
         if (!isOwnerBot) return piyo.reply(from, `Khususs Owner ` , id)
-        if (!q) return piyo.reply(from, `Hai  Kak ${pushname} untuk menggunakan fitur bcimg, Silahkan kirim gambar/reply gambarnya , ketik /bcimg teksnya`, id)
+        if (!q) return piyo.reply(from, `Hai  Kak ${pushname} untuk menggunakan fitur bcimg, Silahkan kirim gambar/reply gambarnya , ketik /bcimg teksna`, id)
         if (isMedia && type === 'image' || isQuotedImage) {
         await piyo.reply(from, ind.wait(), id)
         const encryptMedia = isQuotedImage ? quotedMsg : message
@@ -4353,9 +4353,8 @@ case 'bcimg':
         const chaim = await piyo.getAllChatIds()
         for (let grp of chaim) {
             var cukk = await piyo.getChatById(grp)
-            if (!cukk.isReadOnly) piyo.sendFile(grp, `./media/images/bc.jpg` ,'piyo.jpg' ,`[PIYOBOT BROADCAST]\n\n${q}` ,'' , id)
-            if (cukk.isReadOnly) piyo.sendFile(grp, `./media/images/bc.jpg` ,'piyo.jpg' ,`[PIYOBOT BROADCAST]\n\n${q}` , '' , id)
-        }
+            if (!cukk.isReadOnly) piyo.sendFile(grp, `./media/images/bc.jpg` ,'' ,`[PIYOBOT BROADCAST]\n\n${q}` ,'' , id)
+            if (cukk.isReadOnly) piyo.sendFile(grp, `./media/images/bc.jpg` ,'' ,`[PIYOBOT BROADCAST]\n\n${q}` , '' , id)
         }
         await piyo.reply(from, 'Broadcast Success!', id)
         fs.unlinkSync(`./media/images/bc.jpg`)
