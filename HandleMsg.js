@@ -4353,8 +4353,8 @@ case 'bcimg':
         const chaim = await piyo.getAllChatIds()
         for (let grp of chaim) {
             var cukk = await piyo.getChatById(grp)
-            if (!cukk.isReadOnly) piyo.sendFile(grp, `./media/images/bc.jpg` ,'' ,`[PIYOBOT BROADCAST]\n\n${q}` ,'' , id)
-            if (cukk.isReadOnly) piyo.sendFile(grp, `./media/images/bc.jpg` ,'' ,`[PIYOBOT BROADCAST]\n\n${q}` , '' , id)
+            if (!cukk.isReadOnly) piyo.sendFile(grp, `./media/images/bc.jpg` ,'piyo.jpg' ,`[PIYOBOT BROADCAST]\n\n${q}` ,'' , id)
+            if (cukk.isReadOnly) piyo.sendFile(grp, `./media/images/bc.jpg` ,'piyo.jpg' ,`[PIYOBOT BROADCAST]\n\n${q}` , '' , id)
         }
         await piyo.reply(from, 'Broadcast Success!', id)
         fs.unlinkSync(`./media/images/bc.jpg`)
