@@ -3093,15 +3093,9 @@ case 'facebook':
 case 'fb':
                 if (!isUrl(url) && !url.includes('facebook.com')) return await piyo.reply(from, `URL bukan dari facebook!`, id)
                 await piyo.reply(from, ind.wait(), id)
-                rugaapi.facebook(q)
-                .then(async ({ result }) => {
-                            await piyo.sendFileFromUrl(from, result.result.url, 'videofb.mp4', '', id)
-                            console.log(from, 'Success sending Facebook video!')
-                    })
-                    .catch(async (err) => {
-                        console.error(err)
-                        await piyo.reply(from, result.result.pesan, id)
-                    })
+                const fb = await axios.get(`https://videfikri.com/api/fbdl/?urlfb=${q}`)
+		const fbb = fb.data.result
+		await piyo.sendFileFromUrl(from, fbb.url , 'fb.mp4' , `${fbb.title}` , '' , id)
             break
 case 'instagram': //RECODE BY ALVIO ADJI JANUAR
 case 'ig':
