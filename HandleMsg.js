@@ -945,6 +945,25 @@ case 'bal':
              piyo.reply(from, `Halo ${pushname}, Kamu Memiliki Uang Sejumlah Rp. ${kantong}`, id)
              break
 ///////////////////////////////////////////////////MENU STICKER////////////////////////////////////////////////////
+case 'stickermeme':               
+            if ((isMedia || isQuotedImage) && args.length >= 2) {
+                const top = arg.split('|')[0]
+                const bottom = arg.split('|')[1]
+                const encryptMedia = isQuotedImage ? quotedMsg : message
+                const mediaData = await decryptMedia(encryptMedia, uaOverride)
+                const getUrl = await uploadImages(mediaData, false)
+                const ImageBase64 = await meme.custom(getUrl, top, bottom)
+                piyo.sendImageAsSticker(from, ImageBase64, '', null, true)
+                    .then(() => {
+                        piyo.reply(from, 'Ini makasih!',id)
+                    })
+                    .catch(() => {
+                        piyo.reply(from, 'Ada yang error!')
+                    })
+            } else {
+                await piyo.reply(from, `Tidak ada gambar! Silahkan kirim gambar dengan caption ${prefix}meme <teks_atas> | <teks_bawah>\ncontoh: ${prefix}meme teks atas | teks bawah`, id)
+            }
+            break
 case 'addsticker':
             if (!q) return piyo.reply(from, `Hai  Kak ${pushname} untuk menggunakan fitur save stiker ketik */addsticker* _Nama nya_`, id)
             if (quotedMsg) {
@@ -2315,6 +2334,40 @@ if (!isBotGroupAdmins) return piyo.reply(from, 'Gagal, silahkan tambahkan bot se
     piyo.reply(from, 'Success kick all member', id)
 break
 //////////////////////////////////////////////MENU IMAGE/////////////////////////////////////////////////////////
+case 'faceanime':
+              if (isMedia && type === 'image' || isQuotedImage){
+                  const encryptMedias = isQuotedImage ? quotedMsg : message
+                  const dataface = await decryptMedia(encryptMedias, uaOverride)
+                  const fotoface = await uploadImages(dataface, `fotoface.${sender.id}`)
+                  await piyo.reply(from, ind.wait() , id)
+                  const fotopio = await axios.get(`https://nekobot.xyz/api/imagegen?type=animeface&image=${fotoface}`)
+                  piyo.sendFileFromUrl(from, fotopio.data.message, 'Face.jpg', '', id)
+              }
+              break
+case 'wasted':
+                if (isMedia && type === 'image' || isQuotedImage) {
+                    const encryptMediaWt = isQuotedImage ? quotedMsg : message
+                    const dataPotoWt = await decryptMedia(encryptMediaWt, uaOverride)
+                    const fotoWtNya = await uploadImages(dataPotoWt, `fotoProfilWt.${sender.id}`)
+                    await piyo.reply(from, ind.wait(), id)
+                    await piyo.sendFileFromUrl(from, `https://some-random-api.ml/canvas/wasted?avatar=${fotoWtNya}`, 'Wasted.jpg', 'Ini..., sticker nya lagi di kirim', id).then(() => piyo.sendStickerfromUrl(from, `https://some-random-api.ml/canvas/wasted?avatar=${fotoWtNya}`))
+                    console.log('Success sending Wasted image!')
+                } else {
+                    await piyo.reply(from, ind.wrongFormat(), id)
+                }
+            break
+case 'gayy':
+               if (isMedia && type ==='image' || isQuotedImage){
+                   const encryptMediaa = isQuotedImage ? quotedMsg : message
+                   const datapotogay = await decryptMedia(encryptMediaa, uaOverride)
+                   const fotogay = await uploadImages(datapotogay, `fotogay.${sender.id}`)
+                   await piyo.reply(from, ind.wait() ,id)
+                   await piyo.sendFileFromUrl(from, `https://some-random-api.ml/canvas/gay?avatar=${fotogay}`, 'gay.jpg' , 'nih kontol' , id)
+                   console.log('succes mengirim gay!')
+               } else {
+                   await piyo.reply(from, `wrong format , kirim gambar dengan caption /gay`, id)
+               }
+             break
 case 'totext': 
 if (isMedia && type === 'image' || isQuotedImage) {
 	        await piyo.reply(from, ind.wait(), id)
@@ -2548,21 +2601,16 @@ case 'meme':
             }
             break
 case 'quotemaker':               
-            const qmaker = body.trim().split('|')
-            if (qmaker.length >= 3) {
-                const quotes = qmaker[1]
-                const author = qmaker[2]
-                const theme = qmaker[3]
+if (!q) return piyo.reply(from, 'Ketik /quotemaker quotesnya\nExample: /quotemaker piyoganteng' , id)
+			{
                 piyo.reply(from, 'Proses kak..', id)
                 try {
-                    const hasilqmaker = await images.quote(quotes, author, theme)
+                    const hasilqmaker = await axios.get(`https://lolhuman.herokuapp.com/api/quotemaker?apikey=${lolhuman}&text=${q}`)
                     piyo.sendFileFromUrl(from, `${hasilqmaker}`, '', 'Ini kak..', id)
                 } catch {
                     piyo.reply('Yahh proses gagal, kakak isinya sudah benar belum?..', id)
                 }
-            } else {
-                piyo.reply(from, `Pemakaian ${prefix}quotemaker |isi quote|author|theme\n\ncontoh: ${prefix}quotemaker |aku sayang kamu|-piyo|random\n\nuntuk theme nya pakai random ya kak..`)
-            }
+            } 
             break
 case 'loli':
                 await piyo.reply(from, ind.wait(), id)
@@ -3555,11 +3603,9 @@ case 'lirik':
         })
     break
     case 'darkjokes':
-            const darkjokesx = await rugaapi.darkjokes()
-            await piyo.sendFileFromUrl(from, darkjokesx, 'memeindo.jpeg', 'Nih.....', id)
-            .catch(() => {
-                piyo.reply(from, 'Hayolohhh, ada yang error!!', id)
-            })
+    const darkjokex = await axios.get('https://api.zeks.xyz/api/darkjokes?apikey=apivinz')
+    const darkjok = darkjokex.result
+    await piyo.sendFileFromUrl(from, darkjok , 'darkjokes.jpg' , '' , id)
             break
     case 'chika'://piyobot
             if (!isPremium) return piyo.reply(from, `Maaf, ini adalah fitur premium, untuk menggunakan fitur ini silahkan beli premium ke owner \nUntuk Harga\n\n 10k Perbulan\n5k Perpanjang`, id)
@@ -3772,7 +3818,6 @@ case 'register':
                 await piyo.reply(from, ind.registered(), id)
             break
 case 'apakah' :
-case 'apakah' :
     fetch('https://raw.githubusercontent.com/AlvioAdjiJanuar/ana/main/test.txt')
     .then(res => res.text())
     .then(body => {
@@ -3785,6 +3830,12 @@ case 'apakah' :
         piyo.sendPtt(from , randomansw , id)
     })
 			break
+case 'kapankah':
+                const when = args.join(' ')
+                const ans = kapan[Math.floor(Math.random() * (kapan.length))]
+                if (!when) piyo.reply(from, `⚠️ Format salah! Ketik *${prefix}kapankah* pertanyaanya`)
+                await piyo.sendTextWithMentions(from, `Pertanyaan Dari @${sender.id}\nKapan *${when}* \n\nJawaban: ${ans}`)
+                break
 
         // Other Command
 case 'lk21':
@@ -4461,12 +4512,12 @@ await piyo.reply(from, `Maaf ${pushname}, Command *${arghh[0]}* Tidak Terdaftar 
            const piyoget = await axios.get(`https://lolhuman.herokuapp.com/api/simi?apikey=${lolhuman}&text=${encodeURIComponent(message.body)}`)           
            await piyo.reply(from, `Piyobot Menjawab: ${piyoget.data.result}`, id)
             }
-			// Simi-simi function
+	// Simi-simi function
             if ((!isCmd && isGroupMsg && chatId && isSimi) && message.type === 'chat') {
-                axios.get(`https://piyoz.herokuapp.com/api/simisimi?kata=${encodeURIComponent(message.body)}&apikey=${apiSimi}`)
+                axios.get(`https://videfikri.com/api/simsimi/?teks=${encodeURIComponent(message.body)}`)
                 .then((res) => {
-                    if (res.data.status == 403) return piyo.sendText(ownerNumber, `${res.data.result}\n\n${res.data.pesan}`)
-                    piyo.reply(from, `Simi berkata: ${res.data.result}`, id)
+                    if (res.data.result.status == 404) return piyo.sendText(ownerNumber, `${res.data.result.status}\n\n${res.data.result.pesan}`)
+                    piyo.reply(from, `Simi berkata: ${res.data.result.jawaban}`, id)
                 })
                 .catch((err) => {
                     piyo.reply(from, `${err}`, id)
