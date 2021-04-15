@@ -4279,6 +4279,19 @@ case 'buylimit':
                 }
             break
 //////////////////////////////////////////////////////Owner Bot////////////////////////////////////////////////////
+case 'eval':
+case 'ev':
+            if (!isOwnerBot) return await piyo.reply(from, ind.ownerOnly(), id)
+            if (!q) return await piyo.reply(from, ind.wrongFormat(), id)
+                try {
+                    let evaled = await eval(q)
+                    if (typeof evaled !== 'string') evaled = require('util').inspect(evaled)
+                    await piyo.sendText(from, evaled)
+                } catch (err) {
+                    console.error(err)
+                    await piyo.reply(from, 'Error!', id)
+                }
+            break
 case 'getcode': { 
             if (!isOwnerBot) return await piyo.reply(from, ind.ownerOnly(), id)
 	    if (!q) return await piyo.reply(from, `Silahkan ketik /getcode harinya\nContoh: /getcode 15` , id)
