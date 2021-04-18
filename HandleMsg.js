@@ -222,6 +222,7 @@ module.exports = HandleMsg = async (piyo, message) => {
         const isQuotedAudio  = quotedMsg && quotedMsg.type === 'audio'
         const isQuotedGif = quotedMsg && quotedMsg.type === 'gif'
 	const isQuotedSticker = quotedMsg && quotedMsg.type === 'sticker'
+	const stickermsg = message.type === 'sticker'
         const cecan = [
             {
             lahwoi : "Pacar piyo yang ke 1",
