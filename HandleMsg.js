@@ -3171,33 +3171,36 @@ case 'ig':
             }
             await piyo.sendSeen(from)
             break
-case 'tiktoknowm': //THANKS TO VIDEFIKRI ATAU VIDEFRELAN
-                        await piyo.reply(from, ind.wait(), id)
-                        const tp = await axios.get(`http://videfikri.com/api/tiktok/?url=${q}`)
-			await piyo.sendFileFromUrl(from, `${tp.data.result.thumb}`, 'image.jpg', `Video Ditemukan...\n\nPiyobot\n\n*_Sabar, Piyo lagi ngirim Videonya_*`, id)
-                            const respons = await fetch(tp.data.result.link);
-                            const bufferf = await respons.buffer(); 
-                           await fs.writeFile(`./media/play2.mp4`, bufferf)
-                          await piyo.sendFile(from,'./media/play2.mp4', 'piyo.mp4', 'nih kak',id)
-			  await fs.unlinksync('./media/play2.mp4')
-			break
-case 'tiktok': 
-                if (!isUrl(url) && !url.includes('tiktok.com')) return await piyo.reply(from, ind.wrongFormat(), id)
+case 'tiktoknowm':
                 await piyo.reply(from, ind.wait(), id)
-                rugaapi.tik(url)
-                    .then(async ({ result })=> {
-                        await piyo.sendFileFromUrl(from, result.video, 'tiktok.mp4', '', id)
-                    })
-                    .catch(async (err) => {
-                        console.log(err)
-                        await piyo.reply(from, 'Error!', id)
-                    })
-            break
+                const tp = await axios.get(`https://api.zeks.xyz/api/tiktok?url=${q}&apikey=apivinz`)
+                if (tp.data.status == false) return piyo.reply(from, tp.data.message , id)
+		await piyo.sendFileFromUrl(from, `http://piyobot.cf/download.png`, 'image.jpg', `Video Ditemukan...\n\nPiyobot\n\n*_Sabar, Piyo lagi ngirim Videonya_*`, id)
+                const respons = await fetch(tp.data.no_watermark);
+                const bufferf = await respons.buffer(); 
+                await fs.writeFile(`./media/video/tiktok2.mp4`, bufferf)
+                await piyo.sendFile(from,'./media/video/tiktok2.mp4', 'piyo.mp4', 'nih kak',id)
+		await fs.unlinksync('./media/video/tiktok2.mp4')
+		break
+			
+case 'tiktok':
+                await piyo.reply(from, ind.wait() , id)
+                const tiktod = await axios.get(`https://api.zeks.xyz/api/tiktok?url=${q}&apikey=apivinz`)
+                const {  like_count , author , no_watermark , music_name , status } = tiktod.data
+                if (tiktod.data.status == false) return piyo.reply(from, tiktod.data.message)
+                const tikpon = await fetch(no_watermark);
+                const baperpon = await tikpon.buffer();
+                await fs.writeFile(`./media/video/tiktok.mp4` , baperpon)
+                await piyo.sendFile(from, `./media/video/tiktok.mp4` , 'piyo.mp4',  `*Tiktok Downloader*\n*Username*: ${author}\n*Judul*: ${tiktod.data.title}\n*Jumlah Suka*: ${like_count}\n*Nama Music*: ${music_name}` , id)
+                await fs.unlinkSync(`./media/video/tiktok.mp4`)
+                break
+			
 case 'tiktokmusic':
-            if (!q) return piyo.reply(from, `Silahkan ketik /tiktokmusic link tiktoknya` , id)
-            await piyo.reply(from, ind.wait() , id)
-            await piyo.sendFileFromUrl(from, `https://lolhuman.herokuapp.com/api/tiktokmusic?apikey=${lolhuman}&url=${q}` , 'tiktok.mp3' , '' , id)
-            break
+                if (!q) return piyo.reply(from, `Silahkan ketik /tiktokmusic link tiktoknya` , id)
+                await piyo.reply(from, ind.wait() , id)
+                await piyo.sendFileFromUrl(from, `https://lolhuman.herokuapp.com/api/tiktokmusic?apikey=${lolhuman}&url=${q}` , 'tiktok.mp3' , '' , id)
+                break
+			
 case 'igstory':
                 if (isLimit(serial)) return piyo.reply(from, `Maaf ${pushname}, Kuota Limit Kamu Sudah Habis, Ketik ${prefix}limit Untuk Mengecek Kuota Limit Kamu`, id)
                 if (!q) return piyo.reply(from, ind.wrongFormat(), id)
@@ -3243,21 +3246,22 @@ case 'joox':
 case 'play': //PAKE API VIDE FIKRI BIAR ADA SIZE LAGUNYA
             if (!q) return piyo.reply(from , `Silahkan  ketik /play judulnya` , id)
             await piyo.reply(from,'Wait..',id)
-	    const getvids = await axios.get(`https://videfikri.com/api/ytplay/?query=${q}`)
+	    const getvids = await axios.get(`https://videfikri.com/api/ytplayv2/?query=${q}`)
 	    if (getvids.data.result.status == 400) return piyo.reply(from, getvids.data.result.pesan , id)
-            if (Number(getvids.data.result.size.split('MB')[0]) >= 10.00) return piyo.reply(from, 'Maaf durasi music sudah melebihi batas maksimal 10 MB!', id)
+            if (Number(getvids.data.result.size.split('MB')[0]) >= 15.00) return piyo.reply(from, 'Maaf durasi music sudah melebihi batas maksimal 15 MB!', id)
 	    await piyo.sendFileFromUrl(from, getvids.data.result.thumbnail, 'gambar.jpg', `Title: ${getvids.data.result.title}\n\n───────────⚪───────────\n(っ◔◡◔)っ   ◄◄⠀▐▐ ⠀►► ───○ 🔊\n───────────⚪───────────\n➥Size: ${getvids.data.result.size}\n➥Type: Mp3\n➥Duration: ${getvids.data.result.duration}\n\n*Mohon Tunggu Bot Akan Mengirim Audio!*`, id)
             const responno = await fetch(getvids.data.result.url)
             const bufferj = await responno.buffer()
             await fs.writeFile('./media/play.mp3', bufferj)
-            await piyo.sendFile(from, './media/play.mp3', 'nih kak', '',  id)			
+            await piyo.sendFile(from, './media/play.mp3', 'nih kak', '',  id)
+            await fs.unlinkSync('./media/play.mp3')			
             break
 			
 case 'playv':
             if (!q) return piyo.reply(from , `Silahkan  ketik /playv judulnya` , id)
             if (!isPremium) return piyo.reply(from, `Maaf, ini adalah fitur premium, untuk menggunakan fitur ini silahkan beli premium ke owner \nUntuk Harga\n\n10k Perbulan\n5k Perpanjang`, id)
             piyo.reply(from, 'Wait.. Sedang Di Proses!',id)
-	    const getvid = await axios.get(`https://api.zeks.xyz/api/ytplaymp4?q=${q}&apikey=benbenz`)
+	    const getvid = await axios.get(`https://api.zeks.xyz/api/ytplaymp4?q=${q}&apikey=apivinz`)
 	    if (getvid.data.status == false) return piyo.reply(from, `Website sedang error` , id)
 	    const { title , url_video , size , thumbnail , source } = getvid.data.result
 	    if (Number(size.split(' MB')[0]) > 15.00) return piyo.sendFileFromUrl(from, thumbnail , 'thumb.jpg', `「 PLAY MP4 」\n\n• Judul : ${title}\n• Filesize : ${size}\n\n_Maaf, Durasi video melebihi 15 MB. Silahkan download video melalui link dibawah.\n${url_video}`, id)
@@ -3268,13 +3272,14 @@ case 'playv':
 case 'playvn':
 	   if (!q) return piyo.reply(from , `Silahkan  ketik /playvn judulnya` , id)
            await piyo.reply(from, `Wait` , id)
-           const plan = await axios.get(`https://videfikri.com/api/ytplay/?query=${q}`)
+           const plan = await axios.get(`https://videfikri.com/api/ytplayv2/?query=${q}`)
 	   if (Number(plan.data.result.size.split('MB')[0]) >= 10.00) return piyo.reply(from, 'Maaf durasi music sudah melebihi batas maksimal 10 MB!', id)
            await piyo.sendFileFromUrl(from, plan.data.result.thumbnail, 'gambar.jpg' , `Title: ${plan.data.result.title}\n\nTunggu Sebentar Bot Sedang Mengirim Voice Not ` , id)
            const plon = await fetch(plan.data.result.url)
            const buplon = await plon.buffer()
            await fs.writeFile('./media/playvn.mp3', buplon)
            await piyo.sendPtt(from, './media/playvn.mp3' , id)
+	   await fs.unlinkSync('./media/playvn.mp3')
            break
 			
 case 'ytmp3':
@@ -3306,7 +3311,8 @@ case 'ytmp3':
         break
 			
 case 'igstalk':
-                        if (arghh.length === 1)  return piyo.reply(from, 'Kirim perintah /igstalk @username\nContoh /igstalk duar_amjay', id)
+                        await piyo.reply(from, ind.wait() , id)
+                        if (arghh.length === 1)  return piyo.reply(from, 'Kirim perintah /igstalk username\nContoh /igstalk duar_amjay', id)
                         argz = body.trim().split(' ')
                         console.log(...argz[1])
                         var slicedArgs = Array.prototype.slice.call(argz, 1);
@@ -3314,22 +3320,20 @@ case 'igstalk':
                         const istalk = await slicedArgs.join(' ')
                         console.log(istalk)
                         try {
-                        const istalk2 = await axios.get('https://api.vhtear.com/igprofile?query=' + istalk + '&apikey=' + vhtearkey)
-                        const { biography, follower, follow, post_count, full_name, username, picture, is_private } = istalk2.data.result
+                        const istalk2 = await axios.get(`https://api.zeks.xyz/api/igstalk?apikey=apivinz&username=${q}`)
+                        const { bio , follower, following, fullname, username, profile_pic, is_bussiness , is_private } = istalk2.data
                         const istalk3 = `User Ditemukan!
-            ➸ Username: ${username}
-            ➸ Nama: ${full_name}
-            ➸ Bio: ${biography}
-            ➸ Mengikuti: ${follow}
-            ➸ Pengikut: ${follower}
-            ➸ Jumlah Postingan: ${post_count}`
-            
-                        const pictk = await bent("buffer")(picture)
+➸ Username: ${username}
+➸ Nama: ${fullname}
+➸ Bio: ${bio}
+➸ Mengikuti: ${following}
+➸ Pengikut: ${follower}`
+                        const pictk = await bent("buffer")(profile_pic)
                         const base64 = `data:image/jpg;base64,${pictk.toString("base64")}`
                         piyo.sendImage(from, base64, username, istalk3)
                         } catch (err) {
                          console.error(err.message)
-                         await piyo.sendFileFromUrl(self, errorurl2, 'error.png', '💔️ Maaf, User tidak ditemukan')
+                         await piyo.sendFileFromUrl(from, errorurl2, 'error.png', '💔️ Maaf, User tidak ditemukan')
                          piyo.sendText(ownerNumber, 'Igstalk Error : ' + err)
                        }
                       break
@@ -3344,27 +3348,24 @@ case 'tiktokstalk':
                         const tstalk = await slicedArgs.join(' ')
                         console.log(tstalk)
                         try {
-                        const tstalk2 = await axios.get('https://api.vhtear.com/tiktokprofile?query=' + tstalk + '&apikey=' + vhtearkey)
-                        const { username, bio, follow, follower, title, like_count, video_post, description, picture, url_account } = tstalk2.data.result
+                        const tstalk2 = await axios.get(`https://lolhuman.herokuapp.com/api/stalktiktok/${q}?apikey=a73ed493460a451b707e7ff3`)
+                        const { username, bio, followings, follower, nickname, likes, video, user_picture } = tstalk2.data.result
                         const tiktod = `*User Ditemukan!*
-            ➸ *Username:* ${username}
-            ➸ *Judul:* ${title}
-            ➸ *Bio:* ${bio}
-            ➸ *Mengikuti:* ${follow}
-            ➸ *Pengikut:* ${follower}
-            ➸ *Jumlah Like*: ${like_count}
-            ➸ *Jumlah Postingan:* ${video_post}
-            ➸ *Deskripsi:* ${description}
-            ➸ *Link:* ${url_account}`
-            
-                        const pictk = await bent("buffer")(picture)
+➸ *Username:* ${username}
+➸ *Nickname:* ${nickname}
+➸ *Bio:* ${bio}
+➸ *Mengikuti:* ${followings}
+➸ *Pengikut:* ${follower}
+➸ *Jumlah Like*: ${likes}
+➸ *Jumlah Postingan:* ${video}`
+                        const pictk = await bent("buffer")(user_picture)
                         const base64 = `data:image/jpg;base64,${pictk.toString("base64")}`
-                        piyo.sendImage(from, base64, title, tiktod)
+                        piyo.sendImage(from, base64,  'piyo.jpg' , tiktod)
                         await limitAdd(serial)
                         } catch (err) {
                          console.error(err.message)
                          await piyo.sendFileFromUrl(from, errorurl2, 'error.png', '💔️ Maaf, User tidak ditemukan')
-                         piyo.sendText(ownerNumber, 'Error Tiktokstalk : '+ err)
+                         piyo.sendText(from, 'Error Tiktokstalk : '+ err)
                        }
                       break
 //////////////////////////////////////////FUN MENU/////////////////////////////////////////////////////////////////
