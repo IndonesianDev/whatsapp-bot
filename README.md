@@ -3,11 +3,9 @@
 
 # Piyobot
 
-> Piyobot Adalah Bot Whatsapp Yang Sangat Kontol
-> Yang Punya udh pensi wwkw, silahkan chat wa saya jika ingin berkontribusi ke akun github ini
+> Piyobot Adalah Bot Whatsapp Pintar
+> Nomor Pembuat Bot
 > wa.me/6281414046576
-> BACA README GOBLOK BIAR LU TAU BELI APIKEYNYA DIMANA
->
 
 <h3 align="center">Made with ❤️ by</h3>
 <p align="center">
