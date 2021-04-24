@@ -3,8 +3,8 @@
 
 # Piyobot
 
-> Piyobot Adalah Bot Whatsapp Pintar
-> Nomor Pembuat Bot ||
+> Piyobot Adalah Bot Whatsapp Pintar Dengan Fitur Yang Berguna Untuk Grup Maupun Pribadi Message ||
+> Nomor Pembuat Bot
 > wa.me/6281414046576
 
 <h3 align="center">Made with ❤️ by</h3>
