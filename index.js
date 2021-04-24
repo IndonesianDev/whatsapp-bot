@@ -83,7 +83,7 @@ const start = (piyo = new Client()) => {
             if (event.action === 'add' && event.who !== botNumbers && isWelcome) {
                 const pic = await piyo.getProfilePicFromServer(event.who)
                 if (pic === undefined) {
-                    var pp = 'https://i.imgur.com/EZT0ypx.png'
+                    var pp = 'http://piyobot.cf/pphana.jpg'
                 } else {
                     var pp = pic
                 }
