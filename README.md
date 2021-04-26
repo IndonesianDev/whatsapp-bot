@@ -38,7 +38,7 @@
 </p>
 
 <h4 align="center">
-  <a href="https://chat.whatsapp.com/KSG5C4SGlT2IpRtFm05owk">Join WA BOT DEV Indonesia!</a>
+  <a href="https://api.whatsapp.com/send/?phone=79680841988&text=/menu">Nomor Piyo Bot</a>
 </h4>
 </div>
 
