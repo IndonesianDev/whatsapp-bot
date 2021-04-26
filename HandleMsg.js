@@ -3243,7 +3243,7 @@ case 'joox':
                                     await piyo.reply(from, 'Error!', id)
                                 })
                         break
-case 'play': //PAKE API VIDE FIKRI BIAR ADA SIZE LAGUNYA
+case 'play': 
             if (!q) return piyo.reply(from , `Silahkan  ketik /play judulnya` , id)
             await piyo.reply(from,'Wait..',id)
 	    const getvids = await axios.get(`https://api.zeks.xyz/api/ytplaymp3?apikey=apivinz&q=${q}`)
