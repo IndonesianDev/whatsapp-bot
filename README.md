@@ -169,13 +169,13 @@ Setelah itu pindai kode QR menggunakan WhatsApp Anda di ponsel Anda!
 | LK21                |      ✔️      |
 | Reminder            |      ✔️      |
 | Tebak Gambar        |      ✔️      |
+| Truth Of Dare       |      ✔️      |
 | Next Kuiz           |      ✔️      |
 | Stop Kuiz           |      ✔️      |
 | Image to URL        |      ✔️      |
 | Jadwal sholat       |      ✔️      |
 | To Mp3              |      ✔️      |
 | Bass                |      ✔️      |
-| FishEye             |      ✔️      |
 | Line sticker latest |      ✔️      |
 | Quiziz Hack         |      ✔️      |
 | Image To Text       |      ✔️      |
@@ -230,6 +230,9 @@ Setelah itu pindai kode QR menggunakan WhatsApp Anda di ponsel Anda!
 | Ban                |      ✔️      |
 | Add premium user   |      ✔️      |
 | Add Sewa group     |      ✔️      |
+| Halal & Haram      |      ✔️      |
+| Setpictmenu        |      ✔️      |
+
 
 |    Moderation    | Availability |
 | :--------------: | :----------: |
