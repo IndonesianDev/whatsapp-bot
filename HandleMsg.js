@@ -2797,14 +2797,12 @@ case 'infofetish':
                         await piyo.reply(from, 'Error!', id)
                     })
             break
-                case 'nulishd':                
-            if (args.length == 0) return piyo.reply(from, `Membuat bot menulis teks yang dikirim menjadi gambar\nPemakaian: ${prefix}nulis [teks]\n\ncontoh: ${prefix}nulis i love you 3000`, id)
-            const nulisp = await rugaapi.tulis(q)
-            await piyo.sendImage(from, `${nulisp}`, '', 'Nih ...', id)
-            .catch(() => {
-                piyo.reply(from, 'Ada yang Error!', id)
-            })
-            break
+             case 'nulishd':                
+                if (!q) return await piyo.reply(from, `Ketik /nulishd teksnya` , id)
+                await piyo.reply(from, ind.wait() , id)
+                console.log('Creating nulis')
+                await piyo.sendFileFromUrl(from, `https://api.zeks.xyz/api/nulis?text=${q}&apikey=apivinz`, 'error.jpg' , 'Kalo filenya berbentuk dokumen berarti eror' , id)
+                break
 case 'nuliskanan': {
                         //if (!isPremium) return piyo.reply(from, 'Maaf, ini adalah fitur premium, untuk menggunakan fitur ini silahkan donasi, Kirim #donasi untuk melihat info donasi', id)
                         if (!args.length >= 1) return piyo.reply(from, 'Kirim /nuliskanan teks', id) 
