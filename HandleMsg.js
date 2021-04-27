@@ -188,7 +188,7 @@ module.exports = HandleMsg = async (piyo, message) => {
         const isBotGroupAdmins = groupAdmins.includes(botNumber) || false
         const { ind } = require('./message/text/lang/')
         const isAdmin = adminNumber.includes(sender.id)
-	    const isPremium = premium.checkPremiumUser(sender.id, _premium)
+	const isPremium = premium.checkPremiumUser(sender.id, _premium)
         const gg = cc.includes(sender.id)
         const hh = bb.includes(sender.id)
 	const isSewa = sewa.checkSewa(chat.id , _sewa)
