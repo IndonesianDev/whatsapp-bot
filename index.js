@@ -6,6 +6,7 @@ const { ind, eng } = require('./message/text/lang/')
 const HandleMsg = require('./HandleMsg')
 const fs = require('fs-extra')
 const fss = require('fs')
+const { Console } = require('console')
 /**
  * Uncache if there is file change
  * @param {string} module Module name or path
@@ -75,10 +76,16 @@ const start = (piyo = new Client()) => {
     })
 
 // Listen to group's event
-    piyo.onGlobalParticipantsChanged(async (event) => {
+piyo.onGlobalParticipantsChanged(async (event) => {
         const welcome = JSON.parse(fs.readFileSync('./settings/welcome.json'))
+        const gcChat = await piyo.getChatById(event.chat)
+        const pcChat = await piyo.getContact(event.who)
+        let { pushname, verifiedName, formattedName } = pcChat
+        pushname = pushname || verifiedName || formattedName
         const isWelcome = welcome.includes(event.chat)
         const botNumbers = await piyo.getHostNumber() + '@c.us'
+        const { name } = gcChat
+        const sts = await piyo.getStatus(event.who)
         try {
             if (event.action === 'add' && event.who !== botNumbers && isWelcome) {
                 const pic = await piyo.getProfilePicFromServer(event.who)
@@ -87,8 +94,9 @@ const start = (piyo = new Client()) => {
                 } else {
                     var pp = pic
                 }
-                await piyo.sendFileFromUrl(event.chat, pp, 'profile.jpg', '')
-                await piyo.sendTextWithMentions(event.chat, ind.welcome(event))
+                await piyo.sendFileFromUrl(event.chat, pp, 'profile.jpg', `Selamat datang di grup *${name}*\n*Nama :* ${pushname}\n*Bio :* ${sts.status}\n\nSemoga betah terus di grup kami ya~`)
+            } else if (event.action === 'remove' && event.who !== botNumbers && isWelcome){
+                await piyo.sendTextWithMentions(event.chat, `@${event.who.replace('@c.us', '')} Yah Dia Keluar` )
             }
         } catch (err) {
             console.error(err)
