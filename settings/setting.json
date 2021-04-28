@@ -5,6 +5,7 @@
     "groupLimit": 50,
     "medialimitCount": "5",
     "prefix": "/",
+    "halal": true,
     "vhtearkey": "Your Apikey In Here",
     "apikeyz": "Your Apikey In Here",
     "lolhuman": "Your Apikey In Here"
