@@ -109,7 +109,6 @@ const bb = JSON.parse(fs.readFileSync('./settings/truth.json'))
 const cc = JSON.parse(fs.readFileSync('./settings/dare.json'))
 const _nsfw = JSON.parse(fs.readFileSync('./settings/nsfw.json'))
 const _welcome = JSON.parse(fs.readFileSync('./settings/welcome.json'))
-const _list = JSON.parse(fs.readFileSync('./settings/listgrup.json'))
 const _reminder = JSON.parse(fs.readFileSync('./settings/reminder.json'))
 const _autostiker = JSON.parse(fs.readFileSync('./settings/autostiker.json'))
 const _afk = JSON.parse(fs.readFileSync('./settings/afk.json'))
@@ -1703,8 +1702,6 @@ case 'welcome':
                     _welcome.push(chat.id , `teks: "kntl"` )
                     fs.writeFileSync('./settings/welcome.json', JSON.stringify(_welcome))
                     await piyo.reply(from, ind.welcomeOn(), id)
-                    _list.push(formattedTitle)
-                    fs.writeFileSync('./settings/listgrup.json', JSON.stringify(_list))
                 } else if (ar[0] === 'disable') {
                     _welcome.splice(chat.id, 1)
                     fs.writeFileSync('./settings/welcome.json', JSON.stringify(_welcome))
@@ -3353,7 +3350,7 @@ case 'joox':
                                     await piyo.reply(from, 'Error!', id)
                                 })
                         break
-case 'play': //PAKE API VIDE FIKRI BIAR ADA SIZE LAGUNYA
+case 'play': 
             if (!q) return piyo.reply(from , `Silahkan  ketik /play judulnya` , id)
             await piyo.reply(from,'Wait..',id)
 	    const getvids = await axios.get(`https://api.zeks.xyz/api/ytplaymp3?apikey=apivinz&q=${q}`)
