@@ -1868,7 +1868,7 @@ case 'welcome':
                     if (isWelcomeOn) return await piyo.reply(from, ind.welcomeOnAlready(), id)
                     _welcome.push(chat.id)
                     fs.writeFileSync('./settings/welcome.json', JSON.stringify(_welcome))
-                    await piyo.reply(from, ind.welcomeOn(), id
+                    await piyo.reply(from, ind.welcomeOn(), id)
                 } else if (ar[0] === 'disable') {
                     _welcome.splice(chat.id, 1)
                     fs.writeFileSync('./settings/welcome.json', JSON.stringify(_welcome))
