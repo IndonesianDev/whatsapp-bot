@@ -114,8 +114,7 @@ const premiumcode = JSON.parse(fs.readFileSync('./settings/premiumcode.json'))
 const bb = JSON.parse(fs.readFileSync('./settings/truth.json'))
 const cc = JSON.parse(fs.readFileSync('./settings/dare.json'))
 const _nsfw = JSON.parse(fs.readFileSync('./settings/nsfw.json'))
-const _welcome = JSON.parse(fs.readFileSync('./settings/welcome.json'))
-const _list = JSON.parse(fs.readFileSync('./settings/listgrup.json'))
+const _welcome = JSON.parse(fs.readFileSync('./settings/welcome.json')
 const _reminder = JSON.parse(fs.readFileSync('./settings/reminder.json'))
 const _autostiker = JSON.parse(fs.readFileSync('./settings/autostiker.json'))
 const _afk = JSON.parse(fs.readFileSync('./settings/afk.json'))
@@ -1867,11 +1866,9 @@ case 'welcome':
                 if (!isGroupAdmins) return await piyo.reply(from, ind.adminOnly(), id)
                 if (ar[0] === 'enable') {
                     if (isWelcomeOn) return await piyo.reply(from, ind.welcomeOnAlready(), id)
-                    _welcome.push(chat.id , `teks: "kntl"` )
+                    _welcome.push(chat.id)
                     fs.writeFileSync('./settings/welcome.json', JSON.stringify(_welcome))
-                    await piyo.reply(from, ind.welcomeOn(), id)
-                    _list.push(formattedTitle)
-                    fs.writeFileSync('./settings/listgrup.json', JSON.stringify(_list))
+                    await piyo.reply(from, ind.welcomeOn(), id
                 } else if (ar[0] === 'disable') {
                     _welcome.splice(chat.id, 1)
                     fs.writeFileSync('./settings/welcome.json', JSON.stringify(_welcome))
