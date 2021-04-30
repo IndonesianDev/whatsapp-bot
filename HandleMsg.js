@@ -16,6 +16,7 @@ const feature = require('./lib/poll');
 const ffmpeg = require('fluent-ffmpeg')
 const util = require('util')
 const quiziz = require('quizizz.js')
+const canvas = require('canvacord')
 const hackq = new quiziz.QuizizzClient();
 const { Readable, Writable } = require('stream')
 const db_group = new FileSync(appRoot+'/lib/data/group.json')
@@ -27,6 +28,7 @@ const bent = require('bent')
 const Math_js = require('mathjs')
 const fs = require('fs-extra')
 const errorImg = 'https://i.imgur.com/VKoNMIR.png'
+const errorImgg = 'https://i.ibb.co/jRCpLfn/user.png'
 db.defaults({ group: []}).write()
 var tanggal  = moment.tz('Asia/Jakarta').format('YYYY-MM-DD')
 
@@ -78,6 +80,7 @@ const {
     ptlcewek,
     kbbi,
     rugapoi,
+    point,
     rugaapi
 } = require('./lib')
 
@@ -101,6 +104,9 @@ const setting = JSON.parse(fs.readFileSync('./settings/setting.json'))
 const isPorn = JSON.parse(fs.readFileSync('./settings/antiporn.json'))
 const uang = JSON.parse(fs.readFileSync('./settings/uang.json'))
 const kuis = JSON.parse(fs.readFileSync('./settings/kuis.json'))
+const kuismtk = JSON.parse(fs.readFileSync('./settings/kuismtk.json'))
+const kuismtkk = JSON.parse(fs.readFileSync('./settings/kuismtkk.json'))
+const _point = JSON.parse(fs.readFileSync('./settings/point.json'))
 const code15 = JSON.parse(fs.readFileSync('./settings/code15.json'))
 const code30 = JSON.parse(fs.readFileSync('./settings/code30.json'))
 const code60 = JSON.parse(fs.readFileSync('./settings/code60.json'))
@@ -109,6 +115,7 @@ const bb = JSON.parse(fs.readFileSync('./settings/truth.json'))
 const cc = JSON.parse(fs.readFileSync('./settings/dare.json'))
 const _nsfw = JSON.parse(fs.readFileSync('./settings/nsfw.json'))
 const _welcome = JSON.parse(fs.readFileSync('./settings/welcome.json'))
+const _list = JSON.parse(fs.readFileSync('./settings/listgrup.json'))
 const _reminder = JSON.parse(fs.readFileSync('./settings/reminder.json'))
 const _autostiker = JSON.parse(fs.readFileSync('./settings/autostiker.json'))
 const _afk = JSON.parse(fs.readFileSync('./settings/afk.json'))
@@ -122,6 +129,13 @@ const _tebak = JSON.parse(fs.readFileSync('./settings/tebakgambar.json'))
 
 /////////////////////////////////LET SYSTEM////////////////////////////////////
 let dbcot = JSON.parse(fs.readFileSync('./settings/bacot.json'))
+let mtt = JSON.parse(fs.readFileSync('./settings/mtk.json'))
+let mtkeasy = JSON.parse(fs.readFileSync('./settings/mtkeasy.json'))
+let mtkmedium = JSON.parse(fs.readFileSync('./settings/mtkmedium.json'))
+let mtkhard = JSON.parse(fs.readFileSync('./settings/mtkhard.json'))
+let easy = JSON.parse(fs.readFileSync('./settings/easy.json'))
+let medium = JSON.parse(fs.readFileSync('./settings/medium.json'))
+let hard = JSON.parse(fs.readFileSync('./settings/hard.json'))
 let updatepiyobot = JSON.parse(fs.readFileSync('./settings/update.json'))
 let adminNumber = JSON.parse(fs.readFileSync('./settings/admin.json'))
 let limit = JSON.parse(fs.readFileSync('./settings/limit.json'))
@@ -187,7 +201,7 @@ module.exports = HandleMsg = async (piyo, message) => {
         const isBotGroupAdmins = groupAdmins.includes(botNumber) || false
         const { ind } = require('./message/text/lang/')
         const isAdmin = adminNumber.includes(sender.id)
-	const isPremium = premium.checkPremiumUser(sender.id, _premium)
+	    const isPremium = premium.checkPremiumUser(sender.id, _premium)
         const gg = cc.includes(sender.id)
         const hh = bb.includes(sender.id)
 	const isSewa = sewa.checkSewa(chat.id , _sewa)
@@ -215,10 +229,12 @@ module.exports = HandleMsg = async (piyo, message) => {
         const errorurl2 = 'https://steamuserimages-a.akamaihd.net/ugc/954087817129084207/5B7E46EE484181A676C02DFCAD48ECB1C74BC423/?imw=512&&ima=fit&impolicy=Letterbox&imcolor=%23000000&letterbox=false'
         const errorur121= 'https://i.imgur.com/VKoNMIR.png'
         const _antilink = JSON.parse(fs.readFileSync('./settings/antilink.json'))
-	const isNsfw = isGroupMsg ? _nsfw.includes(chat.id) : false
+	    const isNsfw = isGroupMsg ? _nsfw.includes(chat.id) : false
         const isWelcomeOn = isGroupMsg ? _welcome.includes(chat.id) : false
-	const isKuis = isGroupMsg ? kuis.includes(chat.id) : false
-	const isAntiPorn = isGroupMsg ? isPorn.includes(chat.id) : false
+	    const isKuis = isGroupMsg ? kuis.includes(chat.id) : false
+        const isMtk = isGroupMsg ? kuismtk.includes(chat.id) : false
+        const isMtkk = isGroupMsg ? kuismtkk.includes(chat.id) : false
+	    const isAntiPorn = isGroupMsg ? isPorn.includes(chat.id) : false
         const isImage = type === 'image'
         const reason = q ? q : 'Nothing.'
         const isQuotedImage = quotedMsg && quotedMsg.type === 'image'
@@ -349,6 +365,50 @@ module.exports = HandleMsg = async (piyo, message) => {
             '10%',
             '5%'
             ]
+    /// [LEVELING]
+    const levelRole = point.getLevelingLevel(sender.id, _point)
+        var role = 'Copper V'
+        if (levelRole >= 5) {
+            role = 'Copper IV'
+        } else if (levelRole >= 10) {
+            role = 'Copper III'
+        } else if (levelRole >= 15) {
+            role = 'Copper II'
+        } else if (levelRole >= 20) {
+            role = 'Copper I'
+        } else if (levelRole >= 25) {
+            role = 'Silver V'
+        } else if (levelRole >= 30) {
+            role = 'Silver IV'
+        } else if (levelRole >= 35) {
+            role = 'Silver III'
+        } else if (levelRole >= 40) {
+            role = 'Silver II'
+        } else if (levelRole >= 45) {
+            role = 'Silver I'
+        } else if (levelRole >= 50) {
+            role = 'Gold V'
+        } else if (levelRole >= 55) {
+            role = 'Gold IV'
+        } else if (levelRole >= 60) {
+            role = 'Gold III'
+        } else if (levelRole >= 65) {
+            role = 'Gold II'
+        } else if (levelRole >= 70) {
+            role = 'Gold I'
+        } else if (levelRole >= 75) {
+            role = 'Platinum V'
+        } else if (levelRole >= 80) {
+            role = 'Platinum IV'
+        } else if (levelRole >= 85) {
+            role = 'Platinum III'
+        } else if (levelRole >= 90) {
+            role = 'Platinum II'
+        } else if (levelRole >= 95) {
+            role = 'Platinum I'
+        } else if (levelRole > 100) {
+            role = 'Exterminator'
+        }
         const nomormutualan = ['Isi nomor yang ada di registered']
 	// [IDENTIFY]
 	const isOwnerBot = ownerNumber.includes(pengirim)
@@ -374,7 +434,7 @@ function GenerateRandomNumber(min,max){
 }
 // Generates a random alphanumberic character
 function GenerateRandomChar() {
-    var chars = "1234567890ABCDEFGIJKLMNOPQRSTUVWXYZ";
+    var chars = "1234567890";
     var randomNumber = GenerateRandomNumber(0,chars.length - 1);
     return chars[randomNumber];
 }
@@ -617,11 +677,119 @@ if (_tebak.includes(chats))
         await piyo.reply(from, `Jawaban Benar , Kamu mendapatkan 5 Points` , id)
         let tebak = _tebak.indexOf(chats);
         _tebak.splice(tebak,1)
+        point.addCooldown(sender.id)
+        point.addLevelingPoint(sender.id, 5 , _point)
         fs.writeFileSync('./settings/tebakgambar.json', JSON.stringify(_tebak , null, 2))
         let kuiis = kuis.indexOf(chatId)
         kuis.splice(kuiis,1)
         fs.writeFileSync('./settings/kuis.json', JSON.stringify(kuis , null, 2))
     }
+}
+///////////////////////////////////////KUIZ MTK//////////////////////////////////////
+if (isGroupMsg){
+if (easy.includes(chats))
+{
+    await piyo.reply(from, `Jawaban Benar, Selamat Anda Mendapatkan 5 Points\nMau Lanjut ? Silahkan Ketik Next` , id)
+    await clearTimeout(30000)
+    point.addCooldown(sender.id)
+    point.addLevelingPoint(sender.id, 5 , _point)
+    let tebakeasy = easy.indexOf(chats);
+    easy.splice(tebakeasy , 1)
+    fs.writeFileSync('./settings/easy.json', JSON.stringify(easy, null , 2))
+    let kues = kuismtk.indexOf(chatId)
+    kuismtk.splice(kues,1)
+    fs.writeFileSync('./settings/kuismtk.json', JSON.stringify(kuismtk , null, 2))
+}
+
+if (medium.includes(chats))
+{
+    await piyo.reply(from, `Jawaban Benar, Selamat Anda Mendapatkan 5 Points\nMau Lanjut ? Silahkan Ketik Next` , id)
+    point.addCooldown(sender.id)
+    point.addLevelingPoint(sender.id, 5 , _point)
+    let tebakmedium = medium.indexOf(chats);
+    medium.splice(tebakmedium , 1)
+    fs.writeFileSync('./settings/medium.json', JSON.stringify(medium, null , 2))
+    let kues = kuismtk.indexOf(chatId)
+    kuismtk.splice(kues,1)
+    fs.writeFileSync('./settings/kuismtk.json', JSON.stringify(kuismtk , null, 2))
+}
+if (hard.includes(chats))
+{
+    await piyo.reply(from, `Jawaban Benar, Selamat Anda Mendapatkan 5 Points\nMau Lanjut ? Silahkan Ketik Next` , id) 
+    point.addCooldown(sender.id)
+    point.addLevelingPoint(sender.id, 5 , _point)
+    let tebakhard = hard.indexOf(chats);
+    hard.splice(tebakhard , 1)
+    fs.writeFileSync('./settings/hard.json'  , JSON.stringify(hard , null , 2))
+    let kues = kuismtk.indexOf(chatId)
+    kuismtk.splice(kues,1)
+    fs.writeFileSync('./settings/kuismtk.json', JSON.stringify(kuismtk , null, 2))
+}
+}
+if (chats == 'Next'){
+    if (!isGroupMsg) return piyo.reply(from, 'Perintah ini hanya bisa di gunakan dalam group!', id)
+    await piyo.reply(from, ind.wait() , id)
+    await piyo.reply(from, `Silahkan Pilih Level Kuiz\n*Easy*\n*Medium*\n*Hard*` , id)
+    kuismtkk.push(chat.id)
+    fs.writeFileSync('./settings/kuismtkk.json' , JSON.stringify(kuismtkk))
+}
+if (isGroupMsg){
+if (chats == 'Easy'){
+    if (!isMtkk) return
+    if (isMtk) return piyo.reply(from, `Kuis Mtk Sedang Berlangsung` , id)
+    const kuil = mtkeasy[Math.floor(Math.random() * (mtkeasy.length))];
+    const kuil2 = mtkeasy[Math.floor(Math.random() * (mtkeasy.length))];
+    const nova = ['+','-']
+    const noval = nova[Math.floor(Math.random() * (nova.length))]
+    await piyo.reply(from, `Hasil Dari : \n${kuil} ${noval} ${kuil2} adalah` , id)
+    kuismtk.push(chat.id)
+    fs.writeFileSync('./settings/kuismtk.json' , JSON.stringify(kuismtk))
+    if (typeof Math_js.evaluate(`${kuil} ${noval} ${kuil2}`) !== "number"){
+        await piyo.reply(from, ind.notNum(`${kuil}`) , id)
+    } else {
+        easy.push(`${Math_js.evaluate(`${kuil}${noval}${kuil2}`)}`)
+        fs.writeFileSync('./settings/easy.json' , JSON.stringify(easy))
+    }
+    let kuos = kuismtkk.indexOf(chatId)
+    kuismtkk.splice(kuos,1)
+    fs.writeFileSync('./settings/kuismtkk.json', JSON.stringify(kuismtkk , null , 2))
+}
+if (chats == 'Medium'){
+    if (!isMtkk) return
+    if (isMtk) return piyo.reply(from, `Kuis Mtk Sedang Berlangsung` , id) 
+    const kuli = mtkmedium[Math.floor(Math.random() * (mtkmedium.length))]
+    const kuli2 = mtkmedium[Math.floor(Math.random() * (mtkmedium.length))]
+    const mety = ['+','*']
+    const meti = mety[Math.floor(Math.random() * (mety.length))]
+    await piyo.reply(from, `Hasil Dari : \n${kuli} ${meti.replace('*','x')} ${kuli2} adalah` , id)
+    if (typeof Math_js.evaluate(`${kuli} ${meti} ${kuli2}`) !== "number"){
+        await piyo.reply(from, ind.notNum(`${kuli}`), id)
+    } else {
+        medium.push(`${Math_js.evaluate(`${kuli}${meti}${kuli2}`)}`)
+        fs.writeFileSync('./settings/medium.json' , JSON.stringify(medium))
+    }
+    let kuos = kuismtkk.indexOf(chatId)
+    kuismtkk.splice(kuos,1)
+    fs.writeFileSync('./settings/kuismtkk.json', JSON.stringify(kuismtkk , null , 2))
+}
+if (chats == 'Hard'){
+    if (!isMtkk) return
+    if (isMtk) return piyo.reply(from, `Kuis Mtk Sedang Berlangsung` , id) 
+    const kull = mtkhard[Math.floor(Math.random() * (mtkhard.length))]
+    const kull2 = mtkhard[Math.floor(Math.random() * (mtkhard.length))]
+    const udin = ['+','*']
+    const dinu = udin[Math.floor(Math.random() * (udin.length))]
+    await piyo.reply(from , `Hasil Dari : \n${kull} ${dinu.replace('*','x')} ${kull2} adalah` , id)
+    if (typeof Math_js.evaluate(`${kull}${dinu}${kull2}`) !== "number"){
+        await piyo.reply(from, ind.notNum(`${kull}`) , id)
+    } else {
+        hard.push(`${Math_js.evaluate(`${kull}${dinu}${kull2}`)}`)
+        fs.writeFileSync('./settings/hard.json' , JSON.stringify(hard))
+    }
+    let kuos = kuismtkk.indexOf(chatId)
+    kuismtkk.splice(kuos,1)
+    fs.writeFileSync('./settings/kuismtkk.json', JSON.stringify(kuismtkk , null , 2))
+}
 }
 //////////////////////////////////////PREMIUM CODE///////////////////////////////////
 if (code15.includes(q))
@@ -1702,6 +1870,8 @@ case 'welcome':
                     _welcome.push(chat.id , `teks: "kntl"` )
                     fs.writeFileSync('./settings/welcome.json', JSON.stringify(_welcome))
                     await piyo.reply(from, ind.welcomeOn(), id)
+                    _list.push(formattedTitle)
+                    fs.writeFileSync('./settings/listgrup.json', JSON.stringify(_list))
                 } else if (ar[0] === 'disable') {
                     _welcome.splice(chat.id, 1)
                     fs.writeFileSync('./settings/welcome.json', JSON.stringify(_welcome))
@@ -1928,12 +2098,11 @@ try{
             fs.writeFileSync('./settings/tebakgambar.json', JSON.stringify(_tebak))
             kuis.push(chat.id)
             fs.writeFileSync('./settings/kuis.json', JSON.stringify(kuis))
-	    await rugaapi.sleep(5000)
-	    await piyo.sendText(from, `Jika Tidak Bisa Menjawab Soal Ini\nSilahkan /nextkuiz untuk menggantikan soal atau soal berikutnya\nDan /stopkuiz untuk memberhentikan kuiz`, id)
+	        await rugaapi.sleep(5000)
+	        await piyo.sendText(from, `Jika Tidak Bisa Menjawab Soal Ini\nSilahkan /nextkuiz untuk menggantikan soal atau soal berikutnya\nDan /stopkuiz untuk memberhentikan kuiz`, id)
             } catch (err) {
            }
            break
-
 case 'nextkuiz':
 	   if (!isKuis) return piyo.reply(from, 'Tidak Ada Yang Menjalankan Kuiz' , id)
            if (!isGroupMsg) return piyo.reply(from, 'Perintah ini hanya bisa di gunakan dalam group!', id)
@@ -2184,6 +2353,96 @@ case 'setprofile':
             }
             break
 ///////////////////////////////////////////////////MENU SENDER//////////////////////////////////////////////////
+case 'leaderboard':
+                if (!isGroupMsg) return await piyo.reply(from. ind.groupOnly(), id)
+                const resp = _point
+                _point.sort((a, b) => (a.point < b.point) ? 1 : -1)
+                let leaderboard = '*── 「 LEADERBOARDS 」 ──*\n\n'
+                try {
+                    for (let i = 0; i < 10; i++) {
+                        var roles = 'Copper V'
+                        if (resp[i].level >= 5) {
+                            roles = 'Copper IV'
+                        } else if (resp[i].level >= 10) {
+                            roles = 'Copper III'
+                        } else if (resp[i].level >= 15) {
+                            roles = 'Copper II'
+                        } else if (resp[i].level >= 20) {
+                            roles = 'Copper I'
+                        } else if (resp[i].level >= 25) {
+                            roles = 'Silver V'
+                        } else if (resp[i].level >= 30) {
+                            roles = 'Silver IV'
+                        } else if (resp[i].level >= 35) {
+                            roles = 'Silver III'
+                        } else if (resp[i].level >= 40) {
+                            roles = 'Silver II'
+                        } else if (resp[i].level >= 45) {
+                            roles = 'Silver I'
+                        } else if (resp[i].level >= 50) {
+                            roles = 'Gold V'
+                        } else if (resp[i].level >= 55) {
+                            roles = 'Gold IV'
+                        } else if (resp[i].level >= 60) {
+                            roles = 'Gold III'
+                        } else if (resp[i].level >= 65) {
+                            roles = 'Gold II'
+                        } else if (resp[i].level >= 70) {
+                            roles = 'Gold I'
+                        } else if (resp[i].level >= 75) {
+                            roles = 'Platinum V'
+                        } else if (resp[i].level >= 80) {
+                            roles = 'Platinum IV'
+                        } else if (resp[i].level >= 85) {
+                            roles = 'Platinum III'
+                        } else if (resp[i].level >= 90) {
+                            roles = 'Platinum II'
+                        } else if (resp[i].level >= 95) {
+                            roles = 'Platinum I'
+                        } else if (resp[i].level > 100) {
+                            roles = 'Exterminator'
+                        }
+                        leaderboard += `${i + 1}. wa.me/${_point[i].id.replace('@c.us', '')}\n➸ *XP*: ${_point[i].point} *Level*: ${_point[i].level}\n➸ *Role*: ${roles}\n\n`
+                    }
+                    await piyo.reply(from, leaderboard, id)
+                } catch (err) {
+                    console.error(err)
+                    await piyo.reply(from, ind.minimalDb(), id)
+                }
+            break
+case 'points':
+    await piyo.reply(from, ind.wait() , id)
+    const userLevel = point.getLevelingLevel(sender.id, _point)
+    const userXp = point.getLevelingPoint(sender.id, _point)
+    const ppLink = await piyo.getProfilePicFromServer(sender.id)
+    if (ppLink === undefined) {
+        var pepe = errorImgg
+    } else {
+        pepe = ppLink
+    }
+    const requiredXp = 5 * Math.pow(userLevel, 2) + 50 * userLevel + 100
+    const rank = new canvas.Rank()
+        .setAvatar(pepe)
+        .setLevel(userLevel)
+        .setLevelColor('#ffa200', '#ffa200')
+        .setRank(Number(point.getUserRank(sender.id, _point)))
+        .setCurrentXP(userXp)
+        .setOverlay('#000000', 100, false)
+        .setRequiredXP(requiredXp)
+        .setProgressBar('#ffa200', 'COLOR')
+        .setBackground('COLOR', '#000000')
+        .setUsername(pushname)
+        .setDiscriminator(sender.id.substring(6, 10))
+         rank.build()
+        .then(async (buffer) => {
+            const imageBase64 = `data:image/png;base64,${buffer.toString('base64')}`
+            await piyo.sendImage(from, imageBase64, 'rank.png', '', id)
+        })
+        .catch(async (err) => {
+            console.error(err)
+            await piyo.reply(from, 'Error!', id)
+        })
+break
 case 'tod':
     await piyo.reply(from, `Sebelum bermain berjanjilah akan melaksanakan apapapun perintah yang di berikan` , id)
     await piyo.sendText(from, `Silahkan pilih \n\n*truth*\n\n*dare*` , id)
@@ -3350,7 +3609,7 @@ case 'joox':
                                     await piyo.reply(from, 'Error!', id)
                                 })
                         break
-case 'play': 
+case 'play': //PAKE API VIDE FIKRI BIAR ADA SIZE LAGUNYA
             if (!q) return piyo.reply(from , `Silahkan  ketik /play judulnya` , id)
             await piyo.reply(from,'Wait..',id)
 	    const getvids = await axios.get(`https://api.zeks.xyz/api/ytplaymp3?apikey=apivinz&q=${q}`)
@@ -3416,6 +3675,18 @@ case 'ytmp4':
                     piyo.sendText(from, 'Fitur Error : ' + err)
               }
         break
+
+case 'yts':
+    if (!q) return piyo.reply(from, `Untuk Pencarian Video/Musik Di Youtube\nSilahkan Ketik /yts judulnya` , id)
+    const yts = await axios.get(`https://api.zeks.xyz/api/yts?q=${q}&apikey=apivinz`)
+    await piyo.reply(from, ind.wait() , id)
+    let ytss = `*Hasil Pencarian Video Dari Youtube*\n\n`
+    for (let i = 0; i < yts.data.result.video.length; i++){
+        ytss += `\n*Title :* ${yts.data.result[i].video.title}\n*Durasi :* ${yts.data.result[i].video.duration}`
+    }
+    piyo.reply(from, ytss , id)
+    break
+
 			
 case 'igstalk':
                         await piyo.reply(from, ind.wait() , id)
@@ -3437,7 +3708,7 @@ case 'igstalk':
 ➸ Pengikut: ${follower}`
                         const pictk = await bent("buffer")(profile_pic)
                         const base64 = `data:image/jpg;base64,${pictk.toString("base64")}`
-                        piyo.sendImage(from, base64, username, istalk3)
+                        piyo.sendImage(from, base64, username, istalk3 , id)
                         } catch (err) {
                          console.error(err.message)
                          await piyo.sendFileFromUrl(from, errorurl2, 'error.png', '💔️ Maaf, User tidak ditemukan')
@@ -4019,14 +4290,14 @@ case 'playstore':
                     await piyo.reply(from, `Error!\n\n${err}`, id)
                 }
             break
-        case 'resi':
+case 'resi':
             if (args.length !== 2) return piyo.reply(from, `Maaf, format pesan salah.\nSilahkan ketik pesan dengan ${prefix}resi <kurir> <no_resi>\n\nKurir yang tersedia:\njne, pos, tiki, wahana, jnt, rpx, sap, sicepat, pcp, jet, dse, first, ninja, lion, idl, rex`, id)
             const kurirs = ['jne', 'pos', 'tiki', 'wahana', 'jnt', 'rpx', 'sap', 'sicepat', 'pcp', 'jet', 'dse', 'first', 'ninja', 'lion', 'idl', 'rex']
             if (!kurirs.includes(args[0])) return piyo.sendText(from, `Maaf, jenis ekspedisi pengiriman tidak didukung layanan ini hanya mendukung ekspedisi pengiriman ${kurirs.join(', ')} Tolong periksa kembali.`)
             console.log('Memeriksa No Resi', args[1], 'dengan ekspedisi', args[0])
             cekResi(args[0], args[1]).then((result) => piyo.sendText(from, result))
             break
-	case 'bass':
+case 'bass':
             if (isQuotedAudio) {
                 let dB = 58
                 let freq = 75
@@ -4047,7 +4318,7 @@ case 'playstore':
             }
             break
 			
-        case 'tts':               
+case 'tts':               
             if (args.length == 0) return piyo.reply(from, `Mengubah teks menjadi sound (google voice)\nketik: ${prefix}tts <kode_bahasa> <teks>\ncontoh : ${prefix}tts id halo\nuntuk kode bahasa cek disini : https://anotepad.com/note/read/5xqahdy8`)
             const ttsGB = require('node-gtts')(args[0])
             const dataText = body.slice(8)
@@ -4060,7 +4331,7 @@ case 'playstore':
                     piyo.reply(from, err, id)
                 }
             break	
-	case 'tomp3':
+case 'tomp3':
         if ((isMedia || isQuotedVideo || isQuotedFile)) {
             piyo.reply(from, ind.wait(), id)
             const encryptMedia = isQuotedVideo || isQuotedFile ? quotedMsg : message
@@ -4103,7 +4374,7 @@ case 'playstore':
         }
         limitAdd(serial)
        break
-	case 'toptt':
+case 'toptt':
             if (quotedMsg){
                 if (quotedMsg.type === 'audio') { 
                     try {
@@ -4122,7 +4393,7 @@ case 'playstore':
                 piyo.reply(from, `Gaada data yang direply gan`, id)
             }
          break
-        case 'translate':
+case 'translate':
                 
             if (args.length != 1) return piyo.reply(from, `Maaf, format pesan salah.\nSilahkan reply sebuah pesan dengan caption ${prefix}translate <kode_bahasa>\ncontoh ${prefix}translate id`, id)
             if (!quotedMsg) return piyo.reply(from, `Maaf, format pesan salah.\nSilahkan reply sebuah pesan dengan caption ${prefix}translate <kode_bahasa>\ncontoh ${prefix}translate id`, id)
@@ -4131,13 +4402,13 @@ case 'playstore':
                 .then((result) => piyo.sendText(from, result))
                 .catch(() => piyo.sendText(from, 'Error, Kode bahasa salah.'))
             break
-		case 'covidindo':
-			rugaapi.covidindo()
-			.then(async (res) => {
-				await piyo.reply(from, `${res}`, id)
-			})
-			break
-        case 'ceklokasi':
+case 'covidindo':
+	   rugaapi.covidindo()
+           .then(async (res) => {
+	   await piyo.reply(from, `${res}`, id)
+	   })
+	   break
+case 'ceklokasi':
             if (quotedMsg.type !== 'location') return piyo.reply(from, `Maaf, format pesan salah.\nKirimkan lokasi dan reply dengan caption ${prefix}ceklokasi`, id)
             console.log(`Request Status Zona Penyebaran Covid-19 (${quotedMsg.lat}, ${quotedMsg.lng}).`)
             const zoneStatus = await getLocationData(quotedMsg.lat, quotedMsg.lng)
@@ -4151,7 +4422,7 @@ case 'playstore':
             const toll = `*CEK LOKASI PENYEBARAN COVID-19*\nHasil pemeriksaan dari lokasi yang anda kirim adalah *${zoneStatus.status}* ${zoneStatus.optional}\n\nInformasi lokasi terdampak disekitar anda:\n${datax}`
             piyo.sendText(from, toll)
             break
-        case 'shortlink':        
+case 'shortlink':        
             if (args.length == 0) return piyo.reply(from, `ketik ${prefix}shortlink <url>`, id)
             if (!isUrl(args[0])) return piyo.reply(from, 'Maaf, url yang kamu kirim tidak valid.', id)
             const shortlink = await urlShortener(args[0])
@@ -4176,20 +4447,27 @@ case 'mtk':
                     await piyo.reply(from, `*「 MATH 」*\n\n${q} = ${Math_js.evaluate(q)}`, id)
                 }
             break
-                    break
-                		case 'hilih':
-			if (args.length == 0) return piyo.reply(from, `Mengubah kalimat menjadi hilih\n\nketik ${prefix}hilih kalimat`, id)
-			rugaapi.hilih(body.slice(11))
-			.then(async(res) => {
-				await piyo.reply(from, res.kata , id)
-			})
-            break
-            case 'resep':
-                    
-                if (args.length == 0) return piyo.reply(from, `Untuk mencari resep makanan\nCaranya ketik: ${prefix}resep [search]\n\ncontoh: ${prefix}resep tahu`, id)
-                const cariresep = body.slice(7)
-                const hasilresep = await resep.resep(cariresep)
-                await piyo.reply(from, hasilresep + '\n\nIni kak resep makanannya..', id)
+case 'kuismtk':
+    if (isMtk) return piyo.reply(from, `Kuis Sedang Berlangsung` , id)
+    if (!isGroupMsg) return piyo.reply(from, 'Perintah ini hanya bisa di gunakan dalam group!', id)
+    await piyo.reply(from, ind.wait() , id)
+    await piyo.reply(from, `Silahkan Pilih Level Kuiz\n*Easy*\n*Medium*\n*Hard*` , id)
+    kuismtkk.push(chat.id)
+    fs.writeFileSync('./settings/kuismtkk.json' , JSON.stringify(kuismtkk))
+    break
+
+case 'hilih':
+    if (args.length == 0) return piyo.reply(from, `Mengubah kalimat menjadi hilih\n\nketik ${prefix}hilih kalimat`, id)
+    rugaapi.hilih(body.slice(11))
+    .then(async(res) => {
+    await piyo.reply(from, res.kata , id)
+    })
+    break
+case 'resep':    
+    if (args.length == 0) return piyo.reply(from, `Untuk mencari resep makanan\nCaranya ketik: ${prefix}resep [search]\n\ncontoh: ${prefix}resep tahu`, id)
+    const cariresep = body.slice(7)
+    const hasilresep = await resep.resep(cariresep)
+    await piyo.reply(from, hasilresep + '\n\nIni kak resep makanannya..', id)
                 .catch(() => {
                     piyo.reply(from, 'Ada yang Error!', id)
                 })
@@ -4242,9 +4520,9 @@ case 'chord':
                 })
                 break
 case 'ssphone':
-                    if (args.length == 0) return piyo.reply(from, 'Kirim perintah */ssphone [linkWeb]*\nContoh : */ssphone https://neonime.vip*', id)
-                    const ssphone = body.slice(9)
-                    piyo.sendFileFromUrl(from, `https://api.vhtear.com/ssweb?link=${ssphone}&type=phone&apikey=${vhtearkey}`, 'ssphone.jpg', '', id)
+               if (args.length == 0) return piyo.reply(from, 'Kirim perintah */ssphone [linkWeb]*\nContoh : */ssphone https://neonime.vip*', id)
+               const ssphone = body.slice(9)
+               piyo.sendFileFromUrl(from, `https://api.vhtear.com/ssweb?link=${ssphone}&type=phone&apikey=${vhtearkey}`, 'ssphone.jpg', '', id)
                     await limitAdd(serial)
                     break
 case 'sspc':
@@ -4275,12 +4553,11 @@ case 'sspc':
                                     }
                                     break
         //Fun Menu
-
-        case 'chat':
+case 'chat':
             piyo.reply(from, `Untuk mengaktifkan piyobot chat\n\n penggunannya\n${prefix}piyo on --mengaktifkan\n${prefix}piyo off --menonatifkan\n`, id)
             break
             break
-        case 'piyo':
+case 'piyo':
             if (isGroupMsg) 
             {return await piyo.reply(from, `Fitur ini khusus private chat` ,id)  
         }else{
@@ -4299,11 +4576,11 @@ case 'sspc':
             }
         }
 			break    
-		case 'simisimi':
+case 'simisimi':
 			if (!isGroupMsg) return piyo.reply(from, 'Maaf, perintah ini hanya dapat dipakai didalam grup!', id)
 			piyo.reply(from, `Untuk mengaktifkan simi-simi pada Group Chat\n\nPenggunaan\n${prefix}simi on --mengaktifkan\n${prefix}simi off --nonaktifkan\n`, id)
 			break
-		case 'simi':
+case 'simi':
 			if (!isGroupMsg) return piyo.reply(from, 'Maaf, perintah ini hanya dapat dipakai didalam grup!', id)
             if (!isGroupAdmins) return piyo.reply(from, 'Gagal, perintah ini hanya dapat digunakan oleh admin grup!', id)
 			if (args.length !== 1) return piyo.reply(from, `Untuk mengaktifkan simi-simi pada Group Chat\n\nPenggunaan\n${prefix}simi on --mengaktifkan\n${prefix}simi off --nonaktifkan\n`, id)
@@ -4324,7 +4601,7 @@ case 'sspc':
 			if (!isGroupMsg) return piyo.reply(from, 'Maaf, perintah ini hanya dapat dipakai didalam grup!', id)
 			piyo.reply(from, `Untuk mengaktifkan simi-simi pada Group Chat\n\nPenggunaan\n${prefix}simi on --mengaktifkan\n${prefix}simi off --nonaktifkan\n`, id)
 			break
-                        case 'limit':
+case 'limit':
             var found = false
             const limidat = JSON.parse(fs.readFileSync('./settings/limit.json'))
             for(let lmt of limidat){
@@ -4595,7 +4872,7 @@ case 'autostiker':
                 }
             break
 
-        case 'bacot':
+case 'bacot':
             if (isLimit(serial)) return piyo.reply(from, `Maaf ${pushname}, Kuota Limit Kamu Sudah Habis, Ketik ${prefix}limit Untuk Mengecek Kuota Limit Kamu`, id)
                     if(args.length == 1) {
                         const no = args[0]
@@ -4621,7 +4898,7 @@ case 'autostiker':
                                             await piyo.reply(from, `Error!`, id)
                                         })
                                 break
-        case 'leaveall': //mengeluarkan bot dari semua group serta menghapus chatnya
+case 'leaveall': //mengeluarkan bot dari semua group serta menghapus chatnya
             if (!isOwnerBot) return piyo.reply(from, 'Perintah ini hanya untuk Owner bot', id)
             const allChatz = await piyo.getAllChatIds()
             const allGroupz = await piyo.getAllGroups()
