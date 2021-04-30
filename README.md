@@ -172,6 +172,9 @@ Setelah itu pindai kode QR menggunakan WhatsApp Anda di ponsel Anda!
 | Truth Of Dare       |      ✔️      |
 | Next Kuiz           |      ✔️      |
 | Stop Kuiz           |      ✔️      |
+| Kuis Mtk            |      ✔️      |
+| Stop Mtk            |      ✔️      |
+| Point              |      ✔️      |
 | Image to URL        |      ✔️      |
 | Jadwal sholat       |      ✔️      |
 | To Mp3              |      ✔️      |
