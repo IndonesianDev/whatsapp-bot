@@ -200,7 +200,7 @@ module.exports = HandleMsg = async (piyo, message) => {
         const isBotGroupAdmins = groupAdmins.includes(botNumber) || false
         const { ind } = require('./message/text/lang/')
         const isAdmin = adminNumber.includes(sender.id)
-	    const isPremium = premium.checkPremiumUser(sender.id, _premium)
+	const isPremium = premium.checkPremiumUser(sender.id, _premium)
         const gg = cc.includes(sender.id)
         const hh = bb.includes(sender.id)
 	const isSewa = sewa.checkSewa(chat.id , _sewa)
@@ -228,12 +228,12 @@ module.exports = HandleMsg = async (piyo, message) => {
         const errorurl2 = 'https://steamuserimages-a.akamaihd.net/ugc/954087817129084207/5B7E46EE484181A676C02DFCAD48ECB1C74BC423/?imw=512&&ima=fit&impolicy=Letterbox&imcolor=%23000000&letterbox=false'
         const errorur121= 'https://i.imgur.com/VKoNMIR.png'
         const _antilink = JSON.parse(fs.readFileSync('./settings/antilink.json'))
-	    const isNsfw = isGroupMsg ? _nsfw.includes(chat.id) : false
+	const isNsfw = isGroupMsg ? _nsfw.includes(chat.id) : false
         const isWelcomeOn = isGroupMsg ? _welcome.includes(chat.id) : false
-	    const isKuis = isGroupMsg ? kuis.includes(chat.id) : false
+	const isKuis = isGroupMsg ? kuis.includes(chat.id) : false
         const isMtk = isGroupMsg ? kuismtk.includes(chat.id) : false
         const isMtkk = isGroupMsg ? kuismtkk.includes(chat.id) : false
-	    const isAntiPorn = isGroupMsg ? isPorn.includes(chat.id) : false
+	const isAntiPorn = isGroupMsg ? isPorn.includes(chat.id) : false
         const isImage = type === 'image'
         const reason = q ? q : 'Nothing.'
         const isQuotedImage = quotedMsg && quotedMsg.type === 'image'
