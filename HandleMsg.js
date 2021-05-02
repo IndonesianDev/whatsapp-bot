@@ -752,6 +752,15 @@ if (chats == 'Easy'){
     let kuos = kuismtkk.indexOf(chatId)
     kuismtkk.splice(kuos,1)
     fs.writeFileSync('./settings/kuismtkk.json', JSON.stringify(kuismtkk , null , 2))
+    await rugaapi.sleep(30000)
+    if (kuismtk.includes(chat.id)) {
+    await piyo.reply(from , `Jawabannya : ${Math_js.evaluate(`${kuil}${noval}${kuil2}`)}`  , id)
+    let kuii = kuismtk.indexOf(chatId)
+           kuismtk.splice(kuii,1)
+           fs.writeFileSync('./settings/kuismtk.json', JSON.stringify(kuismtk , null, 2))
+           easy.splice(`${Math_js.evaluate(`${kuil}${noval}${kuil2}`)}` , 1)
+           fs.writeFileSync('./settings/easy.json', JSON.stringify(easy , null, 2))
+     }
 }
 if (chats == 'Medium'){
     if (!isMtkk) return
@@ -761,6 +770,8 @@ if (chats == 'Medium'){
     const mety = ['+','*']
     const meti = mety[Math.floor(Math.random() * (mety.length))]
     await piyo.reply(from, `Hasil Dari : \n${kuli} ${meti.replace('*','x')} ${kuli2} adalah` , id)
+    kuismtk.push(chat.id)
+    fs.writeFileSync('./settings/kuismtk.json' , JSON.stringify(kuismtk))
     if (typeof Math_js.evaluate(`${kuli} ${meti} ${kuli2}`) !== "number"){
         await piyo.reply(from, ind.notNum(`${kuli}`), id)
     } else {
@@ -770,6 +781,15 @@ if (chats == 'Medium'){
     let kuos = kuismtkk.indexOf(chatId)
     kuismtkk.splice(kuos,1)
     fs.writeFileSync('./settings/kuismtkk.json', JSON.stringify(kuismtkk , null , 2))
+    await rugaapi.sleep(30000)
+    if (kuismtk.includes(chat.id)) {
+    await piyo.reply(from , `Jawabannya : ${Math_js.evaluate(`${kuli}${meti}${kuli2}`)}`  , id)
+    let kuii = kuismtk.indexOf(chatId)
+           kuismtk.splice(kuii,1)
+           fs.writeFileSync('./settings/kuismtk.json', JSON.stringify(kuismtk , null, 2))
+           medium.splice(`${Math_js.evaluate(`${kuli}${meti}${kuli2}`)}` , 1)
+           fs.writeFileSync('./settings/medium.json', JSON.stringify(medium , null, 2))
+     }
 }
 if (chats == 'Hard'){
     if (!isMtkk) return
@@ -779,6 +799,8 @@ if (chats == 'Hard'){
     const udin = ['+','*']
     const dinu = udin[Math.floor(Math.random() * (udin.length))]
     await piyo.reply(from , `Hasil Dari : \n${kull} ${dinu.replace('*','x')} ${kull2} adalah` , id)
+    kuismtk.push(chat.id)
+    fs.writeFileSync('./settings/kuismtk.json' , JSON.stringify(kuismtk))
     if (typeof Math_js.evaluate(`${kull}${dinu}${kull2}`) !== "number"){
         await piyo.reply(from, ind.notNum(`${kull}`) , id)
     } else {
@@ -788,6 +810,15 @@ if (chats == 'Hard'){
     let kuos = kuismtkk.indexOf(chatId)
     kuismtkk.splice(kuos,1)
     fs.writeFileSync('./settings/kuismtkk.json', JSON.stringify(kuismtkk , null , 2))
+    await rugaapi.sleep(30000)
+    if (kuismtk.includes(chat.id)) {
+    await piyo.reply(from , `Jawabannya : ${Math_js.evaluate(`${kull}${dinu}${kull2}`)}`  , id)
+    let kuii = kuismtk.indexOf(chatId)
+           kuismtk.splice(kuii,1)
+           fs.writeFileSync('./settings/kuismtk.json', JSON.stringify(kuismtk , null, 2))
+           hard.splice(`${Math_js.evaluate(`${kull}${dinu}${kull2}`)}` , 1)
+           fs.writeFileSync('./settings/hard.json', JSON.stringify(hard , null, 2))
+     }
 }
 }
 //////////////////////////////////////PREMIUM CODE///////////////////////////////////
@@ -2095,8 +2126,16 @@ try{
             fs.writeFileSync('./settings/tebakgambar.json', JSON.stringify(_tebak))
             kuis.push(chat.id)
             fs.writeFileSync('./settings/kuis.json', JSON.stringify(kuis))
-	        await rugaapi.sleep(5000)
-	        await piyo.sendText(from, `Jika Tidak Bisa Menjawab Soal Ini\nSilahkan /nextkuiz untuk menggantikan soal atau soal berikutnya\nDan /stopkuiz untuk memberhentikan kuiz`, id)
+            await piyo.sendText(from, `Jika Tidak Bisa Menjawab Soal Ini\nSilahkan /nextkuiz untuk menggantikan soal atau soal berikutnya\nDan /stopkuiz untuk memberhentikan kuiz`, id)
+	        await rugaapi.sleep(30000)
+            if (kuis.includes(chat.id)) {
+            await piyo.reply(from , `Jawabannya : ${resp.data.result.jawaban.toLowerCase()}`  , id)
+            let kuii = kuis.indexOf(chatId)
+                   kuis.splice(kuii,1)
+                   fs.writeFileSync('./settings/kuis.json', JSON.stringify(kuis , null, 2))
+                   _tebak.splice(resp.data.result.jawaban.toLowerCase() , 1)
+                   fs.writeFileSync('./settings/tebakgambar.json', JSON.stringify(_tebak , null, 2))
+             }
             } catch (err) {
            }
            break
@@ -2113,6 +2152,15 @@ try{
             piyo.sendFileFromUrl(from, respek.data.result.soal_gbr, 'tebakgambar.jpg', '_Silahkan Jawab Maksud Dari Gambar Ini_\nHanya Satu Jawaban Untuk Satu Orang\nJawab Semua Dengan Huruf kecil\nContoh anak maling ',id)
             _tebak.push(respek.data.result.jawaban.toLowerCase())
             fs.writeFileSync('./settings/tebakgambar.json', JSON.stringify(_tebak))
+            await rugaapi.sleep(30000)
+            if (kuis.includes(chat.id)) {
+            await piyo.reply(from , `Jawabannya : ${resp.data.result.jawaban.toLowerCase()}`  , id)
+            let kuii = kuis.indexOf(chatId)
+                   kuis.splice(kuii,1)
+                   fs.writeFileSync('./settings/kuis.json', JSON.stringify(kuis , null, 2))
+                   _tebak.splice(resp.data.result.jawaban.toLowerCase() , 1)
+                   fs.writeFileSync('./settings/tebakgambar.json', JSON.stringify(_tebak , null, 2))
+             }
             } catch (err) {
             }
             break
@@ -2148,10 +2196,6 @@ case 'sider':
                 piyo.reply(from, `Maaf, Belum Ada Yang Membaca Pesan Bot atau Mereka Menonaktifkan Read Receipts`, id)    
             }
             break
-case 'getinfo':
-    const infomobilo = piyo.getGroupInfo("62895336148600-1604934362@g.us")
-    console.log(infomobilo)
-    break
 
 case 'koin':
     if (!isGroupMsg) return piyo.reply(from, 'Perintah ini hanya bisa di gunakan dalam group!', id)
@@ -3723,7 +3767,7 @@ case 'tiktokstalk':
                         const tstalk = await slicedArgs.join(' ')
                         console.log(tstalk)
                         try {
-                        const tstalk2 = await axios.get(`https://lolhuman.herokuapp.com/api/stalktiktok/${q}?apikey=a73ed493460a451b707e7ff3`)
+                        const tstalk2 = await axios.get(`https://lolhuman.herokuapp.com/api/stalktiktok/${q}?apikey=${lolhuman}`)
                         const { username, bio, followings, follower, nickname, likes, video, user_picture } = tstalk2.data.result
                         const tiktod = `*User Ditemukan!*
 ➸ *Username:* ${username}
