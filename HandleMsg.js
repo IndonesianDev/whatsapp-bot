@@ -3692,10 +3692,9 @@ case 'playvn':
 case 'ytmp3':
        await piyo.reply(from, ind.wait() , id)
        try{
-        const yte = await axios.get(`https://videfikri.com/api/ytmp3/?url=${q}`)
-        const { thumbnail , judul , url , size } = yte.data.result
-        await piyo.sendFileFromUrl(from, thumbnail , 'piyo.jpg' , `*「 YOUTUBE MP3 」*\n\n• *Judul* : ${judul}\n\n• *Size* : ${size}\n\nSilahkan tunggu file media sedang dikirim mungkin butuh beberapa menit_`, id)
-        await piyo.sendFileFromUrl(from, url , 'piyo.mp3' , '' , id)
+        const yte = await axios.get(`https://api.zeks.xyz/api/ytmp3?url=${q}&apikey=apivinz`)
+        await piyo.sendFileFromUrl(from, yte.data.result.thumbnail , 'piyo.jpg' , `*「 YOUTUBE MP3 」*\n\n• *Judul* : ${yte.data.result.title}\n\n• *Size* : ${yte.data.result.size}\n\nSilahkan tunggu file media sedang dikirim mungkin butuh beberapa menit_`, id)
+        await piyo.sendFileFromUrl(from, yte.data.result.url_audio , 'piyo.mp3' , '' , id)
         } catch (err) {
                     console.error(err.message)
                     await piyo.sendFileFromUrl(from, errorurl2, 'error.png', '💔️ Maaf, Ada Sedikit Error')
@@ -3706,10 +3705,9 @@ case 'ytmp3':
 case 'ytmp4':
        await piyo.reply(from, ind.wait() , id)
        try{
-        const yt = await axios.get(`https://videfikri.com/api/ytmp4/?url=${q}`)
-        const { imgUrl , judul , urlVideo , source } = yt.data.result
-        await piyo.sendFileFromUrl(from, imgUrl , 'piyo.jpg' , `*「 YOUTUBE MP4 」*\n\n• *Judul* : ${judul}\n\n• *Source* : ${q}\n\nSilahkan tunggu file media sedang dikirim mungkin butuh beberapa menit_`, id)
-        await piyo.sendFileFromUrl(from, urlVideo , 'piyo.mp4' , 'Nih Kak' , id)
+        const yt = await axios.get(`https://api.zeks.xyz/api/ytmp4?url=${q}&apikey=apivinz`)
+        await piyo.sendFileFromUrl(from, yt.data.result.thumbnail , 'piyo.jpg' , `*「 YOUTUBE MP4 」*\n\n• *Judul* : ${yt.data.result.title}\n\n• *Size* : ${yt.data.result.size}\n\n• *Source* : ${q}\n\nSilahkan tunggu file media sedang dikirim mungkin butuh beberapa menit_`, id)
+        await piyo.sendFileFromUrl(from, yt.data.result.url_video , 'piyo.mp4' , 'Nih Kak' , id)
         } catch (err) {
                     console.error(err.message)
                     await piyo.sendFileFromUrl(from, errorurl2, 'error.png', '💔️ Maaf, Ada Sedikit Error')
@@ -3717,16 +3715,6 @@ case 'ytmp4':
               }
         break
 
-case 'yts':
-    if (!q) return piyo.reply(from, `Untuk Pencarian Video/Musik Di Youtube\nSilahkan Ketik /yts judulnya` , id)
-    const yts = await axios.get(`https://api.zeks.xyz/api/yts?q=${q}&apikey=apivinz`)
-    await piyo.reply(from, ind.wait() , id)
-    let ytss = `*Hasil Pencarian Video Dari Youtube*\n\n`
-    for (let i = 0; i < yts.data.result.video.length; i++){
-        ytss += `\n*Title :* ${yts.data.result[i].video.title}\n*Durasi :* ${yts.data.result[i].video.duration}`
-    }
-    piyo.reply(from, ytss , id)
-    break
 
 			
 case 'igstalk':
