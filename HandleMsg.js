@@ -4953,7 +4953,12 @@ await piyo.reply(from, `Maaf ${pushname}, Command *${arghh[0]}* Tidak Terdaftar 
 }
         // Piyobot Function
         if ((!isCmd && chatId && isChat)&& message.type === 'chat'){
-           const piyoget = await axios.get(`https://lolhuman.herokuapp.com/api/simi?apikey=${lolhuman}&text=${encodeURIComponent(message.body)}`)           
+	   await piyo.sendSeen(from , true)
+           const piyoget = await axios.get(`https://lolhuman.herokuapp.com/api/simi?apikey=${lolhuman}&text=${encodeURIComponent(message.body)}`)
+	   await piyo.simulateTyping(from , true)
+           const rancok = [1000,2000,3000,4000,5000]
+           const matcok = rancok[Math.floor(Math.random() * rancok.length)]
+           await rugaapi.sleep(matcok)
            await piyo.reply(from, `Piyobot Menjawab: ${piyoget.data.result}`, id)
             }
 	// Simi-simi function
