@@ -152,6 +152,7 @@ let {
     halal,
     apikeyz,
     lolhuman,
+    apizeks,
     vhtearkey
 } = setting
 ///////////////////////////////API JSON///////////////////////////////////////
@@ -1624,7 +1625,7 @@ case 'blackpink':
     piyo.reply(from, ind.wait(), id)
     const blpk = body.slice(11)
     if (blpk.length > 10) return piyo.reply(from, '*Teks Terlalu Panjang!*\n_Maksimal 10 huruf!_', id)
-    await piyo.sendFileFromUrl(from, `https://api.zeks.xyz/api/logobp?text=${blpk}&apikey=apivinz`, 'blackpink.jpg', '', id)
+    await piyo.sendFileFromUrl(from, `https://api.zeks.xyz/api/logobp?text=${blpk}&apikey=${apizeks}`, 'blackpink.jpg', '', id)
     break 
 case 'pornhub':
     if (args.length == 2) return piyo.reply(from, `Kirim perintah */pornhub [ |Teks1|Teks2 ]*, contoh */pornhub |Alvio|Piyobot*`, id)
@@ -1635,7 +1636,7 @@ case 'pornhub':
         const lpornhub2 = argz[2]
         if (lpornhub.length > 10) return piyo.reply(from, '*Teks1 Terlalu Panjang!*\n_Maksimal 10 huruf!_', id)
         if (lpornhub2.length > 10) return piyo.reply(from, '*Teks2 Terlalu Panjang!*\n_Maksimal 10 huruf!_', id)
-        piyo.sendFileFromUrl(from, `https://api.zeks.xyz/api/phlogo?text1=${lpornhub}&text2=${lpornhub2}&apikey=apivinz`)
+        piyo.sendFileFromUrl(from, `https://api.zeks.xyz/api/phlogo?text1=${lpornhub}&text2=${lpornhub2}&apikey=${apizeks}`)
     } else {
         await piyo.reply(from, `Wrong Format!\n[❗] Kirim perintah */pornhub [ |Teks1|Teks2 ]*, contoh */pornhub |Piyo|Alvio*`, id)
     }
@@ -1659,7 +1660,7 @@ case 'ffmaker':
     if (!q) return await piyo.reply(from, `Salah kak, /ffmaker alok | nama kaka` , id)
     await piyo.reply(from, ind.wait() , id)
     console.log('Creating FF Maker')
-    await piyo.sendFileFromUrl(from, `https://api.zeks.xyz/api/epep?text=${q}&apikey=apivinz`, 'error.jpg', '', id)
+    await piyo.sendFileFromUrl(from, `https://api.zeks.xyz/api/epep?text=${q}&apikey=${apizeks}`, 'error.jpg', '', id)
     await piyo.sendText(from, `Nih kak` , id)
     .then(() => console.log('Success creating image!'))
             .catch(async (err) => {
@@ -1699,7 +1700,7 @@ case 'wolf2':
             piyo.reply(from, 'Tunggu sebentar dan pastikan format yang anda masukkan benar', id)
             const wolf12 = argz[1]
             const wolf22 = argz[2]
-            piyo.sendFileFromUrl(from, `https://api.zeks.xyz/api/wolflogo?apikey=apivinz&text1=${wolf12}&text2=${wolf22}`, 'wolf2.jpg', 'neh bang', id)
+            piyo.sendFileFromUrl(from, `https://api.zeks.xyz/api/wolflogo?apikey=${apizeks}&text1=${wolf12}&text2=${wolf22}`, 'wolf2.jpg', 'neh bang', id)
         } else {
             await piyo.reply(from, `Wrong Formt!\n[❗] Kirim perintah *${prefix}wolf2 [ |Teks1|Teks2 ]*, contoh *${prefix}wolf2 |piyo|bot*`, id)
         }
@@ -1711,7 +1712,7 @@ case 'wolf':
             piyo.reply(from, 'Tunggu sebentar dan pastikan format yang anda masukkan benar', id)
             const wolf1 = argz[1]
             const wolf2 = argz[2]
-            piyo.sendFileFromUrl(from, `https://api.zeks.xyz/api/wolflogo?apikey=apivinz&text1=${wolf1}&text2=${wolf2}`, 'wolf2.jpg', 'neh bang', id)
+            piyo.sendFileFromUrl(from, `https://api.zeks.xyz/api/wolflogo?apikey=${apizeks}&text1=${wolf1}&text2=${wolf2}`, 'wolf2.jpg', 'neh bang', id)
         } else {
             await piyo.reply(from, `Wrong Formt!\n[❗] Kirim perintah *${prefix}wolf2 [ |Teks1|Teks2 ]*, contoh *${prefix}wolf2 |piyo|bot*`, id)
         }
@@ -3210,7 +3211,7 @@ case 'infofetish':
                 if (!q) return await piyo.reply(from, `Ketik /nulishd teksnya` , id)
                 await piyo.reply(from, ind.wait() , id)
                 console.log('Creating nulis')
-                await piyo.sendFileFromUrl(from, `https://api.zeks.xyz/api/nulis?text=${q}&apikey=apivinz`, 'error.jpg' , 'Kalo filenya berbentuk dokumen berarti eror' , id)
+                await piyo.sendFileFromUrl(from, `https://api.zeks.xyz/api/nulis?text=${q}&apikey=${apizeks}`, 'error.jpg' , 'Kalo filenya berbentuk dokumen berarti eror' , id)
                 break
 case 'nuliskanan': {
                         //if (!isPremium) return piyo.reply(from, 'Maaf, ini adalah fitur premium, untuk menggunakan fitur ini silahkan donasi, Kirim #donasi untuk melihat info donasi', id)
@@ -3555,7 +3556,6 @@ case 'fb':
             break
 case 'instagram': //RECODE BY ALVIO ADJI JANUAR
 case 'ig':
-    if (!isPremium) return piyo.reply(from, `Fitur Ini Premium` ,id)
             try {
                 if (arghh.length === 1) return piyo.reply(from, 'Kirim perintah *!ig [linkIg]* untuk contoh silahkan kirim perintah *!readme*', id)
                 if (!arghh[1].includes('instagram.com')) return piyo.reply(from, `Salah linknya kak`, id)
@@ -3580,26 +3580,20 @@ case 'ig':
             break
 case 'tiktoknowm':
                 await piyo.reply(from, ind.wait(), id)
-                const tp = await axios.get(`https://api.zeks.xyz/api/tiktok?url=${q}&apikey=apivinz`)
+                const tp = await axios.get(`https://lolhuman.herokuapp.com/api/tiktok3?apikey=${lolhuman}=${q}`)
                 if (tp.data.status == false) return piyo.reply(from, tp.data.message , id)
-		await piyo.sendFileFromUrl(from, `http://piyobot.cf/download.png`, 'image.jpg', `Video Ditemukan...\n\nPiyobot\n\n*_Sabar, Piyo lagi ngirim Videonya_*`, id)
-                const respons = await fetch(tp.data.no_watermark);
+		        await piyo.sendFileFromUrl(from, `http://piyobot.cf/download.png`, 'image.jpg', `Video Ditemukan...\n\nPiyobot\n\n*_Sabar, Piyo lagi ngirim Videonya_*`, id)
+                const respons = await fetch(tp.data.result);
                 const bufferf = await respons.buffer(); 
                 await fs.writeFile(`./media/video/tiktok2.mp4`, bufferf)
                 await piyo.sendFile(from,'./media/video/tiktok2.mp4', 'piyo.mp4', 'nih kak',id)
-		await fs.unlinksync('./media/video/tiktok2.mp4')
+		        await fs.unlinkSync('./media/video/tiktok2.mp4')
 		break
 			
 case 'tiktok':
                 await piyo.reply(from, ind.wait() , id)
-                const tiktod = await axios.get(`https://api.zeks.xyz/api/tiktok?url=${q}&apikey=apivinz`)
-                const {  like_count  , no_watermark , music_name , status } = tiktod.data
-                if (tiktod.data.status == false) return piyo.reply(from, tiktod.data.message)
-                const tikpon = await fetch(no_watermark);
-                const baperpon = await tikpon.buffer();
-                await fs.writeFile(`./media/video/tiktok.mp4` , baperpon)
-                await piyo.sendFile(from, `./media/video/tiktok.mp4` , 'piyo.mp4',  `*Tiktok Downloader*\n*Username :* ${tiktod.data.author}\n*Judul*: ${tiktod.data.title}\n*Jumlah Suka*: ${like_count}\n*Nama Music*: ${music_name}` , id)
-                await fs.unlinkSync(`./media/video/tiktok.mp4`)
+                await piyo.sendFileFromUrl(from, `http://piyobot.cf/download.png`, 'image.jpg', `Video Ditemukan...\n\nPiyobot\n\n*_Sabar, Piyo lagi ngirim Videonya_*`, id)
+                await piyo.sendFileFromUrl(from, `https://lolhuman.herokuapp.com/api/tiktokwm?apikey=${lolhuman}&url=${q}` , 'piyo.mp4',  `*Tiktok Downloader*\n*Creator :* Alvio Adji Januar` , id)
                 break
 			
 case 'tiktokmusic':
@@ -3653,7 +3647,7 @@ case 'joox':
 case 'play': //PAKE API VIDE FIKRI BIAR ADA SIZE LAGUNYA
             if (!q) return piyo.reply(from , `Silahkan  ketik /play judulnya` , id)
             await piyo.reply(from,'Wait..',id)
-	    const getvids = await axios.get(`https://api.zeks.xyz/api/ytplaymp3?apikey=apivinz&q=${q}`)
+	    const getvids = await axios.get(`https://api.zeks.xyz/api/ytplaymp3?apikey=${apizeks}&q=${q}`)
 	    if (getvids.data.status == false) return piyo.reply(from, getvids.data.message , id)
             if (Number(getvids.data.result.size.split('MB')[0]) >= 15.00) return piyo.reply(from, 'Maaf durasi music sudah melebihi batas maksimal 15 MB!', id)
 	    await piyo.sendFileFromUrl(from, getvids.data.result.thumbnail, 'gambar.jpg', `Title: ${getvids.data.result.title}\n\n───────────⚪───────────\n(っ◔◡◔)っ   ◄◄⠀▐▐ ⠀►► ───○ 🔊\n───────────⚪───────────\n➥Size: ${getvids.data.result.size}\n➥Type: Mp3\n➥Duration: ${getvids.data.result.duration}\n\n*Mohon Tunggu Bot Akan Mengirim Audio!*`, id)
@@ -3668,7 +3662,7 @@ case 'playv':
             if (!q) return piyo.reply(from , `Silahkan  ketik /playv judulnya` , id)
             if (!isPremium) return piyo.reply(from, `Maaf, ini adalah fitur premium, untuk menggunakan fitur ini silahkan beli premium ke owner \nUntuk Harga\n\n10k Perbulan\n5k Perpanjang`, id)
             piyo.reply(from, 'Wait.. Sedang Di Proses!',id)
-	    const getvid = await axios.get(`https://api.zeks.xyz/api/ytplaymp4?q=${q}&apikey=apivinz`)
+	    const getvid = await axios.get(`https://api.zeks.xyz/api/ytplaymp4?q=${q}&apikey=${apizeks}`)
 	    if (getvid.data.status == false) return piyo.reply(from, `Website sedang error` , id)
 	    const { title , url_video , size , thumbnail , source } = getvid.data.result
 	    if (Number(size.split(' MB')[0]) > 15.00) return piyo.sendFileFromUrl(from, thumbnail , 'thumb.jpg', `「 PLAY MP4 」\n\n• Judul : ${title}\n• Filesize : ${size}\n\n_Maaf, Durasi video melebihi 15 MB. Silahkan download video melalui link dibawah.\n${url_video}`, id)
@@ -3679,7 +3673,7 @@ case 'playv':
 case 'playvn':
 	   if (!q) return piyo.reply(from , `Silahkan  ketik /playvn judulnya` , id)
            await piyo.reply(from, `Wait` , id)
-           const plan = await axios.get(`https://api.zeks.xyz/api/ytplaymp3?apikey=apivinz&q=${q}`)
+           const plan = await axios.get(`https://api.zeks.xyz/api/ytplaymp3?apikey=${apizeks}&q=${q}`)
 	   if (Number(plan.data.result.size.split('MB')[0]) >= 10.00) return piyo.reply(from, 'Maaf durasi music sudah melebihi batas maksimal 10 MB!', id)
            await piyo.sendFileFromUrl(from, plan.data.result.thumbnail, 'gambar.jpg' , `Title: ${plan.data.result.title}\n\nTunggu Sebentar Bot Sedang Mengirim Voice Not ` , id)
            const plon = await fetch(plan.data.result.url_audio)
@@ -3692,7 +3686,7 @@ case 'playvn':
 case 'ytmp3':
        await piyo.reply(from, ind.wait() , id)
        try{
-        const yte = await axios.get(`https://api.zeks.xyz/api/ytmp3?url=${q}&apikey=apivinz`)
+        const yte = await axios.get(`https://api.zeks.xyz/api/ytmp3?url=${q}&apikey=${apizeks}`)
         await piyo.sendFileFromUrl(from, yte.data.result.thumbnail , 'piyo.jpg' , `*「 YOUTUBE MP3 」*\n\n• *Judul* : ${yte.data.result.title}\n\n• *Size* : ${yte.data.result.size}\n\nSilahkan tunggu file media sedang dikirim mungkin butuh beberapa menit_`, id)
         await piyo.sendFileFromUrl(from, yte.data.result.url_audio , 'piyo.mp3' , '' , id)
         } catch (err) {
@@ -3705,7 +3699,7 @@ case 'ytmp3':
 case 'ytmp4':
        await piyo.reply(from, ind.wait() , id)
        try{
-        const yt = await axios.get(`https://api.zeks.xyz/api/ytmp4?url=${q}&apikey=apivinz`)
+        const yt = await axios.get(`https://api.zeks.xyz/api/ytmp4?url=${q}&apikey=${apizeks}`)
         await piyo.sendFileFromUrl(from, yt.data.result.thumbnail , 'piyo.jpg' , `*「 YOUTUBE MP4 」*\n\n• *Judul* : ${yt.data.result.title}\n\n• *Size* : ${yt.data.result.size}\n\n• *Source* : ${q}\n\nSilahkan tunggu file media sedang dikirim mungkin butuh beberapa menit_`, id)
         await piyo.sendFileFromUrl(from, yt.data.result.url_video , 'piyo.mp4' , 'Nih Kak' , id)
         } catch (err) {
@@ -3727,7 +3721,7 @@ case 'igstalk':
                         const istalk = await slicedArgs.join(' ')
                         console.log(istalk)
                         try {
-                        const istalk2 = await axios.get(`https://api.zeks.xyz/api/igstalk?apikey=apivinz&username=${q}`)
+                        const istalk2 = await axios.get(`https://api.zeks.xyz/api/igstalk?apikey=${apizeks}&username=${q}`)
                         const { bio , follower, following, fullname, username, profile_pic, is_bussiness , is_private } = istalk2.data
                         const istalk3 = `User Ditemukan!
 ➸ Username: ${username}
@@ -4006,7 +4000,7 @@ case 'lirik':
         })
     break
     case 'darkjokes':
-    const darkjokex = await axios.get('https://api.zeks.xyz/api/darkjokes?apikey=apivinz')
+    const darkjokex = await axios.get('https://api.zeks.xyz/api/darkjokes?apikey=${apizeks}')
     const darkjok = darkjokex.result
     await piyo.sendFileFromUrl(from, darkjok , 'darkjokes.jpg' , '' , id)
             break
