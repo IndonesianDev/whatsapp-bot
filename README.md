@@ -84,6 +84,8 @@ Edit value yang diperlukan di `settings/setting.json`.
 
 `lolhuman`: Lolhuman token. Anda bisa Mendapatkannya Di https://lolhuman.herokuapp.com/ silahkan daftar untuk mendapatkan apikey
 
+`apivinz` : Api vinz token. Anda bisa mendapatkanya di https://zeks.xyz/ silahkan daftar untuk mendapatkan apikey 
+
 Untuk Mendapatkan Apikey nya , daftar akun terlebih dahulu di website tersebut
 
 ## 🔍 Menginstal dependensi
