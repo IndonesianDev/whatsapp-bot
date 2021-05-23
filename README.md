@@ -70,6 +70,7 @@ Edit value yang diperlukan di `settings/setting.json`.
     "vhtearkey": "Your Apikey In Here",
     "apikeyz": "Your Apikey In Here",
     "lolhuman": "Your Apikey In Here",
+    "apizeks": "Your Apikey In Here"
 }
 
 ```
@@ -84,7 +85,7 @@ Edit value yang diperlukan di `settings/setting.json`.
 
 `lolhuman`: Lolhuman token. Anda bisa Mendapatkannya Di https://lolhuman.herokuapp.com/ silahkan daftar untuk mendapatkan apikey
 
-`apivinz` : Api vinz token. Anda bisa mendapatkanya di https://zeks.xyz/ silahkan daftar untuk mendapatkan apikey 
+`apizeks` : Api vinz token. Anda bisa mendapatkanya di https://zeks.xyz/ silahkan daftar untuk mendapatkan apikey 
 
 Untuk Mendapatkan Apikey nya , daftar akun terlebih dahulu di website tersebut
 
