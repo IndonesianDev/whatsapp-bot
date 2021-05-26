@@ -49,9 +49,9 @@
 # Requirements
 * [Node.js](https://nodejs.org/en/)
 * [Git](https://git-scm.com/downloads)
-* [FFmpeg](https://github.com/BtbN/FFmpeg-Builds/releases/download/autobuild-2020-12-08-13-03/ffmpeg-n4.3.1-26-gca55240b8c-win64-gpl-4.3.zip) (for sticker GIF command)
+* [FFmpeg](https://www.gyan.dev/ffmpeg/builds/ffmpeg-release-full.7z) (for sticker GIF command)
 * Any text editor
-* [Magisk](https://download.imagemagick.org/ImageMagick/download/binaries/ImageMagick-7.0.11-4-Q16-HDRI-x64-dll.exe) (Buat nuliskanan kiri folio kanan kiri)
+* [Magisk](https://download.imagemagick.org/ImageMagick/download/binaries/ImageMagick-7.0.11-13-Q16-HDRI-x64-dll.exe) (Buat nuliskanan kiri folio kanan kiri)
 * [Tesseract-ocr](https://digi.bib.uni-mannheim.de/tesseract/tesseract-ocr-w64-setup-v5.0.0-alpha.20201127.exe) (Buat Fitur image to text)
 
 # installation
