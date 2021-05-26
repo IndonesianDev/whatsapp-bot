@@ -40,6 +40,10 @@
 <h4 align="center">
   <a href="https://api.whatsapp.com/send/?phone=79680841988&text=/menu">Nomor Piyo Bot</a>
 </h4>
+  
+<h4 align="center">
+<a href="https://www.youtube.com/watch?v=9xHCd2GhA8c">Cara Install</a>
+</h4>
 </div>
 
 # Requirements
