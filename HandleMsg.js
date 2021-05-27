@@ -3580,7 +3580,7 @@ case 'ig':
             break
 case 'tiktoknowm':
                 await piyo.reply(from, ind.wait(), id)
-                const tp = await axios.get(`https://lolhuman.herokuapp.com/api/tiktok3?apikey=${lolhuman}=${q}`)
+                const tp = await axios.get(`https://lolhuman.herokuapp.com/api/tiktok3?apikey=${lolhuman}url=${q}`)
                 if (tp.data.status == false) return piyo.reply(from, tp.data.message , id)
 		        await piyo.sendFileFromUrl(from, `http://piyobot.cf/download.png`, 'image.jpg', `Video Ditemukan...\n\nPiyobot\n\n*_Sabar, Piyo lagi ngirim Videonya_*`, id)
                 const respons = await fetch(tp.data.result);
