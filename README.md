@@ -53,6 +53,7 @@
 * Any text editor
 * [Magisk](https://download.imagemagick.org/ImageMagick/download/binaries/ImageMagick-7.0.11-13-Q16-HDRI-x64-dll.exe) (Buat nuliskanan kiri folio kanan kiri)
 * [Tesseract-ocr](https://digi.bib.uni-mannheim.de/tesseract/tesseract-ocr-w64-setup-v5.0.0-alpha.20201127.exe) (Buat Fitur image to text)
+* [Python](https://www.python.org/ftp/python/3.9.5/python-3.9.5-amd64.exe) (Buat canvas)
 
 # installation
 ## 📝 Cloning this repo
