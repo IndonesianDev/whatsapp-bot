@@ -13,11 +13,6 @@ const color = (text, color) => {
     return !color ? chalk.blueBright(text) : chalk.keyword(color)(text)
 }
 
-// Message type Log
-const messageLog = (fromMe, type) => updateJson('utils/stat.json', (data) => {
-    (fromMe) ? (data.sent[type]) ? data.sent[type] += 1 : data.sent[type] = 1 : (data.receive[type]) ? data.receive[type] += 1 : data.receive[type] = 1
-    return data
-})
 
 /**
  * Get Time duration
@@ -74,6 +69,5 @@ module.exports = {
     processTime,
     createcode,
     isUrl,
-    color,
-    messageLog
+    color
 }
