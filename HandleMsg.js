@@ -4932,10 +4932,10 @@ case 'leaveall': //mengeluarkan bot dari semua group serta menghapus chatnya
             }
             piyo.reply(from, 'Success leave all group!', id)
             break
-        case 'clearall': //menghapus seluruh pesan diakun bot
+case 'clearall': //menghapus seluruh pesan diakun bot
             if (!isOwnerBot) return piyo.reply(from, 'Perintah ini hanya untuk Owner bot', id)
             const allChatx = await piyo.getAllChats()
-            for (let dchat of allChatx) {p
+            for (let dchat of allChatx) {
                 await piyo.deleteChat(dchat.id)
             }
             piyo.reply(from, 'Success clear all chat!', id)
