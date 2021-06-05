@@ -23,6 +23,12 @@ const processTime = (timestamp, now) => {
     // timestamp => timestamp when message was received
     return moment.duration(now - moment(timestamp * 1000)).asSeconds()
 }
+
+// Message type Log
+const messageLog = (fromMe, type) => updateJson('utils/stat.json', (data) => {
+    (fromMe) ? (data.sent[type]) ? data.sent[type] += 1 : data.sent[type] = 1 : (data.receive[type]) ? data.receive[type] += 1 : data.receive[type] = 1
+    return data
+})
 /**
  * Get Code For Premium
  */
@@ -69,5 +75,6 @@ module.exports = {
     processTime,
     createcode,
     isUrl,
+    messageLog,
     color
 }
