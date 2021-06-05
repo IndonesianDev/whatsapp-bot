@@ -1,7 +1,7 @@
 const { create, Client } = require('@open-wa/wa-automate')
 const figlet = require('figlet')
 const options = require('./utils/options')
-const { color, messageLog } = require('./utils')
+const { color } = require('./utils')
 const { ind, eng } = require('./message/text/lang/')
 const HandleMsg = require('./HandleMsg')
 const fs = require('fs-extra')
@@ -124,10 +124,6 @@ piyo.onGlobalParticipantsChanged(async (event) => {
         require('./HandleMsg')(piyo, message)
     })
 	
-    // Message log for analytic
-    piyo.onAnyMessage((anal) => { 
-        messageLog(anal.fromMe, anal.type)
-    })
 }
 //create session
 create(options(true, start))
