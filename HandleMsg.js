@@ -4367,7 +4367,7 @@ case 'tomp3':
             let fileOutputPath = path.join(temp, 'audio', `${name}.mp3`)
             console.log(color('[fs]', 'green'), `Downloading media into '${fileInputPath}'`)
             fs.writeFile(fileInputPath, mediaData, err => {
-                if (err) return piyo.sendText(from, 'Ada yang error saat menulis file\n\n' + err) && _err(err)
+                if (err) return piyo.sendText(from, 'Ada yang error saat menulis file\n\n' + err)
                 // ffmpeg -y -t 5 -i <input_file> -vf "scale=512:512:flags=lanczos:force_original_aspect_ratio=decrease" -qscale 100 <output_file>.webp
                 ffmpeg(fileInputPath)
                     .format('mp3')
