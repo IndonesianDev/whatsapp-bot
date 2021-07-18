@@ -123,6 +123,7 @@ const _sewa = JSON.parse(fs.readFileSync('./settings/sewa.json'))
 const _biodata = JSON.parse(fs.readFileSync('./settings/biodata.json'))
 const _registered = JSON.parse(fs.readFileSync('./settings/registered.json'))
 const _tebak = JSON.parse(fs.readFileSync('./settings/tebakgambar.json'))
+const usermp3 = JSON.parse(fs.readFileSync('./settings/usermp3.json'))
 ///////////////////////////////////////////////////////////////////////////////
 
 
@@ -209,6 +210,7 @@ module.exports = HandleMsg = async (piyo, message) => {
         const isRegistered = _registered.includes(sender.id)
         global.pollfile = 'poll_Config_' + chat.id + '.json'
         global.voterslistfile = 'poll_voters_Config_' + chat.id + '.json'
+        const nadhirasayang = './media/pphana.jpg'
         const isAutoStikerOn = isGroupMsg ? _autostiker.includes(chat.id) : false
         // Bot Prefix
         body = (type === 'chat' && body.startsWith(prefix)) ? body : (((type === 'image' || type === 'video') && caption) && caption.startsWith(prefix)) ? caption : ''
@@ -416,6 +418,7 @@ module.exports = HandleMsg = async (piyo, message) => {
         const isSimi = simi.includes(chatId)
         const isChat = chatt.includes(chatId)
         const isDetectorOn = _antilink.includes(chat.id)
+        const usermp33 = usermp3.includes(sender.id)
         const isInviteLink = await piyo.inviteInfo(body)
 	const isNgegas = ngegas.includes(chatId)
 	const isKode = premiumcode.includes(q)
@@ -822,6 +825,25 @@ if (chats == 'Hard'){
      }
 }
 }
+/////////////////////////////////////////YTMP3///////////////////////////////////////
+
+if (chats == 'iya')
+{
+   if (!usermp3) return
+   await piyo.sendPtt(from, `./media/${sender.id}.mp3` , 'nih kak')
+   fs.unlinkSync(`./media/${sender.id}.mp3`)
+   usermp3.splice(sender.id)
+   fs.writeFileSync('./settings/usermp3.json' , JSON.stringify(usermp3, null , 2))
+}
+
+if (chats == 'ga')
+{
+    if (!usermp3) return
+    await piyo.sendFile(from, `./media/${sender.id}.mp3`, 'piyo.mp3')
+    fs.unlinkSync(`./media/${sender.id}.mp3`)
+    usermp3.splice(sender.id)
+    fs.writeFileSync('./settings/usermp3.json' , JSON.stringify(usermp3, null , 2))
+}
 //////////////////////////////////////PREMIUM CODE///////////////////////////////////
 if (code15.includes(q))
 {
@@ -1164,12 +1186,9 @@ case 'menupenting':
                 await piyo.sendText(from, menuId.textmenupenting (pushname))
         break
 case 'help':
-        const contol = await piyo.getAllChatIds()
-        const premiu = isPremium ? 'Premium' : 'Free'
-        await piyo.sendText(from, menuId.texthelp(pushname, premiu , _registered , contol))
+        await piyo.sendFile(from, nadhirasayang , 'piyo.jpg' , menuId.textmenubaru(pushname))
         break
 case 'menubaru':
-	    const nadhirasayang = './media/pphana.jpg'
         await piyo.sendFile(from, nadhirasayang , 'piyo.jpg' , menuId.textmenubaru(pushname))
         break
 case 'setpictmenu':
@@ -1187,7 +1206,7 @@ case 'menu':
         const premi = isPremium ? 'Premium' : 'Free'
         const coloo = await piyo.getAllChatIds()
         let tod = `${timee}`;
-        await piyo.sendText(from, menuId.textmenu(pushname, premi , _registered , coloo , tod))
+        await piyo.sendFile(from, nadhirasayang , 'piyo.jpg' , menuId.textmenubaru(pushname, premi , _registered , coloo , tod))
         break
 case 'rules':
 case 'rule':
@@ -1556,43 +1575,45 @@ case '8bit':
     if (!q) return await piyo.reply(from, `Salah kak, /8bit nama kaka | nama kaka` , id)
     await piyo.reply(from, ind.wait() , id)
     console.log('Creating 8bit  Maker')
-    await piyo.sendFileFromUrl(from, `https://videfikri.com/api/textmaker/8bit/?text1=${bit1}&text2=${bit2}` , 'piyo.jpg' , 'Nih Kak' , id)
+    await piyo.reply(from, `Maintance` , id)
+    // await piyo.sendFileFromUrl(from, `https://videfikri.com/api/textmaker/8bit/?text1=${bit1}&text2=${bit2}` , 'piyo.jpg' , 'Nih Kak' , id)
     break
 case 'shadow':
     if (!q) return await piyo.reply(from, `Ketik /shadow teksnya` , id)
     await piyo.reply(from, ind.wait() , id)
     console.log('Creating shadow  Maker')
-    await piyo.sendFileFromUrl(from, `https://videfikri.com/api/textmaker/shadowtext/?text=${q}` , 'piyo.jpg' , 'Nih Kak' , id)
+    await piyo.reply(from, `Maintance` , id)
+    // await piyo.sendFileFromUrl(from, `https://videfikri.com/api/textmaker/shadowtext/?text=${q}` , 'piyo.jpg' , 'Nih Kak' , id)
     break
 case 'burn':
     if (!q) return await piyo.reply(from, `Ketik /burn teksnya` , id)
     await piyo.reply(from, ind.wait() , id)
     console.log('Creating burn  Maker')
-    await piyo.sendFileFromUrl(from, `https://videfikri.com/api/textmaker/burnpaper/?text=${q}` , 'piyo.jpg' , 'Nih Kak' , id)
+    await piyo.reply(from, `Maintance` , id)
     break
 case 'kopi':
     if (!q) return await piyo.reply(from, `Ketik /coffe teksnya` , id)
     await piyo.reply(from, ind.wait() , id)
     console.log('Creating coffe  Maker')
-    await piyo.sendFileFromUrl(from, `https://videfikri.com/api/textmaker/coffeecup/?text=${q}` , 'piyo.jpg' , 'Nih Kak' , id)
+    await piyo.reply(from, `Maintance` , id)
     break
 case 'love':
     if (!q) return await piyo.reply(from, `Ketik /love teksnya` , id)
     await piyo.reply(from, ind.wait() , id)
     console.log('Creating love  Maker')
-    await piyo.sendFileFromUrl(from, `https://videfikri.com/api/textmaker/lovemsg/?text=${q}` , 'piyo.jpg' , 'Nih Kak' , id)
+    await piyo.reply(from, `Maintance` , id)
     break
 case 'wood':
     if (!q) return await piyo.reply(from, `Ketik /wood teksnya` , id)
     await piyo.reply(from, ind.wait() , id)
     console.log('Creating wood  Maker')
-    await piyo.sendFileFromUrl(from, `https://videfikri.com/api/textmaker/woodblock/?text=${q}` , 'piyo.jpg' , 'Nih Kak' , id)
+    await piyo.reply(from, `Maintance` , id)
     break
 case 'potter':
     if (!q) return await piyo.reply(from, `Ketik /potter teksnya` , id)
     await piyo.reply(from, ind.wait() , id)
     console.log('Creating boards  harry poter')
-    await piyo.sendFileFromUrl(from, `https://videfikri.com/api/textmaker/hpotter/?text=${q}` , 'piyo.jpg' , 'Nih Kak' , id)
+    await piyo.reply(from, `Maintance` , id)
     break
 case 'tlight':
     if (!q) return await piyo.reply(from, `Ketik /tlight teksnya` , id)
@@ -3686,9 +3707,14 @@ case 'playvn':
 case 'ytmp3':
        await piyo.reply(from, ind.wait() , id)
        try{
-        const yte = await axios.get(`https://api.zeks.xyz/api/ytmp3?url=${q}&apikey=${apizeks}`)
-        await piyo.sendFileFromUrl(from, yte.data.result.thumbnail , 'piyo.jpg' , `*「 YOUTUBE MP3 」*\n\n• *Judul* : ${yte.data.result.title}\n\n• *Size* : ${yte.data.result.size}\n\nSilahkan tunggu file media sedang dikirim mungkin butuh beberapa menit_`, id)
-        await piyo.sendFileFromUrl(from, yte.data.result.url_audio , 'piyo.mp3' , '' , id)
+        const yte = await axios.get(`https://lolhuman.herokuapp.com/api/ytaudio?apikey=${lolhuman}&url=${q}`)
+        await piyo.sendFileFromUrl(from, yte.data.result.thumbnail , 'piyo.jpg' , `*「 YOUTUBE MP3 」*\n\n• *Judul* : ${yte.data.result.title}\n\n• *Size* : ${yte.data.result.link.size}\n• *Duration* : ${yte.data.result.duration}`, id)
+        const bufmp3 = await fetch(yte.data.result.link.link)
+        const mp3buf = await bufmp3.buffer()
+        await fs.writeFile(`./media/${sender.id}.mp3` , mp3buf)
+        await piyo.reply(from, `Apakah mau dikirim file berbentuk vn atau mp3 ?\nKalo vn ketik iya kalo mp3 ketik ga` , id)
+        usermp3.push(sender.id)
+        fs.writeFileSync('./settings/usermp3.json' , JSON.stringify(usermp3))
         } catch (err) {
                     console.error(err.message)
                     await piyo.sendFileFromUrl(from, errorurl2, 'error.png', '💔️ Maaf, Ada Sedikit Error')
@@ -3699,9 +3725,12 @@ case 'ytmp3':
 case 'ytmp4':
        await piyo.reply(from, ind.wait() , id)
        try{
-        const yt = await axios.get(`https://api.zeks.xyz/api/ytmp4?url=${q}&apikey=${apizeks}`)
+        const yt = await axios.get(`https://lolhuman.herokuapp.com/api/ytvideo2?apikey=${lolhuman}&url=${q}`)
         await piyo.sendFileFromUrl(from, yt.data.result.thumbnail , 'piyo.jpg' , `*「 YOUTUBE MP4 」*\n\n• *Judul* : ${yt.data.result.title}\n\n• *Size* : ${yt.data.result.size}\n\n• *Source* : ${q}\n\nSilahkan tunggu file media sedang dikirim mungkin butuh beberapa menit_`, id)
-        await piyo.sendFileFromUrl(from, yt.data.result.url_video , 'piyo.mp4' , 'Nih Kak' , id)
+        const bufmp4 = await fetch(yt.data.result.link)
+        const mp4buf = await bufmp4.buffer()
+        await fs.writeFile(`./media/${sender.id}mp4` , mp4buf)
+        await piyo.sendFile(from, `./media/${sender.id}mp4` , 'piyo.mp4' , 'Nih Kak' , id)
         } catch (err) {
                     console.error(err.message)
                     await piyo.sendFileFromUrl(from, errorurl2, 'error.png', '💔️ Maaf, Ada Sedikit Error')
@@ -3966,9 +3995,9 @@ case 'toxic':
                 break
 case 'lirik':
         await piyo.reply(from, ind.wait() , id)
-        const lirikk = await axios.get(`https://videfikri.com/api/liriklagu/?query=${q}`)
+        const lirikk = await axios.get(`https://lolhuman.herokuapp.com/api/lirik?apikey=${lolhuman}&query=${q}`)
         const lik = lirikk.data.result
-        await piyo.reply(from, `*Judul :* ${lik.title}\n*Artist :* ${lik.artist}\n\n*LIRIK*:\n${lik.lirik}` , id)
+        await piyo.reply(from, `*LIRIK*:\n${lik.lirik}` , id)
                 break
         case 'ptl':
             if (!isPremium) return piyo.reply(from, `Maaf, ini adalah fitur premium, untuk menggunakan fitur ini silahkan beli premium ke owner \nUntuk Harga\n\n 10k Perbulan\n5k Perpanjang`, id)
@@ -4535,7 +4564,7 @@ case 'cuaca':
 case 'chord':          
                 if (args.length == 0) return piyo.reply(from, `Untuk mencari lirik dan chord dari sebuah lagu\bketik: ${prefix}chord [judul_lagu]`, id)
                 const chordq = body.slice(7)
-                const chordd = await axios.get(`https://videfikri.com/api/chord/?query=${q}`)
+                const chordd = await axios.get(`https://lolhuman.herokuapp.com/api/chord?apikey=${lolhuman}&query=${q}`)
                 const chorde = chordd.data.result
                 await piyo.reply(from, `*Judul :* ${chorde.title}\n*Chord :* \n ${chorde.chord}` , id)
                 .catch(() => {
@@ -4957,7 +4986,7 @@ await piyo.reply(from, `Maaf ${pushname}, Command *${arghh[0]}* Tidak Terdaftar 
             }
 	// Simi-simi function
             if ((!isCmd && isGroupMsg && chatId && isSimi) && message.type === 'chat') {
-                axios.get(`https://videfikri.com/api/simsimi/?teks=${encodeURIComponent(message.body)}`)
+                axios.get(`https://api.zeks.xyz/api/simi?apikey=${apizeks}&text=${encodeURIComponent(message.body)}`)
                 .then((res) => {
                     if (res.data.result.status == 404) return piyo.sendText(ownerNumber, `${res.data.result.status}\n\n${res.data.result.pesan}`)
                     piyo.reply(from, `Simi berkata: ${res.data.result.jawaban}`, id)
