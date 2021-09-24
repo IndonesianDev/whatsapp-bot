@@ -2,6 +2,8 @@
 <img src="http://piyobot.000webhostapp.com/822161.png" alt="Piyobot" width="400" />
 
 # Piyobot
+  
+> I am very very bored, give me a task to update or develop this bot? feature suggestions?
 
 > Piyobot Adalah Bot Whatsapp Pintar Dengan Fitur Yang Berguna Untuk Grup Maupun Pribadi Message ||
 > Nomor Pembuat Bot
