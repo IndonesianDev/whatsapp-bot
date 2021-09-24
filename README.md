@@ -270,6 +270,12 @@ Setelah itu pindai kode QR menggunakan WhatsApp Anda di ponsel Anda!
 | Xnxxdl             |      ✔️      |
 | nHentai downloader |      ✔️      |
 
+## Troubleshooting
+Fix Stuck on linux, install google chrome stable: 
+```bash
+> wget https://dl.google.com/linux/direct/google-chrome-stable_current_amd64.deb
+> sudo apt install ./google-chrome-stable_current_amd64.deb
+```
 
 # Thanks to
 * [`open-wa/wa-automate-nodejs`](https://github.com/open-wa/wa-automate-nodejs)
