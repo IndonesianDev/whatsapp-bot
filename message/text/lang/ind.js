@@ -66,7 +66,7 @@ exports.wrongFormat = () => {
 
 exports.wrongFormatt = () => {
     return `Format salah!`
-    aruga.sendFile(from, './media/register.png', id) 
+    aruga.sendFile(from, './media/register.png', id)
 }
 
 exports.emptyMess = () => {
@@ -74,11 +74,11 @@ exports.emptyMess = () => {
 }
 
 exports.Yt3 = () => {
-return `[❗] Terjadi kesalahan, tidak dapat meng konversi ke mp3!`
+    return `[❗] Terjadi kesalahan, tidak dapat meng konversi ke mp3!`
 }
 
 exports.Yt4 = () => {
-return `[❗] Terjadi kesalahan, mungkin error di sebabkan oleh sistem.`
+    return `[❗] Terjadi kesalahan, mungkin error di sebabkan oleh sistem.`
 }
 
 exports.cmdNotFound = () => {
@@ -176,15 +176,15 @@ exports.registered = () => {
 }
 
 exports.follow = () => {
-return `Makasih ya sudah follow instagram owner , semoga tuhan memberkatimu ~ , kirim ulang apa yang mau dikerjakan oleh bot , terimakasih`
+    return `Makasih ya sudah follow instagram owner , semoga tuhan memberkatimu ~ , kirim ulang apa yang mau dikerjakan oleh bot , terimakasih`
 }
 
 exports.followsudah = () => {
-return `anda sudah menfollow ig owner`
+    return `anda sudah menfollow ig owner`
 }
 
 exports.belomfollow = () => {
-return `anda belum menfollow ig owner , silahkan follow terlebih dahulu\n*dan silahkan cek bio owner di instagram*\nhttps://www.instagram.com/alvio151/\n\n*INGAT CEK BIO IG OWNER*`
+    return `anda belum menfollow ig owner , silahkan follow terlebih dahulu\n*dan silahkan cek bio owner di instagram*\nhttps://www.instagram.com/alvio151/\n\n*INGAT CEK BIO IG OWNER*`
 }
 exports.registeredAlready = () => {
     return `Kamu sudah mendaftar sebelumnya.`

@@ -53,30 +53,30 @@ const start = (piyo = new Client()) => {
 
     // ketika bot diinvite ke dalam group
     piyo.onAddedToGroup(async (chat) => {
-	const groups = await piyo.getAllGroups()
-	// kondisi ketika batas group bot telah tercapai,ubah di file settings/setting.json
-	if (groups.length > groupLimit) {
-	await piyo.sendText(chat.id, `Maap, Bot Sudah melewati batas memasuki group: ${groupLimit}`).then(() => {
-	      piyo.leaveGroup(chat.id)
-	      piyo.deleteChat(chat.id)
-	  }) 
-	} else {
-	// kondisi ketika batas member group belum tercapai, ubah di file settings/setting.json
-	    if (chat.groupMetadata.participants.length < memberLimit) {
-	    await piyo.sendText(chat.id, `Member lu kurang , minimal member ${memberLimit} people`).then(() => {
-	      piyo.leaveGroup(chat.id)
-	      piyo.deleteChat(chat.id)
-	    })
-	    } else {
-        await piyo.simulateTyping(chat.id, true).then(async () => {
-          await piyo.sendText(chat.id, `Hai anjg~, Saya Whatsapp Bot Pintar.  Untuk memulai bot silahkan ketik ${prefix}menu`)
-        })
-	    }
-	}
+        const groups = await piyo.getAllGroups()
+        // kondisi ketika batas group bot telah tercapai,ubah di file settings/setting.json
+        if (groups.length > groupLimit) {
+            await piyo.sendText(chat.id, `Maap, Bot Sudah melewati batas memasuki group: ${groupLimit}`).then(() => {
+                piyo.leaveGroup(chat.id)
+                piyo.deleteChat(chat.id)
+            })
+        } else {
+            // kondisi ketika batas member group belum tercapai, ubah di file settings/setting.json
+            if (chat.groupMetadata.participants.length < memberLimit) {
+                await piyo.sendText(chat.id, `Member lu kurang , minimal member ${memberLimit} people`).then(() => {
+                    piyo.leaveGroup(chat.id)
+                    piyo.deleteChat(chat.id)
+                })
+            } else {
+                await piyo.simulateTyping(chat.id, true).then(async () => {
+                    await piyo.sendText(chat.id, `Hai anjg~, Saya Whatsapp Bot Pintar.  Untuk memulai bot silahkan ketik ${prefix}menu`)
+                })
+            }
+        }
     })
 
-// Listen to group's event
-piyo.onGlobalParticipantsChanged(async (event) => {
+    // Listen to group's event
+    piyo.onGlobalParticipantsChanged(async (event) => {
         const welcome = JSON.parse(fs.readFileSync('./settings/welcome.json'))
         const gcChat = await piyo.getChatById(event.chat)
         const pcChat = await piyo.getContact(event.who)
@@ -95,8 +95,8 @@ piyo.onGlobalParticipantsChanged(async (event) => {
                     var pp = pic
                 }
                 await piyo.sendFileFromUrl(event.chat, pp, 'profile.jpg', `Selamat datang di grup *${name}*\n*Nama :* ${pushname}\n*Bio :* ${sts.status}\n\nSemoga betah terus di grup kami ya~`)
-            } else if (event.action === 'remove' && event.who !== botNumbers && isWelcome){
-                await piyo.sendTextWithMentions(event.chat, `@${event.who.replace('@c.us', '')} Yah Dia Keluar` )
+            } else if (event.action === 'remove' && event.who !== botNumbers && isWelcome) {
+                await piyo.sendTextWithMentions(event.chat, `@${event.who.replace('@c.us', '')} Yah Dia Keluar`)
             }
         } catch (err) {
             console.error(err)
@@ -105,10 +105,10 @@ piyo.onGlobalParticipantsChanged(async (event) => {
     piyo.onIncomingCall(async (callData) => {
         // ketika seseorang menelpon nomor bot akan mengirim pesan
         await piyo.sendText(callData.peerJid, 'Maaf sedang tidak bisa menerima panggilan.\n nelfon=block \n\n-bot')
-        .then(async () => {
-            // bot akan memblock nomor itu
-            await piyo.contactBlock(callData.peerJid)
-        })
+            .then(async () => {
+                // bot akan memblock nomor itu
+                await piyo.contactBlock(callData.peerJid)
+            })
     })
 
     // ketika seseorang mengirim pesan
@@ -123,7 +123,7 @@ piyo.onGlobalParticipantsChanged(async (event) => {
         //HandleMsg(piyo, message)    
         require('./HandleMsg')(piyo, message)
     })
-	
+
 }
 //create session
 create(options(true, start))
