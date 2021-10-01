@@ -152,6 +152,7 @@ let {
     prefix,
     halal,
     apikeyz,
+    caliph,
     lolhuman,
     apizeks,
     vhtearkey
@@ -2714,19 +2715,12 @@ module.exports = HandleMsg = async (piyo, message) => {
                     limitAdd(serial)
                     break
                 case 'maps':
-                    if (arghh.length === 1) return piyo.reply(from, 'Kirim perintah */maps [optional]*, Contoh : */maps Jakarta*', id)
-                    console.log(q)
-                    try {
-                        const mapz2 = await axios.get('https://mnazria.herokuapp.com/api/maps?search=' + q)
-                        const { gambar } = mapz2.data
-                        const pictk = await bent("buffer")(gambar)
-                        const base64 = `data:image/jpg;base64,${pictk.toString("base64")}`
-                        piyo.sendImage(from, base64, 'maps.jpg', `*Hasil Maps : ${q}*`)
-                    } catch (err) {
-                        console.error(err.message)
-                        await piyo.sendFileFromUrl(from, errorurl2, 'error.png', '💔️ Maaf, User tidak ditemukan')
-                        piyo.sendText(ownerNumber, 'Error Maps : ' + err)
-                    }
+                    if (args.length == 0) return piyo.reply(from, `Mencari sebuah kota dari google map\nUsage: ${prefix}maps namakota\nContoh: ${prefix}maps pontianak`, id)
+                    piyo.reply(from, 'Wait...', id)
+                    await piyo.sendFileFromUrl(from, `https://caliph71.xyz/map?apikey=${caliph}&kota=${body.slice(6)}`)
+                        .catch(() => {
+                            piyo.reply(from, 'Rest Api sedang error', id)
+                        })
                     break
                 case 'quiziz':
                     if (!q) return piyo.reply(from, `Kirim perintah */quiziz idnya* , Contoh : */quiziz 16126165*`, id)
@@ -3641,7 +3635,7 @@ module.exports = HandleMsg = async (piyo, message) => {
                     break
                 case 'joox':
                     if (!isPremium) return piyo.reply(from, `Maaf, ini adalah fitur premium, untuk menggunakan fitur ini silahkan beli premium ke owner \nUntuk Harga\n\n 10k Perbulan\n5k Perpanjang`, id)
-                    if (args.length == 0) return piyo.reply(from, `Untuk mencari lagu dari joox\n\nPenggunaan: ${prefix}play judul lagu`, id)
+                    if (args.length == 0) return piyo.reply(from, `Untuk mencari lagu dari joox\n\nPenggunaan: ${prefix}joox judul lagu`, id)
                     if (!q) return await piyo.reply(from, ind.wrongFormat(), id)
                     await piyo.reply(from, ind.wait(), id)
                     await rugaapi.joox(q)
@@ -3653,6 +3647,47 @@ module.exports = HandleMsg = async (piyo, message) => {
                         .catch(async (err) => {
                             console.error(err)
                             await piyo.reply(from, 'Error!', id)
+                        })
+                    break
+                case 'spotify'://Urbaexyz
+                    if (args.length == 0) return piyo.reply(from, `Untuk mencari lagu dari spotify\nGunakan ${prefix}spotify judul lagu\nContoh: ${prefix}spotify rex orange county sunflower`, id)
+                    const carispot2 = body.slice(9)
+                    await piyo.reply(from, 'Tunggu sebentar...', id)
+                    const spos2 = await axios.get(`https://api.zeks.me/api/spotify?apikey=${apizeks}&q=${carispot2}`)
+                    piyo.sendFileFromUrl(from, spos2.data.data[0].thumb, 'thumb.jpg', `「 *SPOTIFY* 」\n\n*•Title:* ${spos2.data.data[0].title}\n*•Artists:* ${spos2.data.data[0].artists}\n*•Album:* ${spos2.data.data[0].album}\n*•Url:* ${spos2.data.data[0].url}\n\n*_Tunggu sebentar, audio sedang dikirim_*`, id)
+                    rugaapi.spotify(spos2.data.data[0].url)
+                        .then(async (res) => {
+                            if (res.status == 404) return piyo.reply(from, 'Link tidak valid atau rest api sedang error', id)
+                            piyo.sendFileFromUrl(from, res.mp3, '', '', id)
+                                .catch(() => {
+                                    piyo.reply(from, 'Meng-error', id)
+                                })
+                        })
+                        .catch(err => {
+                            console.log(err)
+                            piyo.reply(from, err.message, id)
+                        })
+                    break
+                case 'spotifysearch': //Urbaexyz
+                case 'searchspotify':
+                    if (args.length == 0) return piyo.reply(from, `Menampilkan list spotify yang anda cari!\nGunakan ${prefix}spotifysearch judul lagu\nContoh: ${prefix}spotifysearch young`, id)
+                    const carispotify = body.slice(15)
+                    piyo.reply(from, mess.wait, id)
+                    const spotifyapi = await axios.get(`https://api.zeks.me/api/spotify?apikey=${apizeks}&q=${carispotify}`)
+                    const spotifydata = spotifyapi.data
+                    const spotres = spotifydata.data
+                    let spotifytext = `*「 S P O T I F Y 」*\n`
+                    for (let i = 0; i < spotres.length; i++) {
+                        spotifytext += `\n─────────────────\n\n*•Title:* ${spotres[i].title}\n*•Artists:* ${spotres[i].artists}\n*•Album:* ${spotres[i].album}\n*•Url:* ${spotres[i].url}\n`
+                    }
+                    await piyo.sendFileFromUrl(from, spotres[0].thumb, 'img.jpg', spotifytext, id)
+                        .catch(err => {
+                            console.log(err)
+                            piyo.reply(from, 'Terjadi kesalahan, silahkan ulangi', id)
+                        })
+                        .catch(err => {
+                            console.log(err)
+                            piyo.reply(from, err.message, id)
                         })
                     break
                 case 'play': //PAKE API VIDE FIKRI BIAR ADA SIZE LAGUNYA
