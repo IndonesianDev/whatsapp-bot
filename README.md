@@ -40,7 +40,7 @@
 </p>
 
 <h4 align="center">
-  <a href="https://api.whatsapp.com/send/?phone=79680841988&text=/menu">Nomor Piyo Bot</a>
+  <a href="https://chat.whatsapp.com/Lb8nqO0WNoeJfR2bUGrZXf">Group Whatsapp</a>
 </h4>
   
 <h4 align="center">
