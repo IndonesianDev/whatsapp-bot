@@ -4828,6 +4828,24 @@ module.exports = HandleMsg = async (piyo, message) => {
                         await piyo.reply(from, ind.doneOwner(), id)
                     }
                     break
+             case 'sendsewa':
+                    let linkRegex = /chat\.whatsapp\.com\/(?:invite\/)?([0-9A-Za-z]{20,24})/i
+                    if (ar.length == 0) return piyo.reply(from, `Ketik /sendsewa linknya harinya\n\nExample: /sendsewa link 30d`, id)
+                    if (ar.length == 1) return piyo.reply(from, `Ketik /sendsewa linknya harinya\n\nExample: /sendsewa link 30d`, id)
+                    let [, code] = q.match(linkRegex) || []
+                    if (!code) throw 'Link invalid'
+                    let res = await piyo.inviteInfo(code)
+                    if (!res) throw res
+                    piyo.reply(from, 'Tunggu Sebentar' , id)
+                    sewa.addSewaGroup(res.id , args[1], _sewa)
+                    await piyo.reply(from, ` *「 SEWA ADDED 」*\n\n➸ *NAMA*: ${res.subject}\n➸ *ID*: ${res.id}\n➸ *Expired*: ${ms(toMs(args[1])).days} day(s) ${ms(toMs(args[1])).hours} hour(s) ${ms(toMs(args[1])).minutes} minute(s)\n\nBot Akan Keluar Secara Otomatis\nDalam waktu yang sudah di tentukan` , id)
+                    console.log(res.owner)
+                    await piyo.sendText(`${res.owner}`, `Group Anda ${res.subject} Telah Menyewakan Bot Piyo`,  id)
+                    await piyo.joinGroupViaLink(code)
+                    await rugaapi.sleep(10000)
+                    await piyo.sendText(res.id , `Bot Activated In Group\n\n➸ *Expired*: ${ms(toMs(args[1])).days} day(s) ${ms(toMs(args[1])).hours} hour(s) ${ms(toMs(args[1])).minutes} minute(s)` , id)
+                    break   
+                    
                 case 'premium':
                     if (!isOwnerBot) return await piyo.reply(from, ind.ownerOnly(), id)
                     if (ar[0] === 'add') {
