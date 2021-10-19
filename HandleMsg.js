@@ -2816,11 +2816,12 @@ module.exports = HandleMsg = async (piyo, message) => {
                         const encryptMedia = isQuotedImage ? quotedMsg : message
                         const mediaData = await decryptMedia(encryptMedia, uaOverride)
                         const imageLink = await uploadImages(mediaData, `anime.${sender.id}`)
-                        const ank = await axios.get(`http://lolhuman.herokuapp.com/api/wait?apikey=${lolhuman}&url=${imageLink}`)
+                        const ank = await axios.get(`https://api.lolhuman.xyz/api/wait?apikey=${lolhuman}&img=${imageLink}`)
                         const anj = ank.data.result
                         await piyo.sendFileFromUrl(from, anj.video, 'piyo.mp4', `*Terdeteksi Anime Berikut :*\n*Nama :* ${anj.title_romaji}\n*Nama Lain :* ${anj.title_native}\n*DiWaktu :* ${anj.at}\n*Episode :* ${anj.episode}\n*Kesamaan :* ${anj.similarity}`, id)
                     }
                     break
+                    
                 case 'neko18':
                     if (banChat()) return await piyo.reply(from, `Stay Halal Brother`, id)
                     await piyo.reply(from, ind.wait(), id)
