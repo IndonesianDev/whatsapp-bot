@@ -69,7 +69,7 @@ const start = (piyo = new Client()) => {
                 })
             } else {
                 await piyo.simulateTyping(chat.id, true).then(async () => {
-                    await piyo.sendText(chat.id, `Hai anjg~, Saya Whatsapp Bot Pintar.  Untuk memulai bot silahkan ketik ${prefix}menu`)
+                    menunggu  piyo . sendText ( chatting . id , `Hai kawan ~, Saya Whatsapp Bot Pintar. Untuk memulai bot silahkan jangan masukkan $ { prefix } menu` )
                 })
             }
         }
