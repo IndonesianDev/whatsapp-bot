@@ -128,4 +128,4 @@ const start = (piyo = new Client()) => {
 //create session
 create(options(true, start))
     .then((piyo) => start(piyo))
-    .catch((err) => new Error(err))
+    .catch((err) => console.log(err))
