@@ -155,7 +155,8 @@ let {
     caliph,
     lolhuman,
     apizeks,
-    vhtearkey
+    vhtearkey,
+    urllolhuman
 } = setting
 ///////////////////////////////API JSON///////////////////////////////////////
 const {
@@ -1077,7 +1078,7 @@ module.exports = HandleMsg = async (piyo, message) => {
             if (type === 'image') {
                 const datafacol = await decryptMedia(message)
                 const fotofacol = await uploadImages(datafacol, `fotoface.${sender.id}`)
-                const getnsfw = await axios.get(`https://lolhuman.herokuapp.com/api/nsfwcheck?apikey=${lolhuman}&img=${fotofacol}`)
+                const getnsfw = await axios.get(`${urllolhuman}/api/nsfwcheck?apikey=${lolhuman}&img=${fotofacol}`)
                 const persen = getnsfw.data.result
                 console.log(persen)
                 if (Number(getnsfw.data.result.split('%')[0]) >= 30.00) return piyo.reply(from, `*Terdeteksi Mengirim Gambar Yang Berbau Porno*\nKeyakinan Gambar : ${persen}`, id).then(() => piyo.removeParticipant(groupId, sender.id))
@@ -2825,7 +2826,7 @@ module.exports = HandleMsg = async (piyo, message) => {
                 case 'neko18':
                     if (banChat()) return await piyo.reply(from, `Stay Halal Brother`, id)
                     await piyo.reply(from, ind.wait(), id)
-                    await piyo.sendFileFromUrl(from, `https://lolhuman.herokuapp.com/api/random/nsfw/neko?apikey=${lolhuman}`, 'neko.jpg', 'Nih kak', id)
+                    await piyo.sendFileFromUrl(from, `https://api.lolhuman.xyz/api/random/sfw/neko?apikey=${lolhuman}`, 'neko.jpg', 'Nih kak', id)
                     await limitAdd(serial)
                     break
                 case 'anime':
@@ -2833,7 +2834,7 @@ module.exports = HandleMsg = async (piyo, message) => {
                     if (args[0] == 'random' || args[0] == 'waifu' || args[0] == 'husbu' || args[0] == 'neko') {
                         const nimee = ['random', 'waifu', 'husbu', 'neko']
                         let nime = nimee[Math.floor(Math.random() * nimee.length)]
-                        const nimek = await axios.get(`https://lolhuman.herokuapp.com/api/random/${args[0]}?apikey=` + lolhuman)
+                        const nimek = await axios.get(`${urllolhuman}/api/random/${args[0]}?apikey=` + lolhuman)
                         await piyo.sendFileFromUrl(from, nimek, 'anime.jpg', '', id)
                             .catch(() => {
                                 piyo.reply(from, 'Ada yang Error!', id)
@@ -2918,7 +2919,7 @@ module.exports = HandleMsg = async (piyo, message) => {
                     if (isGroupMsg) return piyo.reply(from, 'Perintah ini hanya bisa dilakukan di chat personal!', id)
                     if (isLimit(serial)) return piyo.reply(from, `_Hai ${pushname} Limit request anda sudah mencapai batas, Akan direset kembali setiap jam 9 dan gunakan seperlunya!_`, id)
                     await piyo.reply(from, ind.wait(), id)
-                    await piyo.sendFileFromUrl(from, `https://lolhuman.herokuapp.com/api/random/nsfw/hentai?apikey=${lolhuman}`, 'hentai.jpg', 'Nih kak', id)
+                    await piyo.sendFileFromUrl(from, `${urllolhuman}/api/random/nsfw/hentai?apikey=${lolhuman}`, 'hentai.jpg', 'Nih kak', id)
                     await limitAdd(serial)
                     break
                 case 'gifhentai':
@@ -3021,7 +3022,7 @@ module.exports = HandleMsg = async (piyo, message) => {
                     {
                         piyo.reply(from, 'Proses kak..', id)
                         try {
-                            const hasilqmaker = await axios.get(`https://lolhuman.herokuapp.com/api/quotemaker?apikey=${lolhuman}&text=${q}`)
+                            const hasilqmaker = await axios.get(`${urllolhuman}/api/quotemaker?apikey=${lolhuman}&text=${q}`)
                             piyo.sendFileFromUrl(from, `${hasilqmaker}`, '', 'Ini kak..', id)
                         } catch {
                             piyo.reply('Yahh proses gagal, kakak isinya sudah benar belum?..', id)
@@ -3586,7 +3587,7 @@ module.exports = HandleMsg = async (piyo, message) => {
                     break
                 case 'tiktoknowm':
                     await piyo.reply(from, ind.wait(), id)
-                    const tp = await axios.get(`https://lolhuman.herokuapp.com/api/tiktok3?apikey=${lolhuman}&url=${q}`)
+                    const tp = await axios.get(`${urllolhuman}/api/tiktok3?apikey=${lolhuman}&url=${q}`)
                     if (tp.data.status == false) return piyo.reply(from, tp.data.message, id)
                     await piyo.sendFileFromUrl(from, `http://piyobot.cf/download.png`, 'image.jpg', `Video Ditemukan...\n\nPiyobot\n\n*_Sabar, Piyo lagi ngirim Videonya_*`, id)
                     const respons = await fetch(tp.data.result);
@@ -3599,13 +3600,13 @@ module.exports = HandleMsg = async (piyo, message) => {
                 case 'tiktok':
                     await piyo.reply(from, ind.wait(), id)
                     await piyo.sendFileFromUrl(from, `http://piyobot.cf/download.png`, 'image.jpg', `Video Ditemukan...\n\nPiyobot\n\n*_Sabar, Piyo lagi ngirim Videonya_*`, id)
-                    await piyo.sendFileFromUrl(from, `https://lolhuman.herokuapp.com/api/tiktokwm?apikey=${lolhuman}&url=${q}`, 'piyo.mp4', `*Tiktok Downloader*\n*Creator :* Alvio Adji Januar`, id)
+                    await piyo.sendFileFromUrl(from, `${urllolhuman}/api/tiktokwm?apikey=${lolhuman}&url=${q}`, 'piyo.mp4', `*Tiktok Downloader*\n*Creator :* Alvio Adji Januar`, id)
                     break
 
                 case 'tiktokmusic':
                     if (!q) return piyo.reply(from, `Silahkan ketik /tiktokmusic link tiktoknya`, id)
                     await piyo.reply(from, ind.wait(), id)
-                    await piyo.sendFileFromUrl(from, `https://lolhuman.herokuapp.com/api/tiktokmusic?apikey=${lolhuman}&url=${q}`, 'tiktok.mp3', '', id)
+                    await piyo.sendFileFromUrl(from, `${urllolhuman}/api/tiktokmusic?apikey=${lolhuman}&url=${q}`, 'tiktok.mp3', '', id)
                     break
 
                 case 'igstory':
@@ -3733,7 +3734,7 @@ module.exports = HandleMsg = async (piyo, message) => {
                 case 'ytmp3':
                     await piyo.reply(from, ind.wait(), id)
                     try {
-                        const yte = await axios.get(`https://lolhuman.herokuapp.com/api/ytaudio?apikey=${lolhuman}&url=${q}`)
+                        const yte = await axios.get(`${urllolhuman}/api/ytaudio?apikey=${lolhuman}&url=${q}`)
                         await piyo.sendFileFromUrl(from, yte.data.result.thumbnail, 'piyo.jpg', `*「 YOUTUBE MP3 」*\n\n• *Judul* : ${yte.data.result.title}\n\n• *Size* : ${yte.data.result.link.size}\n• *Duration* : ${yte.data.result.duration}`, id)
                         const bufmp3 = await fetch(yte.data.result.link.link)
                         const mp3buf = await bufmp3.buffer()
@@ -3751,7 +3752,7 @@ module.exports = HandleMsg = async (piyo, message) => {
                 case 'ytmp4':
                     await piyo.reply(from, ind.wait(), id)
                     try {
-                        const yt = await axios.get(`https://lolhuman.herokuapp.com/api/ytvideo2?apikey=${lolhuman}&url=${q}`)
+                        const yt = await axios.get(`${urllolhuman}/api/ytvideo2?apikey=${lolhuman}&url=${q}`)
                         await piyo.sendFileFromUrl(from, yt.data.result.thumbnail, 'piyo.jpg', `*「 YOUTUBE MP4 」*\n\n• *Judul* : ${yt.data.result.title}\n\n• *Size* : ${yt.data.result.size}\n\n• *Source* : ${q}\n\nSilahkan tunggu file media sedang dikirim mungkin butuh beberapa menit_`, id)
                         const bufmp4 = await fetch(yt.data.result.link)
                         const mp4buf = await bufmp4.buffer()
@@ -3804,7 +3805,7 @@ module.exports = HandleMsg = async (piyo, message) => {
                     const tstalk = await slicedArgs.join(' ')
                     console.log(tstalk)
                     try {
-                        const tstalk2 = await axios.get(`https://lolhuman.herokuapp.com/api/stalktiktok/${q}?apikey=${lolhuman}`)
+                        const tstalk2 = await axios.get(`${urllolhuman}/api/stalktiktok/${q}?apikey=${lolhuman}`)
                         const { username, bio, followings, follower, nickname, likes, video, user_picture } = tstalk2.data.result
                         const tiktod = `*User Ditemukan!*
 ➸ *Username:* ${username}
@@ -4021,7 +4022,7 @@ module.exports = HandleMsg = async (piyo, message) => {
                     break
                 case 'lirik':
                     await piyo.reply(from, ind.wait(), id)
-                    const lirikk = await axios.get(`https://lolhuman.herokuapp.com/api/lirik?apikey=${lolhuman}&query=${q}`)
+                    const lirikk = await axios.get(`${urllolhuman}/api/lirik?apikey=${lolhuman}&query=${q}`)
                     const lik = lirikk.data.result
                     await piyo.reply(from, `*LIRIK*:\n${lik.lirik}`, id)
                     break
@@ -4228,7 +4229,7 @@ module.exports = HandleMsg = async (piyo, message) => {
                 case 'nhpdf':
                     if (args.length === 0) return piyo.reply(from, `Pake Kodenya mas`, id)
                     await piyo.reply(from, ind.wait(), id)
-                    const nh = await axios.get(`https://lolhuman.herokuapp.com/api/nhentaipdf/${q}?apikey=${lolhuman}`)
+                    const nh = await axios.get(`${urllolhuman}/api/nhentaipdf/${q}?apikey=${lolhuman}`)
                     await piyo.sendFileFromUrl(from, nh.data.result, 'piyo.pdf', '', id)
                     break
 
@@ -4590,7 +4591,7 @@ module.exports = HandleMsg = async (piyo, message) => {
                 case 'chord':
                     if (args.length == 0) return piyo.reply(from, `Untuk mencari lirik dan chord dari sebuah lagu\bketik: ${prefix}chord [judul_lagu]`, id)
                     const chordq = body.slice(7)
-                    const chordd = await axios.get(`https://lolhuman.herokuapp.com/api/chord?apikey=${lolhuman}&query=${q}`)
+                    const chordd = await axios.get(`${urllolhuman}/api/chord?apikey=${lolhuman}&query=${q}`)
                     const chorde = chordd.data.result
                     await piyo.reply(from, `*Judul :* ${chorde.title}\n*Chord :* \n ${chorde.chord}`, id)
                         .catch(() => {
@@ -5018,7 +5019,7 @@ module.exports = HandleMsg = async (piyo, message) => {
             // Piyobot Function
             if ((!isCmd && chatId && isChat) && message.type === 'chat') {
                 await piyo.sendSeen(from, true)
-                const piyoget = await axios.get(`https://lolhuman.herokuapp.com/api/simi?apikey=${lolhuman}&text=${encodeURIComponent(message.body)}`)
+                const piyoget = await axios.get(`${urllolhuman}/api/simi?apikey=${lolhuman}&text=${encodeURIComponent(message.body)}`)
                 await piyo.simulateTyping(from, true)
                 const rancok = [1000, 2000, 3000, 4000, 5000]
                 const matcok = rancok[Math.floor(Math.random() * rancok.length)]
