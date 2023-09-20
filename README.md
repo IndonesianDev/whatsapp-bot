@@ -6,7 +6,7 @@
 > I am very very bored, give me a task to update or develop this bot? feature suggestions?
 
 <p align="center">
- Piyobot Adalah Bot Whatsapp Pintar Dengan Fitur Yang Berguna Untuk Grup Maupun Pribadi Message ||
+ Piyobot Adalah Bot Whatsapp Pintar Dengan Fitur Yang Berguna Untuk Grup Maupun Pribadi Message
 </p>
 
 <p align="center">
