@@ -1,7 +1,7 @@
 {
-   "name": "whatsapp-bot",
+   "name": "Netzu",
    "version": "3.0.0",
-   "description": "Whatsapp Bot - Node Js",
+   "description": "Netzu bot",
    "main": "index.js",
    "scripts": {
       "start": "node index.js"
